@@ -1,0 +1,724 @@
+/* ============================================================
+   THE EMMAUS COMPANION — Layout & Components
+   Depends on tokens.css. No colour literals below this line.
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+
+body {
+  margin: 0;
+  background: var(--vellum);
+  color: var(--ink);
+  font-family: var(--face-body);
+  font-size: var(--size-body);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: var(--rule); color: var(--ink); }
+
+a { color: var(--water); text-decoration-color: var(--rule); text-underline-offset: 3px; }
+a:hover { text-decoration-color: currentColor; }
+
+:where(a, button, textarea, input, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+img { max-width: 100%; height: auto; }
+
+/* ---------- The ribbon: where you are ---------- */
+.ribbon {
+  position: fixed;
+  top: 0;
+  left: clamp(0.7rem, 3.5vw, 3rem);
+  width: 13px;
+  height: 108px;
+  background: var(--rubric);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 9px), 0 100%);
+  opacity: 0.92;
+  z-index: 20;
+  pointer-events: none;
+}
+
+/* ---------- Shell ---------- */
+.shell {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 3.4rem 1.3rem 5rem;
+}
+.shell--wide { max-width: var(--measure-wide); }
+
+/* ---------- Top bar ---------- */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap);
+  max-width: var(--measure-wide);
+  margin: 0 auto;
+  padding: 1rem clamp(1.3rem, 4vw, 2.4rem) 0;
+  flex-wrap: wrap;
+}
+.topbar .home-link {
+  font-size: 0.82rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+.topbar .home-link:hover { color: var(--rubric); }
+.tools { display: flex; align-items: center; gap: var(--gap-xs); }
+
+.tool-btn {
+  font-family: var(--face-body);
+  font-size: 0.78rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  background: transparent;
+  border: 1px solid var(--rule-faint);
+  padding: 0.45rem 0.75rem;
+  cursor: pointer;
+  line-height: 1;
+}
+.tool-btn:hover { border-color: var(--gilt); color: var(--gilt-ink); background: var(--wash); }
+.tool-btn[aria-pressed="true"] { border-color: var(--gilt); color: var(--gilt-ink); background: var(--leaf-deep); }
+
+/* On a touch screen these secondary controls need a thumb-sized target too. */
+@media (pointer: coarse) {
+  .tool-btn { min-height: 44px; padding-left: 0.9rem; padding-right: 0.9rem; }
+}
+
+/* ---------- Rubrics & headings ---------- */
+.eyebrow {
+  font-size: 0.76rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gilt-ink);
+  text-align: center;
+  margin: 0 0 1.4rem;
+}
+.display {
+  font-family: var(--face-display);
+  font-weight: 600;
+  font-size: clamp(2rem, 6vw, 3.1rem);
+  letter-spacing: 0.06em;
+  text-align: center;
+  text-wrap: balance;
+  margin: 0 0 0.8rem;
+}
+.deck {
+  text-align: center;
+  font-style: italic;
+  font-size: 1.22rem;
+  color: var(--ink-soft);
+  max-width: 34em;
+  margin: 0 auto 1.8rem;
+  text-wrap: balance;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: var(--gap-xl) 0 var(--gap-lg);
+  color: var(--gilt);
+}
+.divider::before, .divider::after { content: ""; flex: 1; border-top: 1px solid var(--rule); }
+.divider span { font-size: 1rem; line-height: 1; }
+
+.sec-rubric {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--rubric);
+  margin: 0;
+}
+
+/* ============================================================
+   THE JOURNEY MAP
+   ============================================================ */
+
+.journey { margin-top: var(--gap-lg); }
+
+.period {
+  position: relative;
+  margin-bottom: 2.6rem;
+  --period: var(--gilt);
+  --period-wash: var(--wash);
+}
+.period[data-period="A"] { --period: var(--seed);    --period-wash: var(--seed-wash); }
+.period[data-period="B"] { --period: var(--water);   --period-wash: var(--water-wash); }
+.period[data-period="C"] { --period: var(--lenten);  --period-wash: var(--lenten-wash); }
+.period[data-period="D"] { --period: var(--paschal); --period-wash: var(--paschal-wash); }
+
+.period-head {
+  border-top: 2px solid var(--period);
+  background: var(--period-wash);
+  padding: 1rem 1.15rem 0.9rem;
+  margin-bottom: 0.2rem;
+}
+.period-head .pletter {
+  font-family: var(--face-display);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--period);
+}
+.period-head h2 {
+  font-family: var(--face-display);
+  font-weight: 600;
+  font-size: clamp(1.15rem, 3.2vw, 1.45rem);
+  letter-spacing: 0.04em;
+  margin: 0.3rem 0 0.25rem;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.period-head .pstage {
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+/* --- the road --- */
+.road { list-style: none; margin: 0; padding: 0 0 0 1.55rem; position: relative; }
+.road::before {
+  content: "";
+  position: absolute;
+  left: 0.42rem;
+  top: 0.2rem;
+  bottom: 0.2rem;
+  width: 2px;
+  background: var(--period);
+  opacity: 0.35;
+}
+
+.stop { position: relative; }
+.stop::before {
+  content: "";
+  position: absolute;
+  left: -1.32rem;
+  top: 1.15em;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--vellum);
+  border: 2px solid var(--period);
+}
+
+.stop-link, .stop-blank {
+  display: grid;
+  grid-template-columns: 3.4rem 1fr auto;
+  gap: 0.9rem;
+  align-items: baseline;
+  padding: 0.6rem 0.7rem 0.6rem 0.35rem;
+  border-bottom: 1px solid var(--rule-faint);
+  text-decoration: none;
+  color: inherit;
+}
+.stop-link:hover { background: var(--period-wash); }
+.stop-blank { color: var(--ink-soft); }
+
+.stop .sess {
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.stop .title { font-size: 1.05rem; line-height: 1.4; }
+.stop-link .title { color: var(--ink); }
+.stop-link:hover .title { color: var(--period); }
+.stop .flag {
+  font-size: 0.7rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--gilt-ink);
+  border: 1px solid var(--rule);
+  padding: 0.2rem 0.45rem;
+  line-height: 1;
+  align-self: center;
+}
+.stop .flag--soon { color: var(--ink-soft); border-color: var(--rule-faint); }
+.stop .flag--written { color: var(--period); border-color: currentColor; }
+
+@media (max-width: 560px) {
+  .stop-link, .stop-blank { grid-template-columns: 2.9rem 1fr; row-gap: 0.3rem; }
+  .stop .flag { grid-column: 2; justify-self: start; }
+}
+
+/* --- a Rite standing across the road --- */
+.gate {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.85rem;
+  align-items: baseline;
+  margin: 0.55rem 0 0.55rem -1.55rem;
+  padding: 0.75rem 0.9rem;
+  background: var(--leaf);
+  border-top: 1px solid var(--rubric);
+  border-bottom: 1px solid var(--rubric);
+}
+.gate .cross { color: var(--rubric); font-size: 0.95rem; line-height: 1.4; }
+.gate .gname {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--rubric);
+}
+.gate .gwhen { display: block; font-size: 0.92rem; font-style: italic; letter-spacing: 0; text-transform: none; color: var(--ink-soft); font-weight: 400; margin-top: 0.2rem; }
+.gate--major { background: var(--paschal-wash); border-color: var(--paschal); }
+.gate--major .gname, .gate--major .cross { color: var(--paschal); }
+
+/* ---------- Legend ---------- */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.4rem;
+  justify-content: center;
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  border-top: 1px solid var(--rule-faint);
+  border-bottom: 1px solid var(--rule-faint);
+  padding: 0.8rem 0.5rem;
+  margin-bottom: var(--gap-lg);
+}
+.legend span { display: inline-flex; align-items: center; gap: 0.45rem; }
+.legend i { width: 0.72rem; height: 0.72rem; border-radius: 50%; display: inline-block; }
+
+/* ============================================================
+   THE SESSION PAGE
+   ============================================================ */
+
+.session-head { text-align: center; margin-bottom: var(--gap-lg); }
+.session-head .period-tag {
+  font-size: 0.76rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--period);
+  margin: 0 0 0.5rem;
+}
+.session-head .topic-no {
+  font-size: 0.82rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 0.35rem;
+  font-variant-numeric: tabular-nums;
+}
+.session-head h1 {
+  font-family: var(--face-display);
+  font-weight: 600;
+  font-size: clamp(1.6rem, 4.6vw, 2.15rem);
+  letter-spacing: 0.05em;
+  margin: 0 0 0.6rem;
+  text-wrap: balance;
+}
+.session-head .theme {
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--rubric);
+  margin: 0 0 0.8rem;
+  text-wrap: balance;
+}
+.session-head .question-of-topic {
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: 0.7rem 0.5rem;
+  font-style: italic;
+  color: var(--ink-soft);
+  max-width: 32em;
+  margin: 0 auto;
+  font-size: 1.05rem;
+}
+
+/* --- a lettered part of the note --- */
+.part { margin: var(--gap-xl) 0 0; }
+.part-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 0.45rem;
+  margin-bottom: 1.2rem;
+}
+.part-head .letter {
+  font-family: var(--face-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--rubric);
+  line-height: 1;
+}
+.part-head h2 {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--rubric);
+  margin: 0;
+}
+.part-head .ref {
+  margin-left: auto;
+  font-size: 0.92rem;
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
+.part p { margin: 0 0 1.05rem; }
+.part .lead::first-letter {
+  font-family: var(--face-display);
+  font-weight: 600;
+  font-size: 3.3em;
+  line-height: 0.82;
+  float: left;
+  padding: 0.06em 0.12em 0 0;
+  color: var(--rubric);
+}
+
+/* --- the numbered teaching points of Part C --- */
+.points { list-style: none; margin: 0; padding: 0; counter-reset: pt; }
+.points > li {
+  counter-increment: pt;
+  position: relative;
+  padding-left: 2.6rem;
+  margin-bottom: 1.35rem;
+}
+.points > li::before {
+  content: counter(pt);
+  position: absolute;
+  left: 0;
+  top: 0.05em;
+  width: 1.85rem;
+  text-align: right;
+  font-family: var(--face-display);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--gilt-ink);
+  font-variant-numeric: tabular-nums;
+}
+/* The point's opening phrase. The punctuation that follows it comes
+   from the content file, so the sentence reads exactly as printed. */
+.points b { font-weight: 600; }
+.points > li > p { margin: 0.6rem 0 0.4rem; }
+.points ul.plain, .points ol.lettered { margin-top: 0.5rem; }
+
+/* marginalia: CCC and Scripture references beside the point they support */
+.marginal {
+  display: block;
+  font-size: 0.86rem;
+  line-height: 1.45;
+  font-style: italic;
+  color: var(--ink-soft);
+  border-left: 2px solid var(--rule);
+  padding: 0.1rem 0 0.1rem 0.75rem;
+  margin: 0.6rem 0 0;
+}
+.marginal .mrk { color: var(--rubric); font-style: normal; }
+@media (min-width: 1180px) {
+  .part { position: relative; }
+  .points > li { position: relative; }
+  .points > li > .marginal {
+    position: absolute;
+    left: calc(100% + 2.2rem);
+    top: 0.2em;
+    width: 12.5rem;
+    margin: 0;
+  }
+}
+
+/* --- plain lists --- */
+ul.plain { list-style: none; padding: 0; margin: 0 0 1.05rem; }
+ul.plain > li { padding-left: 1.5em; position: relative; margin-bottom: 0.5rem; }
+ul.plain > li::before {
+  content: var(--marker, "✠");
+  position: absolute;
+  left: 0;
+  top: 0.02em;
+  color: var(--gilt);
+  font-size: 0.85em;
+}
+ol.lettered { padding-left: 1.6em; margin: 0 0 1.05rem; }
+ol.lettered > li { margin-bottom: 0.5rem; padding-left: 0.2em; }
+
+/* --- Scripture pericope --- */
+.pericope {
+  background: var(--leaf);
+  border-left: 3px solid var(--period);
+  padding: 1rem 1.2rem;
+  margin: 0 0 1.3rem;
+}
+.pericope .cite {
+  font-family: var(--face-display);
+  font-weight: 600;
+  font-size: 1.02rem;
+  letter-spacing: 0.04em;
+  color: var(--period);
+  margin: 0 0 0.3rem;
+}
+.pericope .instruction { font-style: italic; color: var(--ink-soft); margin: 0; font-size: 1rem; }
+.pericope .bible-link { font-size: 0.92rem; margin: 0.6rem 0 0; }
+
+/* --- the Saint plate --- */
+.plate {
+  background: var(--leaf);
+  border: 1px solid var(--rule);
+  box-shadow: var(--shadow-sm);
+  padding: 1.5rem 1.5rem 1.2rem;
+  display: grid;
+  grid-template-columns: 8.5rem 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+.plate .portrait {
+  aspect-ratio: 3 / 4;
+  border: 1px solid var(--rule);
+  background: var(--leaf-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.plate .portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.plate .portrait .monogram {
+  font-family: var(--face-display);
+  font-size: 2.6rem;
+  color: var(--gilt);
+  opacity: 0.6;
+}
+.plate h3 {
+  font-family: var(--face-display);
+  font-weight: 600;
+  font-size: 1.25rem;
+  letter-spacing: 0.04em;
+  margin: 0 0 0.5rem;
+}
+.plate dl {
+  margin: 0 0 0.9rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.15rem 0.7rem;
+  font-size: 0.95rem;
+}
+.plate dt {
+  font-size: 0.74rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--rubric);
+  padding-top: 0.28em;
+}
+.plate dd { margin: 0; }
+.plate p { font-size: 1.02rem; margin: 0 0 0.8rem; }
+.plate .sources { font-size: 0.88rem; color: var(--ink-soft); margin: 0; }
+@media (max-width: 620px) {
+  .plate { grid-template-columns: 1fr; }
+  .plate .portrait { max-width: 9rem; aspect-ratio: 3 / 4; }
+}
+
+/* --- prayer --- */
+.prayer {
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: 1.3rem 1.2rem;
+  margin: 1.4rem 0;
+  text-align: center;
+  font-style: italic;
+  font-size: 1.1rem;
+  background: var(--wash);
+}
+.prayer .plabel {
+  display: block;
+  font-style: normal;
+  font-size: 0.74rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--rubric);
+  margin-bottom: 0.7rem;
+}
+.prayer p { margin: 0 0 0.5rem; }
+.prayer p:last-child { margin-bottom: 0; }
+.prayer .amen-line { color: var(--gilt-ink); }
+
+/* --- pull quote (Scripture set apart) --- */
+.versicle {
+  font-style: italic;
+  font-size: 1.14rem;
+  text-align: center;
+  color: var(--ink);
+  border-left: none;
+  margin: 1.3rem auto;
+  max-width: 30em;
+  padding: 0.3rem 0;
+}
+.versicle .vref { display: block; font-style: normal; font-size: 0.82rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gilt-ink); margin-top: 0.5rem; }
+
+/* ============================================================
+   THE JOURNAL
+   ============================================================ */
+
+.journal { margin: 1.1rem 0 1.8rem; }
+.journal .question {
+  font-style: italic;
+  font-size: 1.1rem;
+  margin: 0 0 0.5rem;
+  display: flex;
+  gap: 0.55rem;
+}
+.journal .question .qn { color: var(--rubric); font-style: normal; font-weight: 600; flex-shrink: 0; }
+
+.journal-lines {
+  display: block;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid var(--rule);
+  background-color: transparent;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent calc(2.3em - 1px),
+    var(--rule-faint) calc(2.3em - 1px),
+    var(--rule-faint) 2.3em
+  );
+  font-family: var(--face-hand);
+  font-size: 1.5rem;
+  line-height: 2.3em;
+  color: var(--ink);
+  padding: 0 0.25em;
+  min-height: 6.9em;
+  resize: none;      /* the box grows itself as the candidate writes */
+  overflow: hidden;
+}
+.journal-lines::placeholder { color: var(--ink-soft); opacity: 0.65; }
+
+.journal .sub { font-size: 0.9rem; color: var(--ink-soft); font-style: italic; margin: 0.35rem 0 0; }
+
+/* the standing note that reflections never leave the device */
+.seal {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  background: var(--leaf);
+  border: 1px solid var(--rule-faint);
+  padding: 0.85rem 1rem;
+  font-size: 0.94rem;
+  color: var(--ink-soft);
+  margin: 0 0 1.5rem;
+}
+.seal .cross { color: var(--rubric); line-height: 1.4; }
+.seal p { margin: 0; }
+
+/* ---------- The export bar ---------- */
+.export {
+  margin-top: var(--gap-xl);
+  border-top: 2px solid var(--gilt);
+  background: var(--leaf);
+  padding: 1.5rem 1.4rem 1.3rem;
+}
+.export h2 {
+  font-family: var(--face-display);
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  margin: 0 0 0.4rem;
+}
+.export p { font-size: 1rem; color: var(--ink-soft); margin: 0 0 1.1rem; }
+
+.namefield { display: grid; gap: 0.9rem; grid-template-columns: 1fr 1fr; margin-bottom: 1.1rem; }
+.namefield label { display: block; font-size: 0.76rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--rubric); margin-bottom: 0.3rem; }
+.namefield input {
+  width: 100%;
+  font-family: var(--face-body);
+  font-size: 1.02rem;
+  color: var(--ink);
+  background: var(--vellum);
+  border: 1px solid var(--rule-faint);
+  padding: 0.55rem 0.65rem;
+}
+@media (max-width: 560px) { .namefield { grid-template-columns: 1fr; } }
+
+.actions { display: flex; flex-wrap: wrap; gap: 0.7rem; align-items: center; }
+
+.btn {
+  font-family: var(--face-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.7rem 1.25rem;
+  cursor: pointer;
+  line-height: 1;
+  border: 1px solid var(--gilt);
+  background: transparent;
+  color: var(--gilt-ink);
+  min-height: 44px;   /* comfortable to tap with a thumb */
+}
+.btn:hover { background: var(--leaf-deep); }
+.btn--primary { background: var(--rubric); border-color: var(--rubric); color: var(--vellum); }
+.btn--primary:hover { background: var(--rubric); filter: brightness(1.1); }
+.btn--quiet { border-color: var(--rule-faint); color: var(--ink-soft); }
+.btn--quiet:hover { border-color: var(--gilt); color: var(--gilt-ink); }
+
+/* the list of sessions already written in, on the journey map */
+.export ul.plain { margin-top: 1rem; margin-bottom: 0; }
+.export ul.plain > li { margin-bottom: 0.4rem; }
+.export ul.plain .sub { font-size: 0.9rem; font-style: italic; color: var(--ink-soft); }
+
+.status { font-size: 0.9rem; font-style: italic; color: var(--ink-soft); min-height: 1.4em; }
+.status[data-state="saved"] { color: var(--seed); }
+.status[data-state="error"] { color: var(--rubric); font-style: normal; }
+
+/* ---------- Footer / colophon ---------- */
+.colophon {
+  margin-top: var(--gap-xl);
+  border-top: 1px solid var(--rule);
+  padding-top: 1.4rem;
+  text-align: center;
+  font-size: 0.92rem;
+  font-style: italic;
+  color: var(--ink-soft);
+  line-height: 1.65;
+}
+.colophon .amdg {
+  font-family: var(--face-display);
+  font-style: normal;
+  font-size: 0.82rem;
+  letter-spacing: 0.28em;
+  color: var(--gilt-ink);
+  margin-top: 1.1rem;
+}
+
+/* ---------- Session navigation ---------- */
+.pager { display: flex; justify-content: space-between; gap: var(--gap); margin-top: var(--gap-lg); font-size: 0.95rem; }
+.pager a { text-decoration: none; color: var(--ink-soft); }
+.pager a:hover { color: var(--rubric); }
+.pager .lbl { display: block; font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gilt-ink); margin-bottom: 0.2rem; }
+
+/* ---------- Notice (missing topic, etc.) ---------- */
+.notice {
+  background: var(--leaf);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--rubric);
+  padding: 1.5rem 1.4rem;
+  text-align: center;
+}
+.notice h1 { font-family: var(--face-display); font-weight: 600; font-size: 1.3rem; margin: 0 0 0.6rem; letter-spacing: 0.04em; }
+.notice p { margin: 0 0 0.7rem; color: var(--ink-soft); }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}

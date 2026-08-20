@@ -1,0 +1,162 @@
+/* ============================================================
+   THE EMMAUS COMPANION — Design Tokens
+   Penang Diocesan Catechetical Commission
+   "Missal, not Material"
+
+   Every colour, size and typeface in the app is declared here
+   and nowhere else. To restyle the app, edit this file only.
+   ============================================================ */
+
+:root {
+  /* ---- The four fixed inks (light theme / daylight) ---- */
+  --vellum:      #F6EFDE;   /* the page itself */
+  --leaf:        #FCF8EC;   /* a raised panel */
+  --leaf-deep:   #F0E7D0;   /* a recessed panel */
+  --ink:         #2A2118;   /* everything that is read */
+  --ink-soft:    #6E5D48;   /* secondary text, marginalia */
+  --rubric:      #9E2B25;   /* liturgical red: structure & the Rites */
+  --gilt:        #A67C2E;   /* gold: rules, initials, ornament */
+  --gilt-ink:    #7E5E1F;   /* gold dark enough to set text in */
+
+  --rule:        rgba(166, 124, 46, 0.42);
+  --rule-faint:  rgba(166, 124, 46, 0.20);
+  --wash:        rgba(166, 124, 46, 0.07);
+
+  /* ---- The colours of the four periods ---- */
+  --seed:        #46704F;   /* A · Evangelization      — green, the sowing */
+  --water:       #2F4E6E;   /* B · Catechumenate       — deep water, the font */
+  --lenten:      #5C3A6E;   /* C · Purification        — violet, Lent */
+  --paschal:     #8A6624;   /* D · Mystagogy           — gold (text-safe) */
+  --paschal-lit: #C29A33;   /* D · ornament gold        (brighter, not for text) */
+  --pentecost:   #9E2B25;   /* the sending             — red */
+
+  --seed-wash:    rgba(70, 112, 79, 0.11);
+  --water-wash:   rgba(47, 78, 110, 0.11);
+  --lenten-wash:  rgba(92, 58, 110, 0.11);
+  --paschal-wash: rgba(194, 154, 51, 0.14);
+
+  /* ---- Paper: the Word-document specimen stays paper-white in both themes ---- */
+  --paper:       #FFFFFF;
+  --paper-ink:   #1F1B15;
+  --paper-soft:  #6B655B;
+  --paper-rule:  #D8D2C4;
+
+  --focus:       #2F4E6E;
+  --shadow-sm:   0 1px 2px rgba(42, 33, 24, 0.10);
+  --shadow:      0 1px 2px rgba(42, 33, 24, 0.10), 0 8px 28px rgba(42, 33, 24, 0.08);
+  --shadow-lift: 0 2px 4px rgba(42, 33, 24, 0.12), 0 14px 40px rgba(42, 33, 24, 0.12);
+
+  /* ---- Typography ---- */
+  --face-display: Cinzel, "Trajan Pro", "Palatino Linotype", Palatino, Georgia, serif;
+  --face-body:    "EB Garamond", Georgia, "Times New Roman", serif;
+  --face-hand:    Caveat, "Segoe Script", "Bradley Hand", "Comic Sans MS", cursive;
+
+  /* Reading size. Session pages let the candidate raise this (see .type-scale). */
+  --size-body:    1.19rem;
+  --lh-body:      1.62;
+
+  /* ---- Rhythm ---- */
+  --measure:      46rem;    /* the reading column */
+  --measure-wide: 62rem;    /* the journey map */
+  --gap-xs: 0.4rem;
+  --gap-sm: 0.75rem;
+  --gap:    1.2rem;
+  --gap-lg: 2.2rem;
+  --gap-xl: 3.6rem;
+}
+
+/* ---- Compline: the candlelit theme ----------------------------------
+   Redefines tokens only. Components never style themselves inside a
+   theme block, so both themes always resolve as a complete set.
+   Guarded so an explicit light choice beats a dark operating system. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --vellum:      #1A1309;
+    --leaf:        #231B10;
+    --leaf-deep:   #150F07;
+    --ink:         #EDE3CC;
+    --ink-soft:    #B3A386;
+    --rubric:      #DC8271;
+    --gilt:        #C9A23B;
+    --gilt-ink:    #D3AF52;
+
+    --rule:        rgba(201, 162, 59, 0.45);
+    --rule-faint:  rgba(201, 162, 59, 0.22);
+    --wash:        rgba(201, 162, 59, 0.06);
+
+    --seed:        #86B694;
+    --water:       #85A9CE;
+    --lenten:      #AF8FC9;
+    --paschal:     #D6B455;
+    --paschal-lit: #D6B455;
+    --pentecost:   #DC8271;
+
+    --seed-wash:    rgba(134, 182, 148, 0.12);
+    --water-wash:   rgba(133, 169, 206, 0.12);
+    --lenten-wash:  rgba(175, 143, 201, 0.12);
+    --paschal-wash: rgba(214, 180, 85, 0.13);
+
+    --paper:       #FBF8F1;
+    --paper-ink:   #1F1B15;
+    --paper-soft:  #6B655B;
+    --paper-rule:  #D8D2C4;
+
+    --focus:       #85A9CE;
+    --shadow-sm:   0 1px 2px rgba(0, 0, 0, 0.5);
+    --shadow:      0 1px 2px rgba(0, 0, 0, 0.5), 0 10px 30px rgba(0, 0, 0, 0.45);
+    --shadow-lift: 0 2px 6px rgba(0, 0, 0, 0.55), 0 16px 44px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* The same set again, so the in-app theme switch wins in both directions. */
+:root[data-theme="dark"] {
+  --vellum:      #1A1309;
+  --leaf:        #231B10;
+  --leaf-deep:   #150F07;
+  --ink:         #EDE3CC;
+  --ink-soft:    #B3A386;
+  --rubric:      #DC8271;
+  --gilt:        #C9A23B;
+  --gilt-ink:    #D3AF52;
+
+  --rule:        rgba(201, 162, 59, 0.45);
+  --rule-faint:  rgba(201, 162, 59, 0.22);
+  --wash:        rgba(201, 162, 59, 0.06);
+
+  --seed:        #86B694;
+  --water:       #85A9CE;
+  --lenten:      #AF8FC9;
+  --paschal:     #D6B455;
+  --paschal-lit: #D6B455;
+  --pentecost:   #DC8271;
+
+  --seed-wash:    rgba(134, 182, 148, 0.12);
+  --water-wash:   rgba(133, 169, 206, 0.12);
+  --lenten-wash:  rgba(175, 143, 201, 0.12);
+  --paschal-wash: rgba(214, 180, 85, 0.13);
+
+  --paper:       #FBF8F1;
+  --paper-ink:   #1F1B15;
+  --paper-soft:  #6B655B;
+  --paper-rule:  #D8D2C4;
+
+  --focus:       #85A9CE;
+  --shadow-sm:   0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow:      0 1px 2px rgba(0, 0, 0, 0.5), 0 10px 30px rgba(0, 0, 0, 0.45);
+  --shadow-lift: 0 2px 6px rgba(0, 0, 0, 0.55), 0 16px 44px rgba(0, 0, 0, 0.5);
+}
+
+/* ---- Period vesture -------------------------------------------------
+   A session page carries its period's colour. Set data-period on <body>
+   and --period / --period-wash follow. The unqualified rule is declared
+   FIRST so the specific ones, which share its specificity, win on
+   source order.                                                       */
+[data-period]     { --period: var(--gilt);    --period-wash: var(--wash); }
+[data-period="A"] { --period: var(--seed);    --period-wash: var(--seed-wash); }
+[data-period="B"] { --period: var(--water);   --period-wash: var(--water-wash); }
+[data-period="C"] { --period: var(--lenten);  --period-wash: var(--lenten-wash); }
+[data-period="D"] { --period: var(--paschal); --period-wash: var(--paschal-wash); }
+
+/* The candidate's reading-size control. */
+:root[data-type="large"]  { --size-body: 1.34rem; }
+:root[data-type="larger"] { --size-body: 1.5rem;  --lh-body: 1.68; }

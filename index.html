@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Emmaus Companion</title>
+<meta name="description" content="The RCIA session notes of the Diocese of Penang, with a private reflection journal.">
+<meta name="color-scheme" content="light dark">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Caveat:wght@500;600&display=swap">
+
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/app.css">
+<link rel="stylesheet" href="assets/css/print.css" media="print">
+</head>
+<body>
+
+<div class="ribbon" aria-hidden="true"></div>
+
+<div class="topbar">
+  <span class="home-link">Penang Diocesan Catechetical Commission</span>
+  <div class="tools">
+    <button class="tool-btn" type="button" id="typeBtn" aria-pressed="false">A Reading size</button>
+    <button class="tool-btn" type="button" id="themeBtn" aria-label="Switch theme">☀ Daylight</button>
+  </div>
+</div>
+
+<main class="shell shell--wide">
+
+  <header>
+    <p class="eyebrow">Rite of Christian Initiation of Adults · Diocese of Penang</p>
+    <h1 class="display">The Emmaus Companion</h1>
+    <p class="deck">“Were not our hearts burning within us while he was talking to us on the road, while he was opening the scriptures to us?” Forty-two stops on one road, from first questions to the day you are sent.</p>
+  </header>
+
+  <div class="legend">
+    <span><i style="background: var(--seed)"></i> A · Evangelization</span>
+    <span><i style="background: var(--water)"></i> B · Catechumenate</span>
+    <span><i style="background: var(--lenten)"></i> C · Purification</span>
+    <span><i style="background: var(--paschal-lit)"></i> D · Mystagogy</span>
+    <span style="color: var(--rubric)">✠ the Rites</span>
+  </div>
+
+  <div id="journeyRoot" class="journey"></div>
+
+  <footer class="colophon">
+    <p>A pilot copy. The session notes are reproduced from those approved for publication by the Penang Diocesan Catechetical Commission.<br>
+    Imprimatur: ✠ Cardinal Sebastian Francis, Bishop of Penang, 31 May 2026 (PKK/BCR/2026/05/705).</p>
+    <p class="amdg">Ad Maiorem Dei Gloriam</p>
+  </footer>
+
+</main>
+
+<script src="assets/js/app.js"></script>
+<script src="assets/js/journal.js"></script>
+<script src="content/syllabus.js"></script>
+<script src="content/topics/topic-01.js"></script>
+<script src="content/topics/topic-16.js"></script>
+<script src="content/topics/topic-29.js"></script>
+<script src="assets/js/journey.js"></script>
+<script>Emmaus.mountControls();</script>
+
+</body>
+</html>
