@@ -235,7 +235,7 @@ img { max-width: 100%; height: auto; }
 
 .stop-link, .stop-blank {
   display: grid;
-  grid-template-columns: 3.4rem 1fr auto;
+  grid-template-columns: 1fr auto;
   gap: 0.9rem;
   align-items: baseline;
   padding: 0.6rem 0.7rem 0.6rem 0.35rem;
@@ -245,15 +245,6 @@ img { max-width: 100%; height: auto; }
 }
 .stop-link:hover { background: var(--period-wash); }
 .stop-blank { color: var(--ink-soft); }
-
-.stop .sess {
-  font-size: 0.78rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-}
 .stop .title { font-size: 1.05rem; line-height: 1.4; }
 .stop-link .title { color: var(--ink); }
 .stop-link:hover .title { color: var(--period); }
@@ -272,8 +263,8 @@ img { max-width: 100%; height: auto; }
 .stop .flag--written { color: var(--period); border-color: currentColor; }
 
 @media (max-width: 560px) {
-  .stop-link, .stop-blank { grid-template-columns: 2.9rem 1fr; row-gap: 0.3rem; }
-  .stop .flag { grid-column: 2; justify-self: start; }
+  .stop-link, .stop-blank { grid-template-columns: 1fr; row-gap: 0.3rem; }
+  .stop .flag { justify-self: start; }
 }
 
 /* --- a Rite standing across the road --- */

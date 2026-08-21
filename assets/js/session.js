@@ -112,7 +112,7 @@
         period.letter + ' · ' + words.name + ' · ' + words.stage.split(' · ')[0]));
     }
     head.appendChild(el('p', 'topic-no',
-      Lang.t('topicSession', { n: t.topic, s: t.session })));
+      Lang.t('topicNo', { n: t.topic })));
     head.appendChild(el('h1', null, t.title));
     if (t.theme) {
       head.appendChild(el('p', 'theme', Lang.t('themeLine', { theme: t.theme })));

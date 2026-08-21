@@ -78,8 +78,6 @@
       row = el('div', 'stop-blank');
     }
 
-    row.appendChild(el('span', 'sess', Lang.t('sess', { n: session.session })));
-
     /* The note's own title where it exists in this language, so the
        words on the map are the words on the candidate's paper. */
     var found = isWritten ? Emmaus.topicIn(session.topic, lang) : null;

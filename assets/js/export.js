@@ -107,8 +107,8 @@ var EmmausExport = (function () {
     var meta = [];
     meta.push(L.t('docName', { name: candidate || '________________________' }, code));
     if (period) {
-      meta.push(L.t('docSession', {
-        s: topic.session,
+      meta.push(L.t('docTopic', {
+        n: topic.topic,
         letter: period.letter,
         period: L.period(period.id, code).name
       }, code));

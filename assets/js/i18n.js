@@ -72,7 +72,6 @@ var Lang = (function () {
       legendD: 'Mystagogy',
       legendRites: '✠ the Rites',
 
-      sess: 'Sess {n}',
       open: 'Open',
       briefing: 'Briefing',
       reflections: '{n} reflections',
@@ -99,7 +98,7 @@ var Lang = (function () {
       topicName: 'Topic {n}',
       backToJourney: 'Return to the journey',
 
-      topicSession: 'Topic {n} · Session {s}',
+      topicNo: 'Topic {n}',
       themeLine: 'Theme: {theme}',
       fallbackNotice: 'This session’s notes have not been transcribed into {language} yet. The approved English text is below — whatever you write is kept, and will still be there when the {language} notes arrive.',
 
@@ -137,7 +136,7 @@ var Lang = (function () {
       /* the Word document */
       docSubtitle: 'RCIA · Journal of the Journey',
       docName: 'Name: {name}',
-      docSession: 'Session {s} · Period {letter}: {period}',
+      docTopic: 'Topic {n} · Period {letter}: {period}',
       docSessionDate: 'Session date: {date}',
       docSaved: 'Saved {date}',
       docNotWritten: '(not yet written)',
@@ -177,7 +176,6 @@ var Lang = (function () {
       legendD: 'Mistagogi',
       legendRites: '✠ Upacara-upacara',
 
-      sess: 'Sesi {n}',
       open: 'Buka',
       briefing: 'Taklimat',
       reflections: '{n} renungan',
@@ -204,7 +202,7 @@ var Lang = (function () {
       topicName: 'Topik {n}',
       backToJourney: 'Kembali ke perjalanan',
 
-      topicSession: 'Topik {n} · Sesi {s}',
+      topicNo: 'Topik {n}',
       themeLine: 'Tema: {theme}',
       fallbackNotice: 'Nota sesi ini belum ditranskripsi ke dalam {language}. Teks bahasa Inggeris yang diluluskan ada di bawah — apa sahaja yang anda tulis akan disimpan, dan masih ada apabila nota {language} tiba.',
 
@@ -241,7 +239,7 @@ var Lang = (function () {
 
       docSubtitle: 'IKD · Jurnal Perjalanan',
       docName: 'Nama: {name}',
-      docSession: 'Sesi {s} · Tempoh {letter}: {period}',
+      docTopic: 'Topik {n} · Tempoh {letter}: {period}',
       docSessionDate: 'Tarikh sesi: {date}',
       docSaved: 'Disimpan {date}',
       docNotWritten: '(belum ditulis)',
@@ -281,7 +279,6 @@ var Lang = (function () {
       legendD: '奧迹期',
       legendRites: '✠ 各项礼仪',
 
-      sess: '第 {n} 课',
       open: '打开',
       briefing: '说明',
       reflections: '{n} 篇反思',
@@ -308,7 +305,7 @@ var Lang = (function () {
       topicName: '主题 {n}',
       backToJourney: '返回旅程',
 
-      topicSession: '主题 {n} · 第 {s} 课',
+      topicNo: '主题 {n}',
       themeLine: '主题思想：{theme}',
       fallbackNotice: '本课讲义尚未转录成{language}。下方是获核准的英文本——你所写的一切都会保留，{language}讲义推出后仍在。',
 
@@ -345,7 +342,7 @@ var Lang = (function () {
 
       docSubtitle: '成人慕道 · 旅程札记',
       docName: '姓名：{name}',
-      docSession: '第 {s} 课 · 阶段 {letter}：{period}',
+      docTopic: '主题 {n} · 阶段 {letter}：{period}',
       docSessionDate: '上课日期：{date}',
       docSaved: '保存于 {date}',
       docNotWritten: '（尚未书写）',
@@ -385,7 +382,6 @@ var Lang = (function () {
       legendD: 'மறைப்பொருள் விளக்கம்',
       legendRites: '✠ சடங்குகள்',
 
-      sess: 'அமர்வு {n}',
       open: 'திற',
       briefing: 'விளக்கம்',
       reflections: '{n} சிந்தனைகள்',
@@ -412,7 +408,7 @@ var Lang = (function () {
       topicName: 'தலைப்பு {n}',
       backToJourney: 'பயணத்திற்குத் திரும்பு',
 
-      topicSession: 'தலைப்பு {n} · அமர்வு {s}',
+      topicNo: 'தலைப்பு {n}',
       themeLine: 'கருப்பொருள்: {theme}',
       fallbackNotice: 'இந்த அமர்வின் குறிப்புகள் இன்னும் {language} மொழியில் படியெடுக்கப்படவில்லை. ஒப்புதல் பெற்ற ஆங்கில உரை கீழே உள்ளது — நீங்கள் எழுதுவது பாதுகாக்கப்படும்; {language} குறிப்புகள் வந்தபிறகும் அது அங்கேயே இருக்கும்.',
 
@@ -449,7 +445,7 @@ var Lang = (function () {
 
       docSubtitle: 'RCIA · பயணக் குறிப்பேடு',
       docName: 'பெயர்: {name}',
-      docSession: 'அமர்வு {s} · காலம் {letter}: {period}',
+      docTopic: 'தலைப்பு {n} · காலம் {letter}: {period}',
       docSessionDate: 'அமர்வு நாள்: {date}',
       docSaved: '{date} அன்று சேமிக்கப்பட்டது',
       docNotWritten: '(இன்னும் எழுதப்படவில்லை)',
@@ -514,7 +510,7 @@ var Lang = (function () {
 
   function table(code) { return STRINGS[code || current()] || STRINGS[DEFAULT]; }
 
-  /* t('sess', {n: 3}) -> "Sess 3". Falls back to English for a key a
+  /* t('topicNo', {n: 3}) -> "Topic 3". Falls back to English for a key a
      language has not filled in, and to the key itself if there is no
      such string at all, so a missing word is visible, never blank. */
   function t(key, vars, code) {
