@@ -768,7 +768,9 @@ ul.saints {
    The same prayer component the session page uses, so a candidate
    recognises a prayer they have already prayed, with the note it came
    from named beneath it. */
-.prayerbook { margin-top: var(--gap-lg); max-width: var(--measure); }
+/* The page itself is set to the reading measure and centred by
+   .shell, so the book only needs its top margin. */
+.prayerbook { margin-top: var(--gap-lg); }
 .prayerbook .deck-count {
   font-size: 0.78rem;
   letter-spacing: 0.16em;
