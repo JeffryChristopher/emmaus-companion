@@ -119,10 +119,13 @@ html[data-lang="zh"] [lang="en"] {
    reads no English can still find their own language.
    ============================================================ */
 
+/* It stands at the very top of the page, above the title, so it is the
+   first thing a candidate meets. Being first, it needs no rule above
+   it — the head of the page is edge enough — but it keeps the one
+   below, which separates it from the title it sits over. */
 .langpick {
-  margin: 0 0 var(--gap-lg);
-  padding: var(--gap) var(--gap-sm);
-  border-top: 1px solid var(--rule-faint);
+  margin: -1.4rem 0 var(--gap-lg);
+  padding: 0 var(--gap-sm) var(--gap);
   border-bottom: 1px solid var(--rule-faint);
   text-align: center;
 }
