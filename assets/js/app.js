@@ -189,6 +189,62 @@ var Emmaus = (function () {
     return Object.keys(topicsIn(code)).map(Number).sort(function (a, b) { return a - b; });
   }
 
+  /* ---- the five sessions that carry no candidate note ----
+     Briefings, the sending, and the day of recollection. They are
+     looked up by SESSION number, not by topic number: they have no
+     topic number, which is the whole reason they need their own
+     pages. Same fallback rule as a topic. */
+
+  function gatesIn(code) {
+    var all = (window.RCIA && window.RCIA.gates) || {};
+    return all[code] || {};
+  }
+
+  function gateIn(sessionNo, code) {
+    var wanted = gatesIn(code)[sessionNo];
+    if (wanted) { return { topic: wanted, lang: code, translated: true }; }
+    var english = gatesIn(Lang.DEFAULT)[sessionNo];
+    if (english) { return { topic: english, lang: Lang.DEFAULT, translated: false }; }
+    return null;
+  }
+
+  function availableGates() {
+    var all = (window.RCIA && window.RCIA.gates) || {};
+    var seen = {};
+    Object.keys(all).forEach(function (code) {
+      Object.keys(all[code]).forEach(function (n) { seen[n] = true; });
+    });
+    return Object.keys(seen).map(Number).sort(function (a, b) { return a - b; });
+  }
+
+  /* Every stop on the road that opens to a page, in the order they
+     are walked. The pager uses this so a briefing can sit between two
+     topics without either of them knowing about it. */
+  function pageStops() {
+    var gates = availableGates();
+    var topics = availableTopics();
+    return ((window.RCIA && window.RCIA.sessions) || []).filter(function (s) {
+      return s.topic != null
+        ? topics.indexOf(s.topic) > -1
+        : gates.indexOf(s.session) > -1;
+    }).map(function (s) {
+      return {
+        session: s.session,
+        topic: s.topic,
+        href: s.topic != null
+          ? 'session.html?topic=' + s.topic
+          : 'session.html?session=' + s.session
+      };
+    });
+  }
+
+  /* The key a page's answers are stored under. A topic keeps its bare
+     number, which is what was written before these pages existed, so
+     no candidate's writing moves. */
+  function journalKeyFor(page) {
+    return page.topic != null ? page.topic : 'gate-' + page.session;
+  }
+
   function formatDate(date) {
     return Lang.formatDate(date);
   }
@@ -202,6 +258,10 @@ var Emmaus = (function () {
     topicIn: topicIn,
     availableTopics: availableTopics,
     topicsTranslated: topicsTranslated,
+    gateIn: gateIn,
+    availableGates: availableGates,
+    pageStops: pageStops,
+    journalKeyFor: journalKeyFor,
     formatDate: formatDate,
     readPrefs: readPrefs,
     writePrefs: writePrefs

@@ -104,14 +104,23 @@ var EmmausExport = (function () {
     var period = options.period;
     var today = options.today || new Date();
 
+    /* A briefing or day of recollection has no topic number: it is
+       named by its title alone, and its period line says so. */
+    var isGate = topic.topic == null;
+
     var meta = [];
     meta.push(L.t('docName', { name: candidate || '________________________' }, code));
     if (period) {
-      meta.push(L.t('docTopic', {
-        n: topic.topic,
-        letter: period.letter,
-        period: L.period(period.id, code).name
-      }, code));
+      meta.push(isGate
+        ? L.t('docGate', {
+            letter: period.letter,
+            period: L.period(period.id, code).name
+          }, code)
+        : L.t('docTopic', {
+            n: topic.topic,
+            letter: period.letter,
+            period: L.period(period.id, code).name
+          }, code));
     }
     if (options.sessionDate) {
       meta.push(L.t('docSessionDate', { date: formatDate(options.sessionDate, code) }, code));
@@ -128,7 +137,8 @@ var EmmausExport = (function () {
         lang: code,
         noteLang: noteLang,
         header: [L.t('brand', null, code), L.t('docSubtitle', null, code)],
-        title: L.t('topicLine', { n: topic.topic, title: topic.title }, code),
+        title: isGate ? topic.title
+                      : L.t('topicLine', { n: topic.topic, title: topic.title }, code),
         subtitle: topic.theme ? L.t('themeLine', { theme: topic.theme }, code) : null,
         meta: meta,
         author: candidate || L.t('docCandidate', null, code),
@@ -145,8 +155,10 @@ var EmmausExport = (function () {
      only the forbidden punctuation is taken out. */
   function fileNameFor(topic, name, code) {
     var candidate = (name || '').trim();
-    var raw = L.t('topicLine', { n: topic.topic, title: topic.title }, code) +
-              (candidate ? ' — ' + candidate : '');
+    var heading = topic.topic == null
+      ? topic.title
+      : L.t('topicLine', { n: topic.topic, title: topic.title }, code);
+    var raw = heading + (candidate ? ' — ' + candidate : '');
     return raw.replace(/[\\/:*?"<>|]/g, '').replace(/\s+/g, ' ').trim() + '.docx';
   }
 

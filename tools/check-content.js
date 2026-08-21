@@ -38,7 +38,7 @@ const Lang = require(path.join(APP, 'assets/js/i18n.js'));
 const KNOWN_BLOCKS = new Set([
   'label', 'subhead', 'aside', 'lead', 'para', 'list', 'points',
   'pericope', 'versicle', 'prayer', 'saint', 'plate', 'journal',
-  'table', 'media'
+  'table', 'media', 'rite', 'crossref'
 ]);
 
 let failures = 0;
@@ -67,6 +67,7 @@ function loadScript(relPath) {
 
 console.log('Loading content…');
 loadScript('content/syllabus.js');
+loadScript('content/gates.js');
 
 const LANGS = Lang.languages().map(l => l.code);
 const TOPIC_ROOT = path.join(APP, 'content/topics');
@@ -468,6 +469,131 @@ LANGS.forEach(function (code) {
     console.log();
   });
 });
+
+/* ============================================================
+   The five sessions that carry no candidate note
+
+   Different rules apply: they have no topic number, no Imprimatur
+   behind their wording, and no Scripture headings. What must hold is
+   that they point only at real things — a session that exists, a
+   Rite the schema actually names, a topic that is really there — and
+   that their answers cannot collide with a topic's.
+   ============================================================ */
+
+console.log('The briefings and days of recollection');
+const gatesAll = RCIA.gates || {};
+const gateLangs = Object.keys(gatesAll);
+check('the gate pages are registered under a language',
+  gateLangs.length > 0 && gateLangs.indexOf(Lang.DEFAULT) > -1,
+  gateLangs.join(', '));
+
+const englishGates = gatesAll[Lang.DEFAULT] || {};
+const gateNumbers = Object.keys(englishGates).map(Number).sort((a, b) => a - b);
+const notelessSessions = RCIA.sessions
+  .filter(s => s.topic == null).map(s => s.session).sort((a, b) => a - b);
+
+check('there is a page for every session that carries no note',
+  gateNumbers.join(',') === notelessSessions.join(','),
+  'pages for ' + gateNumbers.join(', ') + ' vs sessions ' + notelessSessions.join(', '));
+
+gateNumbers.forEach(function (n) {
+  const gate = englishGates[n];
+  const row = RCIA.sessions.find(s => s.session === n);
+  console.log('[gate] session ' + n + ' — ' + gate.title);
+
+  check('names its session, period and title',
+    gate.session === n && !!gate.period && !!gate.title);
+  check('the session it names carries no topic number',
+    !!row && row.topic == null, row ? 'topic ' + row.topic : 'no such session');
+  check('its period matches the schema (' + (row && row.period) + ')',
+    !!row && gate.period === row.period, 'page says ' + gate.period);
+  check('it has a short label for the head', !!gate.label);
+
+  const problems = [];
+  const journalIds = [];
+  let rites = 0;
+  gate.parts.forEach(function (part) {
+    if (!part.letter || !part.name) { problems.push('a part is missing letter or name'); }
+    (part.blocks || []).forEach(function (block, i) {
+      if (!KNOWN_BLOCKS.has(block.type)) { problems.push('unknown block ' + block.type); }
+      if (['label', 'subhead', 'aside', 'lead', 'para'].includes(block.type) &&
+          (!block.text || !block.text.trim())) {
+        problems.push(part.letter + ' block ' + i + ' (' + block.type + ') has no text');
+      }
+      if (block.type === 'journal') {
+        journalIds.push(block.id);
+        block.questions.forEach(function (q, j) {
+          if (!q.text || !q.text.trim() || !q.n) {
+            problems.push('journal ' + block.id + ' question ' + j + ' is incomplete');
+          }
+        });
+      }
+      /* A `rite` block draws itself from the schema. If the session it
+         sits on has no Rite after it, the block would render nothing. */
+      if (block.type === 'rite') {
+        rites++;
+        if (!row || !row.gateAfter) {
+          problems.push('a rite block, but the schema names no Rite after session ' + n);
+        }
+      }
+      if (block.type === 'crossref') {
+        (block.items || []).forEach(function (item) {
+          if (!(allTopics[Lang.DEFAULT] || {})[item.topic]) {
+            problems.push('points at Topic ' + item.topic + ', which does not exist');
+          }
+        });
+      }
+      /* These pages quote another note rather than Scripture, so a
+         versicle here carries `cite`, which is never made a link. */
+      if (block.type === 'versicle' && block.ref) {
+        problems.push('a versicle with a Scripture `ref`; use `cite` on a gate page');
+      }
+    });
+  });
+
+  check('every block is sound, and points at something real',
+    problems.length === 0, problems.slice(0, 3).join(' | '));
+  check('journal ids are unique within the page',
+    new Set(journalIds).size === journalIds.length, journalIds.join(', '));
+  check('it asks at least one question', journalIds.length > 0);
+  if (row && row.gateAfter) {
+    check('it shows the Rite that follows', rites === 1, rites + ' rite blocks');
+  }
+
+  /* The storage key must not be a bare number, or session 18 would
+     write into Topic 18. */
+  const key = 'gate-' + n;
+  check('its answers are filed under "' + key + '", never a bare number',
+    isNaN(parseInt(key, 10)));
+
+  /* And the document must build, as a topic's does. */
+  const keys = EmmausExport.questionKeys(gate).map(k => k.key);
+  check('every question has its own storage key (' + keys.length + ' questions)',
+    new Set(keys).size === keys.length);
+
+  const answers = {};
+  keys.forEach((k, i) => { if (i % 2 === 0) { answers[k] = 'A written reflection for ' + k + '.'; } });
+  const period = RCIA.periods.find(p => p.id === gate.period);
+  const built = EmmausExport.buildSpec(gate, answers, {
+    name: 'Teresa Lim', period: period, today: new Date(2026, 7, 21),
+    lang: Lang.DEFAULT, noteLang: Lang.DEFAULT
+  });
+  check('its title carries no topic number',
+    built.spec.title === gate.title, built.spec.title);
+  check('its period line carries no topic number',
+    built.spec.meta.every(line => line.indexOf('Topic ') !== 0),
+    built.spec.meta.join(' | '));
+
+  const bytes = EmmausDocx.build(built.spec, new Date(2026, 7, 21, 9, 30, 0));
+  check('the Word document builds', bytes.length > 2000 &&
+    bytes[0] === 0x50 && bytes[1] === 0x4B, bytes.length + ' bytes');
+
+  const outFile = path.join(outDir, 'gate — ' +
+    EmmausExport.fileNameFor(gate, 'Sample', Lang.DEFAULT));
+  fs.writeFileSync(outFile, Buffer.from(bytes));
+  console.log('        sample written: tools/sample/' + path.basename(outFile));
+});
+console.log();
 
 /* ---- the fallback path: a Tamil reader opening an English-only note ---- */
 
