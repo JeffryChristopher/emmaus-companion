@@ -104,6 +104,34 @@ Each part (A, B, C…) holds a list of blocks. The available blocks are:
 | `prayer` | a closing prayer |
 | `journal` | questions with ruled writing lines |
 
+### Bible links
+
+Scripture references become links to the chapter on the **USCCB Bible**
+(`https://bible.usccb.org/bible/<book>/<chapter>`), opening in a new tab so the
+candidate does not lose their place or their writing. This happens automatically
+in three places: the reference beside a part heading, the `cite` of a `pericope`,
+and the `ref` of a `versicle`. A marginal note linked only when its `mark` is
+`Scripture` — `CCC` references stay as plain text.
+
+`assets/js/scripture.js` reads the reference as printed, including the
+abbreviations the notes use (`Jn`, `Lk`, `Mt`, and `Ep` for Ephesians), numbered
+books (`1 Corinthians`, `1Cor`) and multi-word titles (`Song of Songs`). Only the
+chapter is linked, never a verse range, because the USCCB verse anchors are
+numeric ids that would quietly rot.
+
+Where a printed heading would mislead the parser, name the passage explicitly —
+Topic 29 does this, because its heading reads "Matthew …  Lk 15:11-32":
+
+```js
+{ type: 'pericope',
+  cite: 'Matthew The Parable of the Prodigal Son - Lk 15:11-32.',
+  passage: 'Luke 15' }
+```
+
+The checker fails the build if a Scripture reference cannot be resolved, or if an
+ordinary heading would accidentally turn into a link. If a book slug ever proves
+wrong, it is one line in the `BOOKS` table in `scripture.js`.
+
 In a `points` item, `title` and `body` are joined by `joiner`, which reproduces
 the punctuation of the printed note exactly — a space, an en dash `" – "`, or
 `"\n"` to start a new paragraph.

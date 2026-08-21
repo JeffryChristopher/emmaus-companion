@@ -23,6 +23,7 @@ const vm = require('vm');
 const APP = path.join(__dirname, '..');
 const EmmausDocx = require(path.join(APP, 'assets/js/docx.js'));
 const EmmausExport = require(path.join(APP, 'assets/js/export.js'));
+const Scripture = require(path.join(APP, 'assets/js/scripture.js'));
 
 /* Block types the session renderer can draw (see session.js buildBlock). */
 const KNOWN_BLOCKS = new Set([
@@ -86,6 +87,26 @@ check('topic numbers are unique in the schema',
   new Set(topicNumbersInSchema).size === topicNumbersInSchema.length);
 check('every session names a period that exists',
   RCIA.sessions.every(s => RCIA.periods.some(p => p.id === s.period)));
+console.log();
+
+/* ---- Scripture references resolve to the USCCB Bible ---- */
+
+console.log('Scripture links');
+const B = 'https://bible.usccb.org/bible/';
+[
+  ['John 6:52–63', B + 'john/6'],
+  ['Lk 15:11-32', B + 'luke/15'],
+  ['Ep 1:9, 2:18', B + 'ephesians/1'],
+  ['1 Corinthians 13:1', B + '1corinthians/13'],
+  ['Song of Songs 2:10', B + 'songofsongs/2'],
+  ['Psalm 23:1', B + 'psalms/23'],
+  ['Matthew The Parable of the Prodigal Son - Lk 15:11-32.', B + 'luke/15'],
+  ['CCC 27-28', null],
+  ['Summa Theologica', null]
+].forEach(([input, expected]) => {
+  check('"' + input.slice(0, 34) + '" -> ' + (expected ? expected.replace(B, '') : 'not a reference'),
+    Scripture.url(input) === expected, String(Scripture.url(input)));
+});
 console.log();
 
 /* ---- each topic ---- */
@@ -152,6 +173,43 @@ topicNumbers.forEach(function (n) {
       }
     });
   });
+
+  /* Every Scripture reference the candidate sees must produce a working
+     link. A reference the parser cannot read would silently render as
+     plain text, so it is worth failing the build over. */
+  const unresolved = [];
+  const falseLinks = [];
+  topic.parts.forEach(function (part) {
+    /* Only the Scripture part's heading is a reference. Elsewhere `ref`
+       carries the topic title or an activity name. */
+    const isScripturePart = /scripture/i.test(part.name || '');
+    if (part.ref && isScripturePart && !Scripture.url(part.ref)) {
+      unresolved.push('part ' + part.letter + ' ref: "' + part.ref + '"');
+    }
+    if (part.ref && !isScripturePart && Scripture.url(part.ref)) {
+      falseLinks.push('part ' + part.letter + ' ref "' + part.ref +
+                      '" would link to ' + Scripture.url(part.ref));
+    }
+    (part.blocks || []).forEach(function (block) {
+      if (block.type === 'pericope' && !Scripture.url(block.passage || block.cite)) {
+        unresolved.push('pericope: "' + block.cite + '" (add a `passage` field)');
+      }
+      if (block.type === 'versicle' && block.ref && !Scripture.url(block.passage || block.ref)) {
+        unresolved.push('versicle ref: "' + block.ref + '"');
+      }
+      if (block.type === 'points') {
+        block.items.forEach(function (item) {
+          if (item.marginal && item.marginal.mark === 'Scripture' && !Scripture.url(item.marginal.text)) {
+            unresolved.push('marginal: "' + item.marginal.text + '"');
+          }
+        });
+      }
+    });
+  });
+  check('every Scripture reference resolves to a USCCB chapter',
+    unresolved.length === 0, unresolved.join(' | '));
+  check('no ordinary heading is mistaken for a Scripture reference',
+    falseLinks.length === 0, falseLinks.join(' | '));
 
   check('every block type is one the app can draw',
     unknown.length === 0, 'unknown: ' + [...new Set(unknown)].join(', '));

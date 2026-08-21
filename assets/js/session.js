@@ -115,7 +115,11 @@
     var head = el('div', 'part-head');
     head.appendChild(el('span', 'letter', part.letter));
     head.appendChild(el('h2', null, part.name));
-    if (part.ref) { head.appendChild(el('span', 'ref', part.ref)); }
+    if (part.ref) {
+      var ref = bibleLink(part.ref, part.ref);
+      ref.className = 'ref';
+      head.appendChild(ref);
+    }
     section.appendChild(head);
 
     part.blocks.forEach(function (block) {
@@ -181,7 +185,12 @@
       if (item.marginal) {
         var note = el('span', 'marginal');
         note.appendChild(el('span', 'mrk', item.marginal.mark + ' '));
-        note.appendChild(document.createTextNode(item.marginal.text));
+        /* Scripture marginalia link out; CCC references do not. */
+        if (item.marginal.mark === 'Scripture') {
+          note.appendChild(bibleLink(item.marginal.text, item.marginal.text));
+        } else {
+          note.appendChild(document.createTextNode(item.marginal.text));
+        }
         li.appendChild(note);
       }
       list.appendChild(li);
@@ -189,10 +198,40 @@
     return list;
   }
 
+  /* A reference as printed, made clickable when it can be understood.
+     Returns a plain <span> when it cannot, so nothing ever looks like a
+     link that goes nowhere. `passage` in the content file overrides the
+     parser, for a heading the parser would read wrongly. */
+  function bibleLink(reference, label, passage) {
+    var href = Scripture.url(passage || reference);
+    if (!href) { return el('span', null, label); }
+
+    var chapter = Scripture.chapterLabel(passage || reference);
+    var a = el('a', null, label);
+    a.href = href;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    a.title = 'Read ' + chapter + ' on the USCCB Bible (opens in a new tab)';
+    return a;
+  }
+
   function buildPericope(block) {
     var box = el('div', 'pericope');
-    box.appendChild(el('p', 'cite', block.cite));
+
+    var cite = el('p', 'cite');
+    cite.appendChild(bibleLink(block.cite, block.cite, block.passage));
+    box.appendChild(cite);
+
     if (block.instruction) { box.appendChild(el('p', 'instruction', block.instruction)); }
+
+    /* An unmistakable way in, rather than relying on the heading alone. */
+    var chapter = Scripture.chapterLabel(block.passage || block.cite);
+    if (chapter) {
+      var line = el('p', 'bible-link');
+      var open = bibleLink(block.cite, 'Read ' + chapter + ' on the USCCB Bible ↗', block.passage);
+      line.appendChild(open);
+      box.appendChild(line);
+    }
     return box;
   }
 
@@ -200,7 +239,11 @@
     var box = el('blockquote', 'versicle');
     var text = (block.number ? block.number + ' ' : '') + block.text;
     box.appendChild(document.createTextNode(text));
-    if (block.ref) { box.appendChild(el('span', 'vref', block.ref)); }
+    if (block.ref) {
+      var ref = el('span', 'vref');
+      ref.appendChild(bibleLink(block.ref, block.ref, block.passage));
+      box.appendChild(ref);
+    }
     return box;
   }
 

@@ -485,8 +485,45 @@ ol.lettered > li { margin-bottom: 0.5rem; padding-left: 0.2em; }
   color: var(--period);
   margin: 0 0 0.3rem;
 }
+.pericope .cite a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--rule);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+.pericope .cite a:hover { text-decoration-color: currentColor; }
 .pericope .instruction { font-style: italic; color: var(--ink-soft); margin: 0; font-size: 1rem; }
-.pericope .bible-link { font-size: 0.92rem; margin: 0.6rem 0 0; }
+
+/* The way in to the passage itself. */
+.pericope .bible-link { margin: 0.9rem 0 0; }
+.pericope .bible-link a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;          /* comfortable to tap */
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--gilt-ink);
+  text-decoration: none;
+  border: 1px solid var(--rule);
+  padding: 0.55rem 0.85rem;
+  line-height: 1.2;
+}
+.pericope .bible-link a:hover { border-color: var(--gilt); background: var(--wash); color: var(--gilt-ink); }
+
+/* A reference in a part heading, or beneath a verse. */
+.part-head a.ref, .versicle .vref a, .marginal a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--rule);
+  text-underline-offset: 3px;
+}
+.part-head a.ref:hover, .versicle .vref a:hover, .marginal a:hover {
+  color: var(--rubric);
+  text-decoration-color: currentColor;
+}
 
 /* --- the Saint plate --- */
 .plate {

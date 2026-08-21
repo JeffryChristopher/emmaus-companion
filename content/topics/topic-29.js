@@ -52,6 +52,10 @@ window.RCIA.topics[29] = {
         {
           type: 'pericope',
           cite: 'Matthew The Parable of the Prodigal Son - Lk 15:11-32.',
+          /* The heading is printed with "Matthew" although the parable is
+             St Luke's. The cite stays exactly as approved; this names the
+             chapter the Bible link should actually open. */
+          passage: 'Luke 15',
           instruction: 'Read Text, reflect, pray and prepare answers for Questions below:'
         },
         { type: 'subhead', text: 'i. Personal Reflection:' },
