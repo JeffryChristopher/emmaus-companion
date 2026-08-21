@@ -764,7 +764,45 @@ ul.saints {
 }
 .saint-card .to-topic:hover { color: var(--rubric); border-bottom-color: currentColor; }
 
-/* A way through to the gallery, under the legend on the journey map. */
+/* --- Prayers of the Journey -----------------------------------------
+   The same prayer component the session page uses, so a candidate
+   recognises a prayer they have already prayed, with the note it came
+   from named beneath it. */
+.prayerbook { margin-top: var(--gap-lg); max-width: var(--measure); }
+.prayerbook .deck-count {
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 var(--gap-lg);
+}
+.prayer-card { margin-bottom: var(--gap-lg); }
+.prayer-card .prayer { margin: 0; border-color: var(--period); }
+.prayer-card .plabel { color: var(--period); }
+.prayer-from {
+  margin: 0.6rem 0 0;
+  text-align: center;
+  font-size: 0.72rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+.prayer-from a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule-faint);
+  padding-bottom: 0.1rem;
+}
+.prayer-from a:hover { color: var(--period); border-bottom-color: currentColor; }
+
+/* Ways through to the gathered pages, under the legend on the map. */
+.side-doors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-sm);
+  margin-bottom: var(--gap);
+}
+.side-doors .gallery-link { margin-bottom: 0; }
+
 .gallery-link {
   display: inline-flex;
   align-items: center;

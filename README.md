@@ -120,6 +120,29 @@ not the app's to do.
 
 ---
 
+## The Prayers
+
+`prayers.html` gathers every prayer the notes set down — seven of them —
+in the order the road is walked, for the days between one session and the
+next. Like the Saints, it reads rather than stores, so a prayer transcribed
+into Mandarin tomorrow appears here in Mandarin with no further work. The
+fallback is per prayer, not per page: a candidate reading in Tamil sees
+Topic 1's prayer in Tamil and the other six in English, never an empty card.
+
+**Where a note prints a prayer with no heading, none is invented.** Two of
+the seven have none; the note they come from is named beneath them instead,
+which is both true and the way back to the page they came from. Topic 1's
+prayer is headed "Example", because that is the word the note prints above
+it — it is an example of a prayer of thanksgiving, not a title.
+
+They are gathered in session order rather than by topic number, because the
+two differ in the Mystagogy, and the road is what the candidate walks.
+
+Both this page and the Saints print well: the screen furniture drops away
+and no card is broken across a page.
+
+---
+
 ## Opening it
 
 **The simple way.** Double-click `index.html`. It opens in your browser and
@@ -145,6 +168,7 @@ App/
   serve.js              the little local server described above
 
   saints.html           the Saints, by the day of their feast
+  prayers.html          the prayers the notes set down
 
   content/
     syllabus.js         the 42 sessions, four periods, and the Rites
@@ -168,6 +192,8 @@ App/
     i18n.js             the four languages and every word the app owns
     saints.js           reading the saints out of the notes
     gallery.js          drawing the Saints page
+    prayers.js          reading the prayers out of the notes
+    prayerbook.js       drawing the Prayers page
     app.js              theme, reading size, language, small helpers
     journal.js          saving what the candidate writes, on their device
     docx.js             writes the Word document, from scratch

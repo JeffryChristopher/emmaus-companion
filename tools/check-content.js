@@ -34,6 +34,7 @@ const EmmausExport = require(path.join(APP, 'assets/js/export.js'));
 const Scripture = require(path.join(APP, 'assets/js/scripture.js'));
 const Lang = require(path.join(APP, 'assets/js/i18n.js'));
 const Saints = require(path.join(APP, 'assets/js/saints.js'));
+const Prayers = require(path.join(APP, 'assets/js/prayers.js'));
 
 /* Block types the session renderer can draw (see session.js buildBlock). */
 const KNOWN_BLOCKS = new Set([
@@ -684,6 +685,57 @@ LANGS.forEach(function (code) {
 console.log();
 
 /* ============================================================
+   The Prayers page
+
+   Like the gallery, it reads rather than stores. What must hold is
+   that it shows every prayer the notes print, none twice, each one
+   pointing back at the part it came from.
+   ============================================================ */
+
+console.log('Prayers of the Journey');
+const prayerList = Prayers.gather(Lang.DEFAULT,
+  Object.assign({ sessions: RCIA.sessions }, sandboxContent));
+
+let printedPrayers = 0;
+Object.keys(allTopics[Lang.DEFAULT] || {}).forEach(function (n) {
+  printedPrayers += Prayers.prayersOf(allTopics[Lang.DEFAULT][n]).length;
+});
+check('every prayer the notes print is on the page',
+  prayerList.length === printedPrayers,
+  prayerList.length + ' vs ' + printedPrayers);
+
+check('no prayer is shown twice',
+  new Set(prayerList.map(p => p.topic + ':' + p.part + ':' + p.prayer.lines[0]))
+    .size === prayerList.length);
+
+check('every prayer has lines to pray',
+  prayerList.every(p => Array.isArray(p.prayer.lines) && p.prayer.lines.length &&
+                        p.prayer.lines.every(l => l && l.trim())));
+
+/* Each card links back to the very part the prayer stands in. */
+const badLinks = prayerList.filter(function (p) {
+  const topic = (allTopics[Lang.DEFAULT] || {})[p.topic];
+  return !topic || !topic.parts.some(part => part.letter === p.part);
+});
+check('every prayer names a part that is really in its note',
+  badLinks.length === 0,
+  badLinks.map(p => 'Topic ' + p.topic + ' part ' + p.part).join(', '));
+
+/* They are gathered in the order the road is walked, not by topic
+   number — the two differ in the Mystagogy. */
+const walked = RCIA.sessions.filter(s => s.topic != null).map(s => s.topic);
+let inOrder = true;
+for (let i = 1; i < prayerList.length; i++) {
+  if (walked.indexOf(prayerList[i - 1].topic) > walked.indexOf(prayerList[i].topic)) {
+    inOrder = false;
+  }
+}
+check('they stand in the order the road is walked', inOrder);
+console.log('        ' + prayerList.length + ' prayers, from Topic ' +
+  [...new Set(prayerList.map(p => p.topic))].join(', '));
+console.log();
+
+/* ============================================================
    The pages load the same content files
 
    Three HTML pages each list every content script by hand. A file
@@ -697,7 +749,7 @@ const contentFiles = ['content/syllabus.js', 'content/gates.js'].concat(
   LANGS.flatMap(code => (loadedFiles[code] || [])
     .map(name => 'content/topics/' + code + '/' + name)));
 
-['index.html', 'session.html', 'saints.html'].forEach(function (page) {
+['index.html', 'session.html', 'saints.html', 'prayers.html'].forEach(function (page) {
   const html = fs.readFileSync(path.join(APP, page), 'utf8');
   const listed = (html.match(/<script src="(content\/[^"]+)"><\/script>/g) || [])
     .map(tag => /src="([^"]+)"/.exec(tag)[1]);

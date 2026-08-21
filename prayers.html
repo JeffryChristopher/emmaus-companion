@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Emmaus Companion</title>
-<meta name="description" content="The RCIA session notes of the Diocese of Penang, in English, Bahasa Malaysia, Mandarin and Tamil, with a private reflection journal.">
+<title>Prayers of the Journey · The Emmaus Companion</title>
+<meta name="description" content="Every prayer the RCIA notes of the Diocese of Penang set down, gathered in the order a candidate meets them.">
 <meta name="color-scheme" content="light dark">
 
 <!-- The chosen language decides the typeface, so it is put on <html>
@@ -37,7 +37,7 @@
 <div class="ribbon" aria-hidden="true"></div>
 
 <div class="topbar">
-  <span class="home-link" data-i18n="brand">Penang Diocesan Catechetical Commission</span>
+  <a class="home-link" href="index.html" data-i18n="backToJourney">Return to the journey</a>
   <div class="tools">
     <button class="tool-btn" type="button" id="typeBtn" aria-pressed="false">A Reading size</button>
     <button class="tool-btn" type="button" id="themeBtn" aria-label="Switch theme">☀ Daylight</button>
@@ -48,38 +48,24 @@
 
   <header>
     <p class="eyebrow" data-i18n="eyebrow">Rite of Christian Initiation of Adults · Diocese of Penang</p>
-    <h1 class="display" data-i18n="appTitle">The Emmaus Companion</h1>
-    <p class="deck" data-i18n="deck">“Were not our hearts burning within us while he was talking to us on the road, while he was opening the scriptures to us?” Forty-two stops on one road, from first questions to the day you are sent.</p>
+    <h1 class="display" data-i18n="prayersTitle">Prayers of the Journey</h1>
+    <p class="deck" data-i18n="prayersDeck">The prayers the notes set down, gathered in the order you meet them, for the days between one session and the next.</p>
   </header>
-
-  <!-- The language is chosen here, before anything else asks to be read. -->
-  <div id="langPick"></div>
-
-  <div class="legend">
-    <span><i style="background: var(--seed)"></i> A · <span data-i18n="legendA">Evangelization</span></span>
-    <span><i style="background: var(--water)"></i> B · <span data-i18n="legendB">Catechumenate</span></span>
-    <span><i style="background: var(--lenten)"></i> C · <span data-i18n="legendC">Purification</span></span>
-    <span><i style="background: var(--paschal-lit)"></i> D · <span data-i18n="legendD">Mystagogy</span></span>
-    <span style="color: var(--rubric)" data-i18n="legendRites">✠ the Rites</span>
-  </div>
 
   <nav class="side-doors">
     <a class="gallery-link" href="saints.html">
       <span aria-hidden="true">✠</span>
       <span data-i18n="saintsLink">The Saints</span>
     </a>
-    <a class="gallery-link" href="prayers.html">
-      <span aria-hidden="true">❧</span>
-      <span data-i18n="prayersLink">The Prayers</span>
-    </a>
   </nav>
 
-  <div id="journeyRoot" class="journey"></div>
+  <div id="langPick"></div>
+
+  <div id="prayersRoot" class="prayerbook"></div>
 
   <footer class="colophon">
     <p data-i18n="colophonNotes">The session notes are reproduced from those approved for publication by the Penang Diocesan Catechetical Commission.</p>
     <p data-i18n="colophonImprimatur">Imprimatur: ✠ Cardinal Sebastian Francis, Bishop of Penang, 31 May 2026 (PKK/BCR/2026/05/705).</p>
-    <p data-i18n="colophonTranslated" data-i18n-when="translated" hidden></p>
     <p class="amdg" data-i18n="amdg">Ad Maiorem Dei Gloriam</p>
   </footer>
 
@@ -88,6 +74,7 @@
 <script src="assets/js/i18n.js"></script>
 <script src="assets/js/app.js"></script>
 <script src="assets/js/journal.js"></script>
+<script src="assets/js/prayers.js"></script>
 <script src="content/syllabus.js"></script>
 <script src="content/gates.js"></script>
 <script src="content/topics/en/topic-01.js"></script>
@@ -133,7 +120,7 @@
 <script src="content/topics/ta/topic-01.js"></script>
 <script src="content/topics/ta/topic-16.js"></script>
 <script src="content/topics/ta/topic-29.js"></script>
-<script src="assets/js/journey.js"></script>
+<script src="assets/js/prayerbook.js"></script>
 <script>Emmaus.mountControls();</script>
 
 </body>

@@ -91,8 +91,14 @@ body {
 .part-head { break-after: avoid; page-break-after: avoid; }
 
 /* The Saints gallery makes a useful handout: two columns, ruled, and
-   no card broken across a page. */
-.gallery-link { display: none !important; }
+   no card broken across a page. The Prayers make a better one still —
+   they are meant to be carried. */
+.gallery-link, .side-doors { display: none !important; }
+.prayer-card { break-inside: avoid; page-break-inside: avoid; }
+.prayerbook .deck-count { color: #444444 !important; }
+.prayer-card .prayer { border-color: #000000 !important; }
+.prayer-card .plabel { color: #000000 !important; }
+.prayer-from a { color: #444444 !important; border-bottom-color: #BBBBBB !important; }
 .gallery .month, .saint-card h3 { color: #000000 !important; }
 .gallery .month { border-bottom-color: #000000 !important; }
 .gallery .deck-count, .saint-card .also, .saint-card .patron { color: #444444 !important; }
