@@ -574,7 +574,7 @@
     if (index > 0) {
       var pa = el('a');
       pa.href = 'session.html?topic=' + written[index - 1];
-      pa.appendChild(el('span', 'lbl', Lang.t('prevInPilot')));
+      pa.appendChild(el('span', 'lbl', Lang.t('prevTopic')));
       pa.appendChild(document.createTextNode(Lang.t('topicName', { n: written[index - 1] })));
       prev.appendChild(pa);
     }
@@ -590,7 +590,7 @@
     if (index > -1 && index < written.length - 1) {
       var na = el('a');
       na.href = 'session.html?topic=' + written[index + 1];
-      na.appendChild(el('span', 'lbl', Lang.t('nextInPilot')));
+      na.appendChild(el('span', 'lbl', Lang.t('nextTopic')));
       na.appendChild(document.createTextNode(Lang.t('topicName', { n: written[index + 1] })));
       next.appendChild(na);
     }

@@ -127,8 +127,8 @@ var Lang = (function () {
       savedFileBlank: 'Saved “{file}” — the questions are there, ready for you to write.',
       exportFailed: 'The document could not be made on this device. Try the Print button instead, and choose “Save as PDF”.',
 
-      prevInPilot: 'Previous in this pilot',
-      nextInPilot: 'Next in this pilot',
+      prevTopic: 'Previous',
+      nextTopic: 'Next',
       theJourney: 'The journey',
       allSessions: 'All sessions',
       backLink: '← The journey',
@@ -231,8 +231,8 @@ var Lang = (function () {
       savedFileBlank: 'Menyimpan “{file}” — soalan-soalannya ada di situ, sedia untuk anda tulis.',
       exportFailed: 'Dokumen tidak dapat dihasilkan pada peranti ini. Cuba butang Cetak, dan pilih “Simpan sebagai PDF”.',
 
-      prevInPilot: 'Sebelum ini dalam salinan perintis',
-      nextInPilot: 'Seterusnya dalam salinan perintis',
+      prevTopic: 'Sebelum ini',
+      nextTopic: 'Seterusnya',
       theJourney: 'Perjalanan',
       allSessions: 'Semua sesi',
       backLink: '← Perjalanan',
@@ -334,8 +334,8 @@ var Lang = (function () {
       savedFileBlank: '已保存“{file}”——题目都在，等你书写。',
       exportFailed: '无法在此装置上生成文件。请改用列印按钮，并选择“另存为 PDF”。',
 
-      prevInPilot: '试行版上一课',
-      nextInPilot: '试行版下一课',
+      prevTopic: '上一课',
+      nextTopic: '下一课',
       theJourney: '旅程',
       allSessions: '全部课程',
       backLink: '← 旅程',
@@ -437,8 +437,8 @@ var Lang = (function () {
       savedFileBlank: '“{file}” சேமிக்கப்பட்டது — கேள்விகள் அங்கே உள்ளன, நீங்கள் எழுதத் தயார்.',
       exportFailed: 'இந்தச் சாதனத்தில் ஆவணத்தை உருவாக்க முடியவில்லை. அச்சிடு பொத்தானைப் பயன்படுத்தி “PDF ஆகச் சேமி” என்பதைத் தேர்ந்தெடுங்கள்.',
 
-      prevInPilot: 'இந்த முன்னோட்டத்தில் முந்தையது',
-      nextInPilot: 'இந்த முன்னோட்டத்தில் அடுத்தது',
+      prevTopic: 'முந்தையது',
+      nextTopic: 'அடுத்தது',
       theJourney: 'பயணம்',
       allSessions: 'அனைத்து அமர்வுகளும்',
       backLink: '← பயணம்',
