@@ -14,31 +14,11 @@ do not follow the ordinary five-part shape and are kept as they are printed:
 | 29 — Prodigal Son Retreat | a retreat: A–D, no Saint, journal-first |
 | 37 — Life in the Holy Spirit Retreat | a retreat in six parts, A–F, no Topic of the Day and no Saint |
 
-**The other five stops now open too.** The Welcome, the two briefings, the
-preparation for the Sacraments of Initiation and the Day of Recollection have
-no candidate note — the Commission has issued none — so they have pages of a
-different kind, in `content/gates.js`. Every one says so at the top, and
-carries only:
-
-- the line the Syllabus Schema itself prints for that session, word for word,
-  where it prints one — and where it prints nothing, the page says nothing;
-- the Rite that follows, drawn from `content/syllabus.js` so its name and its
-  day are written down in only one place;
-- pointers to the approved notes that treat the same subjects;
-- a place to write.
-
-The part names, the sentences introducing a cross-reference and the journal
-prompts are the app's own words, kept few on purpose. Nothing on these pages
-teaches the faith in the Commission's voice.
-
-Two block types serve only these pages: `rite`, which draws the Rite from the
-schema, and `crossref`, which links to a topic and shows its title in whatever
-language that note exists in.
-
-Their answers are filed under `gate-<session>` rather than a bare number, so
-session 18 and Topic 18 can never write into each other. `check-content.js`
-asserts that, and that every cross-reference points at a topic that is really
-there.
+**The other five stops do not open.** The Welcome, the two briefings, the
+preparation for the Sacraments of Initiation and the Day of Recollection carry
+no candidate note — the Commission has issued none — so they are named on the
+road and left at that. There is nothing behind them to read, and the app does
+not write anything in the Commission's place.
 
 ---
 
@@ -172,7 +152,6 @@ App/
 
   content/
     syllabus.js         the 42 sessions, four periods, and the Rites
-    gates.js            the five stops that carry no candidate note
     topics/
       en/               one folder per language, one file per topic
         topic-01.js     — THE APPROVED TEXT, in that language

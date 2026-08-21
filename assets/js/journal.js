@@ -9,10 +9,7 @@
 
    Storage layout
      emmaus.identity.v1     { name: "…" }
-     emmaus.journal.v1.<n>        a topic, by its topic number
-     emmaus.journal.v1.gate-<n>   a briefing or day of recollection,
-                                  by its SESSION number
-                            { answers: { "<blockId>:<i>": "…" },
+     emmaus.journal.v1.<n>  { answers: { "<blockId>:<i>": "…" },
                               updated: "<ISO timestamp>" }
    ============================================================ */
 
@@ -134,23 +131,6 @@ var Journal = (function () {
     return found.sort(function (a, b) { return a - b; });
   }
 
-  /* The five stops that carry no note are filed under "gate-<session>"
-     rather than a bare number, so that session 18 and Topic 18 can
-     never write into each other. Returns the session numbers. */
-  function everyGateWritten() {
-    var found = [];
-    if (!WORKS) { return found; }
-    var prefix = TOPIC_PREFIX + 'gate-';
-    for (var i = 0; i < localStorage.length; i++) {
-      var key = localStorage.key(i);
-      if (key && key.indexOf(prefix) === 0) {
-        var n = parseInt(key.slice(prefix.length), 10);
-        if (!isNaN(n)) { found.push(n); }
-      }
-    }
-    return found.sort(function (a, b) { return a - b; });
-  }
-
   return {
     available: WORKS,
     getName: getName,
@@ -162,7 +142,6 @@ var Journal = (function () {
     flush: flush,
     countAnswered: countAnswered,
     onChange: onChange,
-    everyTopicWritten: everyTopicWritten,
-    everyGateWritten: everyGateWritten
+    everyTopicWritten: everyTopicWritten
   };
 })();

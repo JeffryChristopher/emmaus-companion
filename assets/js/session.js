@@ -27,19 +27,9 @@
     return match ? parseInt(match[1], 10) : null;
   }
 
-  /* ?session=18 opens one of the five stops that carry no candidate
-     note — a briefing, the sending, the day of recollection. */
-  function requestedSession() {
-    var match = /[?&]session=(\d+)/.exec(window.location.search);
-    return match ? parseInt(match[1], 10) : null;
-  }
-
   var chosen = Lang.current();
   var topicNo = requestedTopic();
-  var sessionNo = topicNo == null ? requestedSession() : null;
-  var found = topicNo != null ? Emmaus.topicIn(topicNo, chosen)
-            : sessionNo != null ? Emmaus.gateIn(sessionNo, chosen)
-            : null;
+  var found = topicNo != null ? Emmaus.topicIn(topicNo, chosen) : null;
   var root = document.getElementById('sessionRoot');
 
   if (!found) {
@@ -48,25 +38,16 @@
   }
 
   var topic = found.topic;
-  /* True for a briefing or day of recollection: no topic number, and
-     no text approved under the Imprimatur. */
-  var isGate = topic.topic == null;
-  /* What this page's answers are filed under. A topic keeps its bare
-     number, so nothing already written moves. */
-  var storeKey = Emmaus.journalKeyFor(topic);
 
   document.body.setAttribute('data-period', topic.period);
   /* The note's own script, which may differ from the chrome around it. */
   root.setAttribute('lang', Lang.meta(found.lang).html);
-  document.title = (isGate
-    ? topic.title
-    : Lang.t('topicLine', { n: topic.topic, title: topic.title })) +
-    ' · ' + Lang.t('appTitle');
+  document.title = Lang.t('topicLine', { n: topic.topic, title: topic.title }) +
+                   ' · ' + Lang.t('appTitle');
 
   /* ---------------- render ---------------- */
 
   root.appendChild(buildHead(topic));
-  if (isGate) { root.appendChild(buildGateNotice()); }
   if (!found.translated && chosen !== Lang.DEFAULT) {
     root.appendChild(buildLanguageNotice());
   }
@@ -115,15 +96,6 @@
     return box;
   }
 
-  /* The Commission has issued no note for these five sessions, and the
-     app has not written one in its place. Said plainly, at the top. */
-  function buildGateNotice() {
-    var box = el('div', 'seal seal--notice');
-    box.appendChild(el('span', 'cross', '✠'));
-    box.appendChild(el('p', null, Lang.t('gateNotice')));
-    return box;
-  }
-
   /* Shown when the chosen language has no note for this topic yet. */
   function buildLanguageNotice() {
     var box = el('div', 'seal seal--notice');
@@ -142,9 +114,8 @@
       head.appendChild(el('p', 'period-tag',
         period.letter + ' · ' + words.name + ' · ' + words.stage.split(' · ')[0]));
     }
-    head.appendChild(el('p', 'topic-no', isGate
-      ? t.label
-      : Lang.t('topicNo', { n: t.topic })));
+    head.appendChild(el('p', 'topic-no',
+      Lang.t('topicNo', { n: t.topic })));
     head.appendChild(el('h1', null, t.title));
     if (t.theme) {
       head.appendChild(el('p', 'theme', Lang.t('themeLine', { theme: t.theme })));
@@ -207,8 +178,6 @@
       case 'plate':    return buildPlate(block);
       case 'table':    return buildTable(block);
       case 'media':    return buildMedia(block);
-      case 'rite':     return buildRite();
-      case 'crossref': return buildCrossref(block);
       case 'journal':  return buildJournal(block, part);
       default:         return el('p', null, block.text || '');
     }
@@ -417,53 +386,8 @@
       var ref = el('span', 'vref');
       ref.appendChild(bibleLink(block.ref, block.ref, block.passage));
       box.appendChild(ref);
-    } else if (block.cite) {
-      /* An attribution that is not Scripture — a quotation from another
-         note, say. Never made into a Bible link. */
-      box.appendChild(el('span', 'vref', block.cite));
     }
     return box;
-  }
-
-  /* The Rite that follows this session, drawn from the syllabus schema
-     so its name and its day are written down in only one place. */
-  function buildRite() {
-    var row = (window.RCIA.sessions || []).filter(function (s) {
-      return s.session === topic.session;
-    })[0];
-    var gate = row && row.gateAfter;
-    if (!gate) { return null; }
-
-    var box = el('div', 'rite-plate' + (gate.major ? ' rite-plate--major' : ''));
-    box.appendChild(el('span', 'cross', '✠'));
-    var body = el('div');
-    var name = el('p', 'rname', gate.name);
-    name.setAttribute('lang', 'en');
-    body.appendChild(name);
-    body.appendChild(el('p', 'rwhen', gate.when));
-    box.appendChild(body);
-    return box;
-  }
-
-  /* Pointers to the notes that DO treat this subject. The title is
-     read from the content at render time, so it appears in whatever
-     language that note has been transcribed into. */
-  function buildCrossref(block) {
-    var list = el('ul', 'crossref');
-    (block.items || []).forEach(function (item) {
-      var target = Emmaus.topicIn(item.topic, chosen);
-      if (!target) { return; }
-      var li = el('li');
-      var a = el('a', null, Lang.t('topicLine', {
-        n: item.topic, title: target.topic.title
-      }));
-      a.href = 'session.html?topic=' + item.topic;
-      if (!target.translated) { a.setAttribute('lang', 'en'); }
-      li.appendChild(a);
-      if (item.note) { li.appendChild(el('span', 'sub', item.note)); }
-      list.appendChild(li);
-    });
-    return list;
   }
 
   function buildPrayer(block) {
@@ -644,14 +568,6 @@
     return box;
   }
 
-  /* Every stop that opens to a page, in the order they are walked, so
-     a briefing sits between the two topics it falls between. */
-  function stopLabel(stop) {
-    if (stop.topic != null) { return Lang.t('topicName', { n: stop.topic }); }
-    var gate = Emmaus.gateIn(stop.session, chosen);
-    return gate ? gate.topic.title : '';
-  }
-
   function buildPager(t) {
     var pager = el('nav', 'pager');
     var stops = Emmaus.pageStops();
@@ -665,7 +581,7 @@
       var pa = el('a');
       pa.href = stops[index - 1].href;
       pa.appendChild(el('span', 'lbl', Lang.t('prevTopic')));
-      pa.appendChild(document.createTextNode(stopLabel(stops[index - 1])));
+      pa.appendChild(document.createTextNode(Lang.t('topicName', { n: stops[index - 1].topic })));
       prev.appendChild(pa);
     }
 
@@ -681,7 +597,7 @@
       var na = el('a');
       na.href = stops[index + 1].href;
       na.appendChild(el('span', 'lbl', Lang.t('nextTopic')));
-      na.appendChild(document.createTextNode(stopLabel(stops[index + 1])));
+      na.appendChild(document.createTextNode(Lang.t('topicName', { n: stops[index + 1].topic })));
       next.appendChild(na);
     }
 
@@ -712,7 +628,7 @@
   }
 
   function mountJournal(t) {
-    var saved = Journal.load(storeKey).answers;
+    var saved = Journal.load(t.topic).answers;
     var status = document.querySelector('.export .status');
 
     var areas = root.querySelectorAll('textarea.journal-lines');
@@ -723,7 +639,7 @@
 
       area.addEventListener('input', function () {
         grow(area);
-        Journal.setAnswer(storeKey, key, area.value, function (ok) {
+        Journal.setAnswer(t.topic, key, area.value, function (ok) {
           if (!status) { return; }
           if (ok) {
             status.textContent = Lang.t('savedAt', { time: Lang.formatTime(new Date()) });
@@ -763,12 +679,12 @@
 
     /* Persist whatever is on screen before handing over the document.
        If storage is unavailable the document is still produced. */
-    var entry = Journal.load(storeKey);
+    var entry = Journal.load(t.topic);
     Object.keys(answers).forEach(function (key) {
       if (answers[key] && answers[key].length) { entry.answers[key] = answers[key]; }
       else { delete entry.answers[key]; }
     });
-    Journal.save(storeKey, entry);
+    Journal.save(t.topic, entry);
 
     var sessionDate = null;
     if (isoDate) {

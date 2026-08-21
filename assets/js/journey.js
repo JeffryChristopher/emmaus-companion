@@ -19,7 +19,6 @@
 
   var lang = Lang.current();
   var written = Emmaus.availableTopics();
-  var gates = Emmaus.availableGates();
   var inLanguage = Emmaus.topicsTranslated(lang);
 
   mountPicker();
@@ -70,18 +69,15 @@
     var hasNote = session.topic != null;
     var isWritten = hasNote && written.indexOf(session.topic) > -1;
     var isTranslated = hasNote && inLanguage.indexOf(session.topic) > -1;
-    /* A briefing or day of recollection: no note, but a page of its
-       own carrying what the Syllabus does say about it. */
-    var gate = !hasNote && gates.indexOf(session.session) > -1
-      ? Emmaus.gateIn(session.session, lang) : null;
 
+    /* Only a stop that carries a candidate note opens. The Welcome,
+       the briefings, the preparation and the Day of Recollection have
+       no note in the syllabus, so they are named on the road and left
+       as they are — there is nothing behind them to read. */
     var row;
     if (isWritten) {
       row = el('a', 'stop-link');
       row.href = 'session.html?topic=' + session.topic;
-    } else if (gate) {
-      row = el('a', 'stop-link');
-      row.href = 'session.html?session=' + session.session;
     } else {
       row = el('div', 'stop-blank');
     }
@@ -121,14 +117,6 @@
     } else if (hasNote) {
       row.appendChild(el('span', 'flag flag--soon',
         Lang.t('comingLater')));
-    } else if (gate) {
-      var gateWritten = Journal.countAnswered(Emmaus.journalKeyFor(gate.topic));
-      row.appendChild(el('span', 'flag flag--written', gateWritten
-        ? Lang.count(gateWritten, 'reflection1', 'reflections')
-        : Lang.t('open')));
-      if (!gate.translated && lang !== Lang.DEFAULT) {
-        row.appendChild(el('span', 'flag flag--soon', Lang.t('englishOnly')));
-      }
     } else {
       row.appendChild(el('span', 'flag flag--soon', Lang.t('briefing')));
     }
@@ -161,13 +149,8 @@
     var topicsWritten = Journal.everyTopicWritten().filter(function (n) {
       return Journal.countAnswered(n) > 0;
     });
-    var gatesWritten = Journal.everyGateWritten().filter(function (n) {
-      return Journal.countAnswered('gate-' + n) > 0;
-    });
     var total = topicsWritten.reduce(function (sum, n) {
       return sum + Journal.countAnswered(n);
-    }, 0) + gatesWritten.reduce(function (sum, n) {
-      return sum + Journal.countAnswered('gate-' + n);
     }, 0);
 
     if (!total) {
@@ -177,8 +160,7 @@
 
     box.appendChild(el('p', null, Lang.t('journalSummary', {
       reflections: Lang.count(total, 'reflection1', 'reflections'),
-      topics: Lang.count(topicsWritten.length + gatesWritten.length,
-                         'topics1', 'topicsCount')
+      topics: Lang.count(topicsWritten.length, 'topics1', 'topicsCount')
     })));
 
     /* Which sessions have writing in them, so the candidate can go back. */
@@ -191,20 +173,6 @@
       var link = el('a', null, Lang.t('topicLine', { n: n, title: found.topic.title }));
       link.href = 'session.html?topic=' + n;
       if (!found.translated) { link.setAttribute('lang', 'en'); }
-      li.appendChild(link);
-      li.appendChild(el('span', 'sub',
-        '  ·  ' + Lang.count(count, 'reflection1', 'reflections')));
-      list.appendChild(li);
-    });
-
-    gatesWritten.forEach(function (n) {
-      var gate = Emmaus.gateIn(n, lang);
-      if (!gate) { return; }
-      var count = Journal.countAnswered('gate-' + n);
-      var li = el('li');
-      var link = el('a', null, gate.topic.title);
-      link.href = 'session.html?session=' + n;
-      if (!gate.translated) { link.setAttribute('lang', 'en'); }
       li.appendChild(link);
       li.appendChild(el('span', 'sub',
         '  ·  ' + Lang.count(count, 'reflection1', 'reflections')));
