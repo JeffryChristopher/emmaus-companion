@@ -4,8 +4,24 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Emmaus Companion</title>
-<meta name="description" content="The RCIA session notes of the Diocese of Penang, with a private reflection journal.">
+<meta name="description" content="The RCIA session notes of the Diocese of Penang, in English, Bahasa Malaysia, Mandarin and Tamil, with a private reflection journal.">
 <meta name="color-scheme" content="light dark">
+
+<!-- The chosen language decides the typeface, so it is put on <html>
+     before the first paint. Everything else waits for the scripts at
+     the end of the body, as it always has. -->
+<script>
+(function () {
+  try {
+    var prefs = JSON.parse(localStorage.getItem('emmaus.prefs.v1')) || {};
+    var tags = { en: 'en', ms: 'ms', zh: 'zh-Hans', ta: 'ta' };
+    if (tags[prefs.lang]) {
+      document.documentElement.setAttribute('lang', tags[prefs.lang]);
+      document.documentElement.setAttribute('data-lang', prefs.lang);
+    }
+  } catch (e) { /* no storage: English, as the markup already says */ }
+})();
+</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,6 +29,7 @@
 
 <link rel="stylesheet" href="assets/css/tokens.css">
 <link rel="stylesheet" href="assets/css/app.css">
+<link rel="stylesheet" href="assets/css/lang.css">
 <link rel="stylesheet" href="assets/css/print.css" media="print">
 </head>
 <body>
@@ -20,7 +37,7 @@
 <div class="ribbon" aria-hidden="true"></div>
 
 <div class="topbar">
-  <span class="home-link">Penang Diocesan Catechetical Commission</span>
+  <span class="home-link" data-i18n="brand">Penang Diocesan Catechetical Commission</span>
   <div class="tools">
     <button class="tool-btn" type="button" id="typeBtn" aria-pressed="false">A Reading size</button>
     <button class="tool-btn" type="button" id="themeBtn" aria-label="Switch theme">☀ Daylight</button>
@@ -30,35 +47,46 @@
 <main class="shell shell--wide">
 
   <header>
-    <p class="eyebrow">Rite of Christian Initiation of Adults · Diocese of Penang</p>
-    <h1 class="display">The Emmaus Companion</h1>
-    <p class="deck">“Were not our hearts burning within us while he was talking to us on the road, while he was opening the scriptures to us?” Forty-two stops on one road, from first questions to the day you are sent.</p>
+    <p class="eyebrow" data-i18n="eyebrow">Rite of Christian Initiation of Adults · Diocese of Penang</p>
+    <h1 class="display" data-i18n="appTitle">The Emmaus Companion</h1>
+    <p class="deck" data-i18n="deck">“Were not our hearts burning within us while he was talking to us on the road, while he was opening the scriptures to us?” Forty-two stops on one road, from first questions to the day you are sent.</p>
   </header>
 
+  <!-- The language is chosen here, before anything else asks to be read. -->
+  <div id="langPick"></div>
+
   <div class="legend">
-    <span><i style="background: var(--seed)"></i> A · Evangelization</span>
-    <span><i style="background: var(--water)"></i> B · Catechumenate</span>
-    <span><i style="background: var(--lenten)"></i> C · Purification</span>
-    <span><i style="background: var(--paschal-lit)"></i> D · Mystagogy</span>
-    <span style="color: var(--rubric)">✠ the Rites</span>
+    <span><i style="background: var(--seed)"></i> A · <span data-i18n="legendA">Evangelization</span></span>
+    <span><i style="background: var(--water)"></i> B · <span data-i18n="legendB">Catechumenate</span></span>
+    <span><i style="background: var(--lenten)"></i> C · <span data-i18n="legendC">Purification</span></span>
+    <span><i style="background: var(--paschal-lit)"></i> D · <span data-i18n="legendD">Mystagogy</span></span>
+    <span style="color: var(--rubric)" data-i18n="legendRites">✠ the Rites</span>
   </div>
 
   <div id="journeyRoot" class="journey"></div>
 
   <footer class="colophon">
-    <p>A pilot copy. The session notes are reproduced from those approved for publication by the Penang Diocesan Catechetical Commission.<br>
-    Imprimatur: ✠ Cardinal Sebastian Francis, Bishop of Penang, 31 May 2026 (PKK/BCR/2026/05/705).</p>
-    <p class="amdg">Ad Maiorem Dei Gloriam</p>
+    <p data-i18n="colophonPilot">A pilot copy. The session notes are reproduced from those approved for publication by the Penang Diocesan Catechetical Commission.</p>
+    <p data-i18n="colophonImprimatur">Imprimatur: ✠ Cardinal Sebastian Francis, Bishop of Penang, 31 May 2026 (PKK/BCR/2026/05/705).</p>
+    <p data-i18n="colophonTranslated" data-i18n-when="translated" hidden></p>
+    <p class="amdg" data-i18n="amdg">Ad Maiorem Dei Gloriam</p>
   </footer>
 
 </main>
 
+<script src="assets/js/i18n.js"></script>
 <script src="assets/js/app.js"></script>
 <script src="assets/js/journal.js"></script>
 <script src="content/syllabus.js"></script>
-<script src="content/topics/topic-01.js"></script>
-<script src="content/topics/topic-16.js"></script>
-<script src="content/topics/topic-29.js"></script>
+<script src="content/topics/en/topic-01.js"></script>
+<script src="content/topics/en/topic-16.js"></script>
+<script src="content/topics/en/topic-29.js"></script>
+<script src="content/topics/ms/topic-01.js"></script>
+<script src="content/topics/ms/topic-16.js"></script>
+<script src="content/topics/zh/topic-01.js"></script>
+<script src="content/topics/ta/topic-01.js"></script>
+<script src="content/topics/ta/topic-16.js"></script>
+<script src="content/topics/ta/topic-29.js"></script>
 <script src="assets/js/journey.js"></script>
 <script>Emmaus.mountControls();</script>
 

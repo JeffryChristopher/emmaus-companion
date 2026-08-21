@@ -2,6 +2,12 @@
    THE EMMAUS COMPANION — The Journey map
    The forty-two sessions drawn as one road through four periods,
    with the Rites standing along it as gates.
+
+   A session's title is shown in the chosen language when the note
+   itself exists in that language — the title then comes from the
+   approved note, not from a translation this app made. Where the
+   note has not been transcribed yet, the syllabus's own English
+   title stands, and the stop says so.
    ============================================================ */
 
 (function () {
@@ -11,7 +17,11 @@
   var root = document.getElementById('journeyRoot');
   if (!root) { return; }
 
+  var lang = Lang.current();
   var written = Emmaus.availableTopics();
+  var inLanguage = Emmaus.topicsTranslated(lang);
+
+  mountPicker();
 
   window.RCIA.periods.forEach(function (period) {
     var sessions = window.RCIA.sessions.filter(function (s) { return s.period === period.id; });
@@ -21,16 +31,26 @@
 
   root.appendChild(buildJournalPanel());
 
+  /* ---------------- the language chooser ----------------
+     It sits above the road, where the candidate meets it before
+     anything else they have to read. */
+
+  function mountPicker() {
+    var host = document.getElementById('langPick');
+    if (host) { Lang.mountPicker(host); }
+  }
+
   /* ---------------- builders ---------------- */
 
   function buildPeriod(period, sessions) {
     var section = el('section', 'period');
     section.setAttribute('data-period', period.id);
+    var words = Lang.period(period.id);
 
     var head = el('div', 'period-head');
     head.appendChild(el('p', 'pletter', period.letter));
-    head.appendChild(el('h2', null, period.name));
-    head.appendChild(el('p', 'pstage', period.stage));
+    head.appendChild(el('h2', null, words.name || period.name));
+    head.appendChild(el('p', 'pstage', words.stage || period.stage));
     section.appendChild(head);
 
     var road = el('ol', 'road');
@@ -48,6 +68,7 @@
     var li = el('li', 'stop');
     var hasNote = session.topic != null;
     var isWritten = hasNote && written.indexOf(session.topic) > -1;
+    var isTranslated = hasNote && inLanguage.indexOf(session.topic) > -1;
 
     var row;
     if (isWritten) {
@@ -57,29 +78,50 @@
       row = el('div', 'stop-blank');
     }
 
-    row.appendChild(el('span', 'sess', 'Sess ' + session.session));
-    row.appendChild(el('span', 'title', session.title));
+    row.appendChild(el('span', 'sess', Lang.t('sess', { n: session.session })));
+
+    /* The note's own title where it exists in this language, so the
+       words on the map are the words on the candidate's paper. */
+    var found = isWritten ? Emmaus.topicIn(session.topic, lang) : null;
+    var title = (found && found.translated && found.topic.title) || session.title;
+    var titleNode = el('span', 'title', title);
+    if (found && !found.translated) {
+      titleNode.setAttribute('lang', 'en');
+    }
+    row.appendChild(titleNode);
 
     if (isWritten) {
       var answered = Journal.countAnswered(session.topic);
-      var flag = el('span', 'flag flag--written',
-        answered ? answered + (answered === 1 ? ' reflection' : ' reflections') : 'Open');
+      var text = answered
+        ? Lang.count(answered, 'reflection1', 'reflections')
+        : Lang.t('open');
+      var flag = el('span', 'flag flag--written', text);
       row.appendChild(flag);
+
+      /* Say plainly that this one is still only in English. */
+      if (!isTranslated && lang !== Lang.DEFAULT) {
+        row.appendChild(el('span', 'flag flag--soon',
+          Lang.t('englishOnly', { n: session.topic })));
+      }
     } else if (hasNote) {
-      row.appendChild(el('span', 'flag flag--soon', 'Topic ' + session.topic + ' · Phase II'));
+      row.appendChild(el('span', 'flag flag--soon',
+        Lang.t('comingLater', { n: session.topic })));
     } else {
-      row.appendChild(el('span', 'flag flag--soon', 'Briefing'));
+      row.appendChild(el('span', 'flag flag--soon', Lang.t('briefing')));
     }
 
     li.appendChild(row);
     return li;
   }
 
+  /* The Rites are named in the syllabus schema, which the Commission
+     has issued in English only, so they stand as printed. */
   function buildGate(gate) {
     var li = el('li', 'gate' + (gate.major ? ' gate--major' : ''));
     li.appendChild(el('span', 'cross', '✠'));
 
     var body = el('span', 'gname', gate.name);
+    body.setAttribute('lang', 'en');
     body.appendChild(el('span', 'gwhen', gate.when));
     li.appendChild(body);
     return li;
@@ -91,7 +133,7 @@
 
   function buildJournalPanel() {
     var box = el('section', 'export');
-    box.appendChild(el('h2', null, 'Your journal'));
+    box.appendChild(el('h2', null, Lang.t('journalHeading')));
 
     var topicsWritten = Journal.everyTopicWritten().filter(function (n) {
       return Journal.countAnswered(n) > 0;
@@ -101,28 +143,28 @@
     }, 0);
 
     if (!total) {
-      box.appendChild(el('p', null,
-        'Nothing is written yet. Open a session and begin — whatever you write stays on this device, and you save it as a Word document when you are done.'));
+      box.appendChild(el('p', null, Lang.t('journalEmpty')));
       return box;
     }
 
-    box.appendChild(el('p', null,
-      'You have written ' + total + (total === 1 ? ' reflection' : ' reflections') +
-      ' across ' + topicsWritten.length + (topicsWritten.length === 1 ? ' topic' : ' topics') +
-      '. Remember to save each session as a Word document — that is the copy that stays with you.'));
+    box.appendChild(el('p', null, Lang.t('journalSummary', {
+      reflections: Lang.count(total, 'reflection1', 'reflections'),
+      topics: Lang.count(topicsWritten.length, 'topics1', 'topicsCount')
+    })));
 
     /* Which sessions have writing in them, so the candidate can go back. */
     var list = el('ul', 'plain');
     topicsWritten.forEach(function (n) {
-      var topic = (window.RCIA.topics || {})[n];
-      if (!topic) { return; }
+      var found = Emmaus.topicIn(n, lang);
+      if (!found) { return; }
       var count = Journal.countAnswered(n);
       var li = el('li');
-      var link = el('a', null, 'Topic ' + n + ' — ' + topic.title);
+      var link = el('a', null, Lang.t('topicLine', { n: n, title: found.topic.title }));
       link.href = 'session.html?topic=' + n;
+      if (!found.translated) { link.setAttribute('lang', 'en'); }
       li.appendChild(link);
       li.appendChild(el('span', 'sub',
-        '  ·  ' + count + (count === 1 ? ' reflection' : ' reflections')));
+        '  ·  ' + Lang.count(count, 'reflection1', 'reflections')));
       list.appendChild(li);
     });
     box.appendChild(list);

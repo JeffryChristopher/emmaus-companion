@@ -19,6 +19,13 @@
    letter-spaced small capitals in Garamond (shipped with Office,
    falling back to Cambria) — the same inscriptional feeling with
    a face every machine already has.
+
+   Chinese and Tamil are set through the two other slots Word keeps
+   for exactly this: w:eastAsia and w:cs (complex script). All three
+   are always named, so a document that mixes a Tamil heading with an
+   English note still renders every character. Letter-spacing and
+   small capitals are dropped for those two scripts, where they mean
+   nothing and can spoil the shaping of a conjunct.
    ============================================================ */
 
 var EmmausDocx = (function () {
@@ -170,29 +177,89 @@ var EmmausDocx = (function () {
 
   /* ---------------- styles.xml ---------------- */
 
-  function styleDef(id, name, opts) {
+  /* What Word should reach for, per script. The Latin face is always
+     Garamond; the other two slots are filled when the document may
+     carry that script at all, so mixed pages set correctly. */
+  var SCRIPT_FONTS = {
+    zh: { eastAsia: 'SimSun' },      /* a Song serif, on every Windows */
+    ta: { cs: 'Nirmala UI' }         /* Windows' own Tamil face        */
+  };
+
+  var LOCALES = { en: 'en-MY', ms: 'ms-MY', zh: 'zh-CN', ta: 'ta-IN' };
+
+  /* Small capitals and letter tracking belong to the Latin alphabet.
+     Asked of Chinese or Tamil they do nothing useful, and tracking can
+     pull a Tamil conjunct apart, so those styles lose them. */
+  var UNTRACKED = { zh: true, ta: true };
+
+  function scriptsOf(spec) {
+    var codes = [spec.lang || 'en'];
+    if (spec.noteLang && codes.indexOf(spec.noteLang) < 0) { codes.push(spec.noteLang); }
+    return codes;
+  }
+
+  function fontsFor(codes) {
+    var eastAsia = 'Garamond', cs = 'Garamond';
+    codes.forEach(function (code) {
+      var pick = SCRIPT_FONTS[code];
+      if (!pick) { return; }
+      if (pick.eastAsia) { eastAsia = pick.eastAsia; }
+      if (pick.cs) { cs = pick.cs; }
+    });
+    return '<w:rFonts w:ascii="Garamond" w:hAnsi="Garamond" ' +
+           'w:eastAsia="' + eastAsia + '" w:cs="' + cs + '"/>';
+  }
+
+  function langTag(codes) {
+    var main = LOCALES[codes[0]] || 'en-MY';
+    return '<w:lang w:val="' + main + '" w:eastAsia="' + (LOCALES.zh) +
+           '" w:bidi="' + (LOCALES.ta) + '"/>';
+  }
+
+  /* Every run property that names a size must name the complex-script
+     size too, or Tamil is set at Word's default and jumps off the
+     line. The same goes for bold and italic. */
+  function mirrorComplexScript(rPr, plain) {
+    var out = rPr
+      .replace(/<w:sz w:val="(\d+)"\/>/g, '<w:sz w:val="$1"/><w:szCs w:val="$1"/>')
+      .replace(/<w:b\/>/g, '<w:b/><w:bCs/>')
+      .replace(/<w:i\/>/g, '<w:i/><w:iCs/>');
+    if (plain) {
+      out = out.replace(/<w:smallCaps\/>/g, '')
+               .replace(/<w:caps\/>/g, '')
+               .replace(/<w:spacing w:val="\d+"\/>/g, '');
+    }
+    return out;
+  }
+
+  function makeStyle(id, name, opts, plain) {
     return '<w:style w:type="paragraph" w:styleId="' + id + '">' +
              '<w:name w:val="' + name + '"/>' +
              '<w:basedOn w:val="Normal"/>' +
              '<w:qFormat/>' +
              '<w:pPr>' + (opts.pPr || '') + '</w:pPr>' +
-             '<w:rPr>' + (opts.rPr || '') + '</w:rPr>' +
+             '<w:rPr>' + mirrorComplexScript(opts.rPr || '', plain) + '</w:rPr>' +
            '</w:style>';
   }
 
-  function stylesXml() {
-    var fonts = '<w:rFonts w:ascii="Garamond" w:hAnsi="Garamond" w:cs="Garamond"/>';
+  function stylesXml(spec) {
+    var codes = scriptsOf(spec || {});
+    var fonts = fontsFor(codes);
+    var plain = !!UNTRACKED[codes[0]];
+    var styleDef = function (id, name, opts) {
+      return makeStyle(id, name, opts, plain);
+    };
     return DECL +
       '<w:styles ' + W_NS + '>' +
         '<w:docDefaults><w:rPrDefault><w:rPr>' + fonts +
-          '<w:sz w:val="22"/><w:szCs w:val="22"/><w:lang w:val="en-MY"/>' +
+          '<w:sz w:val="22"/><w:szCs w:val="22"/>' + langTag(codes) +
         '</w:rPr></w:rPrDefault>' +
         '<w:pPrDefault><w:pPr><w:spacing w:after="120" w:line="264" w:lineRule="auto"/></w:pPr></w:pPrDefault>' +
         '</w:docDefaults>' +
 
         '<w:style w:type="paragraph" w:default="1" w:styleId="Normal">' +
           '<w:name w:val="Normal"/><w:qFormat/>' +
-          '<w:rPr>' + fonts + '<w:sz w:val="22"/></w:rPr>' +
+          '<w:rPr>' + fonts + '<w:sz w:val="22"/><w:szCs w:val="22"/></w:rPr>' +
         '</w:style>' +
 
         /* the two lines of the commission's name at the head of the page */
@@ -367,7 +434,7 @@ var EmmausDocx = (function () {
       { name: '_rels/.rels',              data: utf8.encode(ROOT_RELS) },
       { name: 'docProps/core.xml',        data: utf8.encode(corePropsXml(spec, stamp)) },
       { name: 'word/_rels/document.xml.rels', data: utf8.encode(DOC_RELS) },
-      { name: 'word/styles.xml',          data: utf8.encode(stylesXml()) },
+      { name: 'word/styles.xml',          data: utf8.encode(stylesXml(spec)) },
       { name: 'word/document.xml',        data: utf8.encode(documentXml(spec)) }
     ], stamp);
   }

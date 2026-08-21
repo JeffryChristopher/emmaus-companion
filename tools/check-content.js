@@ -2,18 +2,26 @@
    THE EMMAUS COMPANION — Content check
    Run:  node tools/check-content.js
 
-   Reads every topic file the app ships and checks it is sound
-   before anyone puts it in front of a candidate:
+   Reads every topic file the app ships, in every language, and
+   checks it is sound before anyone puts it in front of a candidate:
 
-     · the file loads and registers a topic
+     · the file loads and registers a topic under its language
      · required fields are present and the period exists
      · every block type is one the app knows how to draw
      · journal ids are unique, so no two answers share a key
+     · a translated note asks the SAME questions, under the same
+       journal ids, as the English one — answers are stored against
+       the topic and not the language, so a mismatch would strand
+       whatever a candidate had already written
+     · every Scripture reference still resolves, whatever language
+       the book is named in
      · no empty or accidentally-undefined text
      · the session number matches the syllabus schema
+     · every language answers for every string the app asks for
 
-   Then it writes a sample Word document to tools/sample/ so the
-   export can be opened and looked at without using a browser.
+   Then it writes a sample Word document per language to
+   tools/sample/ so the export can be opened and looked at without
+   using a browser.
    ============================================================ */
 
 const fs = require('fs');
@@ -24,6 +32,7 @@ const APP = path.join(__dirname, '..');
 const EmmausDocx = require(path.join(APP, 'assets/js/docx.js'));
 const EmmausExport = require(path.join(APP, 'assets/js/export.js'));
 const Scripture = require(path.join(APP, 'assets/js/scripture.js'));
+const Lang = require(path.join(APP, 'assets/js/i18n.js'));
 
 /* Block types the session renderer can draw (see session.js buildBlock). */
 const KNOWN_BLOCKS = new Set([
@@ -58,21 +67,36 @@ function loadScript(relPath) {
 console.log('Loading content…');
 loadScript('content/syllabus.js');
 
-const topicFiles = fs.readdirSync(path.join(APP, 'content/topics'))
-  .filter(name => name.endsWith('.js'))
-  .sort();
-topicFiles.forEach(name => loadScript('content/topics/' + name));
+const LANGS = Lang.languages().map(l => l.code);
+const TOPIC_ROOT = path.join(APP, 'content/topics');
+
+const loadedFiles = {};
+LANGS.forEach(code => {
+  const dir = path.join(TOPIC_ROOT, code);
+  if (!fs.existsSync(dir)) { loadedFiles[code] = []; return; }
+  loadedFiles[code] = fs.readdirSync(dir).filter(n => n.endsWith('.js')).sort();
+  loadedFiles[code].forEach(name => loadScript('content/topics/' + code + '/' + name));
+});
+
+/* A stray file left in the old flat layout would load into no language
+   at all and be silently invisible in the app. */
+const strays = fs.readdirSync(TOPIC_ROOT).filter(n => n.endsWith('.js'));
 
 const RCIA = sandbox.window.RCIA;
-const topics = RCIA.topics || {};
-const topicNumbers = Object.keys(topics).map(Number).sort((a, b) => a - b);
+const allTopics = RCIA.topics || {};
 
-console.log('Loaded ' + topicFiles.length + ' topic file(s): Topic ' + topicNumbers.join(', '));
+LANGS.forEach(code => {
+  const found = Object.keys(allTopics[code] || {}).map(Number).sort((a, b) => a - b);
+  console.log('  ' + code + ': ' + loadedFiles[code].length + ' file(s)' +
+              (found.length ? ' — Topic ' + found.join(', ') : ''));
+});
 console.log();
 
 /* ---- the syllabus itself ---- */
 
 console.log('The syllabus');
+check('no topic file is left in the old flat layout',
+  strays.length === 0, strays.join(', '));
 check('four periods are defined', RCIA.periods.length === 4, RCIA.periods.length + ' found');
 check('forty-two sessions are defined', RCIA.sessions.length === 42, RCIA.sessions.length + ' found');
 
@@ -87,172 +111,335 @@ check('topic numbers are unique in the schema',
   new Set(topicNumbersInSchema).size === topicNumbersInSchema.length);
 check('every session names a period that exists',
   RCIA.sessions.every(s => RCIA.periods.some(p => p.id === s.period)));
+check('English carries at least one topic',
+  Object.keys(allTopics.en || {}).length > 0);
 console.log();
 
-/* ---- Scripture references resolve to the USCCB Bible ---- */
+/* ---- the languages ---- */
+
+console.log('Languages');
+const enStrings = Lang.strings[Lang.DEFAULT];
+const enKeys = Object.keys(enStrings).sort();
+
+LANGS.forEach(code => {
+  const meta = Lang.meta(code);
+  check(code + ' is named in its own script and in English',
+    !!meta.endonym && !!meta.english && !!meta.html && !!meta.locale);
+
+  const keys = Object.keys(Lang.strings[code] || {}).sort();
+  const missing = enKeys.filter(k => keys.indexOf(k) < 0);
+  const extra = keys.filter(k => enKeys.indexOf(k) < 0);
+  check(code + ' answers for every string the app asks for',
+    missing.length === 0, 'missing: ' + missing.join(', '));
+  check(code + ' has no string the app never asks for',
+    extra.length === 0, 'extra: ' + extra.join(', '));
+
+  check(code + ' names all four periods',
+    ['A', 'B', 'C', 'D'].every(p => {
+      const words = Lang.period(p, code);
+      return words && words.name && words.stage;
+    }));
+
+  /* A placeholder the app never fills would print as literal "{n}". */
+  const unfilled = keys.filter(k => {
+    const value = Lang.strings[code][k];
+    if (typeof value !== 'string') { return false; }
+    const here = (value.match(/\{(\w+)\}/g) || []).sort().join(',');
+    const there = (String(enStrings[k]).match(/\{(\w+)\}/g) || []).sort().join(',');
+    return here !== there;
+  });
+  check(code + ' uses the same placeholders English does',
+    unfilled.length === 0, unfilled.join(', '));
+
+  check(code + ' writes a date without throwing',
+    typeof Lang.formatDate(new Date(2026, 7, 21), code) === 'string');
+});
+console.log();
+
+/* ---- Scripture references resolve, in every language ---- */
 
 console.log('Scripture links');
-const B = 'https://bible.usccb.org/bible/';
+
+/* What the parser makes of a reference, whatever Bible it ends up
+   pointing at. tools/check-bible-links.js is the one that asks the
+   four sites whether those addresses are real. */
 [
-  ['John 6:52–63', B + 'john/6'],
-  ['Lk 15:11-32', B + 'luke/15'],
-  ['Ep 1:9, 2:18', B + 'ephesians/1'],
-  ['1 Corinthians 13:1', B + '1corinthians/13'],
-  ['Song of Songs 2:10', B + 'songofsongs/2'],
-  ['Psalm 23:1', B + 'psalms/23'],
-  ['Matthew The Parable of the Prodigal Son - Lk 15:11-32.', B + 'luke/15'],
-  ['CCC 27-28', null],
-  ['Summa Theologica', null]
-].forEach(([input, expected]) => {
-  check('"' + input.slice(0, 34) + '" -> ' + (expected ? expected.replace(B, '') : 'not a reference'),
-    Scripture.url(input) === expected, String(Scripture.url(input)));
+  ['John 6:52–63', 'john', 6],
+  ['Lk 15:11-32', 'luke', 15],
+  ['Ep 1:9, 2:18', 'ephesians', 1],
+  ['1 Corinthians 13:1', '1corinthians', 13],
+  ['Song of Songs 2:10', 'songofsongs', 2],
+  ['Psalm 23:1', 'psalms', 23],
+  ['Matthew The Parable of the Prodigal Son - Lk 15:11-32.', 'luke', 15],
+  ['CCC 27-28', null, null],
+  ['Summa Theologica', null, null],
+  /* A translated note names its books in its own language, so the
+     parser must NOT guess at them; the content file carries the
+     chapter in a `passage` field instead. */
+  ['Yohanes 1:35-51', null, null],
+  ['யோவான் 1:35-51', null, null],
+  ['若望福音 1:35-51', null, null]
+].forEach(([input, slug, chapter]) => {
+  const got = Scripture.parse(input);
+  check('"' + input.slice(0, 34) + '" -> ' + (slug ? slug + ' ' + chapter : 'not a reference'),
+    slug ? (got && got.slug === slug && got.chapter === chapter) : got === null,
+    JSON.stringify(got));
 });
+
+/* Each language must land in its own Bible, and never in a Bible that
+   does not carry the book. */
+const EXPECTED_HOST = {
+  en: 'scrutatio.it',
+  ms: 'alkitabversiborneo.org',
+  zh: 'ccccn.org',
+  ta: 'arulvakku.com'
+};
+LANGS.forEach(code => {
+  const link = Scripture.url('John 1:35-51', code);
+  check(code + ' opens John in ' + EXPECTED_HOST[code],
+    !!link && link.indexOf(EXPECTED_HOST[code]) > -1, String(link));
+  check(code + ' names the Bible it is linking to',
+    typeof Scripture.bibleName(code) === 'string' && Scripture.bibleName(code).length > 0);
+  check(code + ' labels the chapter in its own script',
+    typeof Scripture.chapterLabel('John 1:35-51', code) === 'string',
+    String(Scripture.chapterLabel('John 1:35-51', code)));
+});
+check('the Malay Bible carries no deuterocanonical book, so none is linked',
+  Scripture.url('Sirach 3:2', 'ms') === null, String(Scripture.url('Sirach 3:2', 'ms')));
+check('every other language does link Sirach',
+  ['en', 'zh', 'ta'].every(c => !!Scripture.url('Sirach 3:2', c)));
+check('the Psalter picks the right volume in Chinese',
+  Scripture.url('Psalm 95:1', 'zh').indexOf('jiuyue/026') > -1,
+  Scripture.url('Psalm 95:1', 'zh'));
 console.log();
 
-/* ---- each topic ---- */
+/* ============================================================
+   Each topic, in each language
+   ============================================================ */
 
-topicNumbers.forEach(function (n) {
-  const topic = topics[n];
-  console.log('Topic ' + n + ' — ' + topic.title);
+/* The shape a candidate's answers are stored against: the journal ids
+   in order, and how many questions each holds. Every language must
+   present the same shape or a change of language would strand
+   whatever has already been written. */
+function answerShape(topic) {
+  const shape = [];
+  topic.parts.forEach(part => {
+    (part.blocks || []).forEach(block => {
+      if (block.type === 'journal') {
+        shape.push(block.id + ':' + block.questions.length);
+      }
+    });
+  });
+  return shape;
+}
 
-  check('has a title, period and session number',
-    !!topic.title && !!topic.period && Number.isInteger(topic.session));
+const outDir = path.join(__dirname, 'sample');
+fs.mkdirSync(outDir, { recursive: true });
 
-  const schemaRow = RCIA.sessions.find(s => s.topic === topic.topic);
-  check('appears in the syllabus schema', !!schemaRow);
-  if (schemaRow) {
-    check('session number matches the schema (' + schemaRow.session + ')',
-      topic.session === schemaRow.session, 'content says ' + topic.session);
-    check('period matches the schema (' + schemaRow.period + ')',
-      topic.period === schemaRow.period, 'content says ' + topic.period);
+LANGS.forEach(function (code) {
+  const topics = allTopics[code] || {};
+  const numbers = Object.keys(topics).map(Number).sort((a, b) => a - b);
+  if (!numbers.length) {
+    console.log('— ' + Lang.meta(code).english + ': no topics transcribed yet —');
+    console.log();
+    return;
   }
 
-  check('has parts', Array.isArray(topic.parts) && topic.parts.length > 0);
+  numbers.forEach(function (n) {
+    const topic = topics[n];
+    console.log('[' + code + '] Topic ' + n + ' — ' + topic.title);
 
-  /* every block is a type the renderer knows */
-  const unknown = [];
-  const emptyText = [];
-  const journalIds = [];
+    check('has a title, period and session number',
+      !!topic.title && !!topic.period && Number.isInteger(topic.session));
+    check('declares the language it is written in (' + code + ')',
+      code === Lang.DEFAULT ? true : topic.lang === code,
+      'file says ' + topic.lang);
 
-  topic.parts.forEach(function (part) {
-    if (!part.letter || !part.name) { emptyText.push('a part is missing letter or name'); }
-    (part.blocks || []).forEach(function (block, i) {
-      if (!KNOWN_BLOCKS.has(block.type)) { unknown.push(block.type); }
-
-      if (['label', 'subhead', 'aside', 'lead', 'para'].includes(block.type)) {
-        if (!block.text || !block.text.trim()) {
-          emptyText.push(part.letter + ' block ' + i + ' (' + block.type + ') has no text');
-        }
-      }
-      if (block.type === 'points') {
-        block.items.forEach(function (item, j) {
-          if (!item.body || !item.body.trim()) {
-            emptyText.push(part.letter + ' point ' + (j + 1) + ' has no body');
-          }
-          if (/undefined/.test(item.body) || (item.title && /undefined/.test(item.title))) {
-            emptyText.push(part.letter + ' point ' + (j + 1) + ' contains the word "undefined"');
-          }
-        });
-      }
-      if (block.type === 'journal') {
-        journalIds.push(block.id);
-        block.questions.forEach(function (q, j) {
-          if (!q.text || !q.text.trim()) {
-            emptyText.push('journal ' + block.id + ' question ' + j + ' has no text');
-          }
-          if (!q.n) {
-            emptyText.push('journal ' + block.id + ' question ' + j + ' has no number/marker');
-          }
-        });
-      }
-      if (block.type === 'saint') {
-        if (!block.name) { emptyText.push('a saint block has no name'); }
-        if (!Array.isArray(block.facts) || !block.facts.length) {
-          emptyText.push('saint ' + block.name + ' has no facts');
-        }
-      }
-    });
-  });
-
-  /* Every Scripture reference the candidate sees must produce a working
-     link. A reference the parser cannot read would silently render as
-     plain text, so it is worth failing the build over. */
-  const unresolved = [];
-  const falseLinks = [];
-  topic.parts.forEach(function (part) {
-    /* Only the Scripture part's heading is a reference. Elsewhere `ref`
-       carries the topic title or an activity name. */
-    const isScripturePart = /scripture/i.test(part.name || '');
-    if (part.ref && isScripturePart && !Scripture.url(part.ref)) {
-      unresolved.push('part ' + part.letter + ' ref: "' + part.ref + '"');
+    const schemaRow = RCIA.sessions.find(s => s.topic === topic.topic);
+    check('appears in the syllabus schema', !!schemaRow);
+    if (schemaRow) {
+      check('session number matches the schema (' + schemaRow.session + ')',
+        topic.session === schemaRow.session, 'content says ' + topic.session);
+      check('period matches the schema (' + schemaRow.period + ')',
+        topic.period === schemaRow.period, 'content says ' + topic.period);
     }
-    if (part.ref && !isScripturePart && Scripture.url(part.ref)) {
-      falseLinks.push('part ' + part.letter + ' ref "' + part.ref +
-                      '" would link to ' + Scripture.url(part.ref));
-    }
-    (part.blocks || []).forEach(function (block) {
-      if (block.type === 'pericope' && !Scripture.url(block.passage || block.cite)) {
-        unresolved.push('pericope: "' + block.cite + '" (add a `passage` field)');
-      }
-      if (block.type === 'versicle' && block.ref && !Scripture.url(block.passage || block.ref)) {
-        unresolved.push('versicle ref: "' + block.ref + '"');
-      }
-      if (block.type === 'points') {
-        block.items.forEach(function (item) {
-          if (item.marginal && item.marginal.mark === 'Scripture' && !Scripture.url(item.marginal.text)) {
-            unresolved.push('marginal: "' + item.marginal.text + '"');
+
+    check('has parts', Array.isArray(topic.parts) && topic.parts.length > 0);
+
+    /* every block is a type the renderer knows */
+    const unknown = [];
+    const emptyText = [];
+    const journalIds = [];
+
+    topic.parts.forEach(function (part) {
+      if (!part.letter || !part.name) { emptyText.push('a part is missing letter or name'); }
+      (part.blocks || []).forEach(function (block, i) {
+        if (!KNOWN_BLOCKS.has(block.type)) { unknown.push(block.type); }
+
+        if (['label', 'subhead', 'aside', 'lead', 'para'].includes(block.type)) {
+          if (!block.text || !block.text.trim()) {
+            emptyText.push(part.letter + ' block ' + i + ' (' + block.type + ') has no text');
           }
-        });
-      }
+        }
+        if (block.type === 'points') {
+          block.items.forEach(function (item, j) {
+            if (!item.body || !item.body.trim()) {
+              emptyText.push(part.letter + ' point ' + (j + 1) + ' has no body');
+            }
+            if (/undefined/.test(item.body) || (item.title && /undefined/.test(item.title))) {
+              emptyText.push(part.letter + ' point ' + (j + 1) + ' contains the word "undefined"');
+            }
+          });
+        }
+        if (block.type === 'journal') {
+          journalIds.push(block.id);
+          block.questions.forEach(function (q, j) {
+            if (!q.text || !q.text.trim()) {
+              emptyText.push('journal ' + block.id + ' question ' + j + ' has no text');
+            }
+            if (!q.n) {
+              emptyText.push('journal ' + block.id + ' question ' + j + ' has no number/marker');
+            }
+          });
+        }
+        if (block.type === 'saint') {
+          if (!block.name) { emptyText.push('a saint block has no name'); }
+          if (!Array.isArray(block.facts) || !block.facts.length) {
+            emptyText.push('saint ' + block.name + ' has no facts');
+          }
+        }
+      });
     });
+
+    /* Every Scripture reference the candidate sees must produce a
+       working link. A translated note names its books in its own
+       language, which the parser cannot read, so those carry an
+       explicit `passage`. A reference with neither would silently
+       render as plain text — worth failing the build over. */
+    const unresolved = [];
+    const falseLinks = [];
+    topic.parts.forEach(function (part) {
+      /* Only the Scripture part's heading is a reference. Elsewhere
+         `ref` carries the topic title or an activity name; the part
+         is recognised by its letter, which is B in every language. */
+      const isScripturePart = part.letter === 'B';
+      if (part.ref && isScripturePart && !Scripture.url(part.passage || part.ref)) {
+        unresolved.push('part ' + part.letter + ' ref: "' + part.ref +
+                        '" (add a `passage` field)');
+      }
+      if (part.ref && !isScripturePart && !part.passage && Scripture.url(part.ref)) {
+        falseLinks.push('part ' + part.letter + ' ref "' + part.ref +
+                        '" would link to ' + Scripture.url(part.ref));
+      }
+      (part.blocks || []).forEach(function (block) {
+        if (block.type === 'pericope' && !Scripture.url(block.passage || block.cite)) {
+          unresolved.push('pericope: "' + block.cite + '" (add a `passage` field)');
+        }
+        if (block.type === 'versicle' && block.ref && !Scripture.url(block.passage || block.ref)) {
+          unresolved.push('versicle ref: "' + block.ref + '" (add a `passage` field)');
+        }
+        if (block.type === 'points') {
+          block.items.forEach(function (item) {
+            const m = item.marginal;
+            if (!m) { return; }
+            const wantsLink = m.passage || m.mark === 'Scripture';
+            if (wantsLink && !Scripture.url(m.passage || m.text)) {
+              unresolved.push('marginal: "' + m.text + '" (add a `passage` field)');
+            }
+          });
+        }
+      });
+    });
+    check('every Scripture reference resolves to a chapter',
+      unresolved.length === 0, unresolved.join(' | '));
+    check('no ordinary heading is mistaken for a Scripture reference',
+      falseLinks.length === 0, falseLinks.join(' | '));
+
+    check('every block type is one the app can draw',
+      unknown.length === 0, 'unknown: ' + [...new Set(unknown)].join(', '));
+    check('no empty or "undefined" text',
+      emptyText.length === 0, emptyText.slice(0, 3).join(' | '));
+    check('journal ids are unique within the topic',
+      new Set(journalIds).size === journalIds.length,
+      'ids: ' + journalIds.join(', '));
+
+    /* answer keys must be unique across the whole topic — two questions
+       sharing a key would overwrite each other's answer */
+    const keys = EmmausExport.questionKeys(topic).map(k => k.key);
+    check('every question has its own storage key (' + keys.length + ' questions)',
+      new Set(keys).size === keys.length);
+    check('the topic asks at least one question', keys.length > 0);
+
+    /* the translation must not strand what has already been written */
+    const english = (allTopics[Lang.DEFAULT] || {})[n];
+    if (code !== Lang.DEFAULT) {
+      check('the English note for Topic ' + n + ' exists to fall back to', !!english);
+      if (english) {
+        const here = answerShape(topic).join(' ');
+        const there = answerShape(english).join(' ');
+        check('asks the same questions, under the same journal ids, as English',
+          here === there, here + '  vs English  ' + there);
+      }
+    }
+
+    /* the export must build and produce a real .docx */
+    const answers = {};
+    keys.forEach((k, i) => { if (i % 2 === 0) { answers[k] = 'A written reflection for ' + k + '.'; } });
+
+    const period = RCIA.periods.find(p => p.id === topic.period);
+    const built = EmmausExport.buildSpec(topic, answers, {
+      name: 'Teresa Lim',
+      period: period,
+      sessionDate: new Date(2026, 8, 5),
+      today: new Date(2026, 7, 20),
+      lang: code,
+      noteLang: code
+    });
+    const bytes = EmmausDocx.build(built.spec, new Date(2026, 7, 20, 9, 30, 0));
+
+    check('the Word document builds', bytes.length > 2000, bytes.length + ' bytes');
+    check('it is a ZIP archive (PK header)',
+      bytes[0] === 0x50 && bytes[1] === 0x4B && bytes[2] === 0x03 && bytes[3] === 0x04);
+    check('it counts the written reflections correctly',
+      built.wrote === Object.keys(answers).length,
+      built.wrote + ' vs ' + Object.keys(answers).length);
+    check('its wording is in ' + code,
+      built.spec.footer === Lang.t('docFooter', null, code) &&
+      built.spec.meta[0] === Lang.t('docName', { name: 'Teresa Lim' }, code),
+      built.spec.meta[0]);
+
+    const outFile = path.join(outDir, code + ' — ' + EmmausExport.fileNameFor(topic, 'Sample', code));
+    fs.writeFileSync(outFile, Buffer.from(bytes));
+    console.log('        sample written: tools/sample/' + path.basename(outFile));
+    console.log();
   });
-  check('every Scripture reference resolves to a USCCB chapter',
-    unresolved.length === 0, unresolved.join(' | '));
-  check('no ordinary heading is mistaken for a Scripture reference',
-    falseLinks.length === 0, falseLinks.join(' | '));
-
-  check('every block type is one the app can draw',
-    unknown.length === 0, 'unknown: ' + [...new Set(unknown)].join(', '));
-  check('no empty or "undefined" text',
-    emptyText.length === 0, emptyText.slice(0, 3).join(' | '));
-  check('journal ids are unique within the topic',
-    new Set(journalIds).size === journalIds.length,
-    'ids: ' + journalIds.join(', '));
-
-  /* answer keys must be unique across the whole topic — two questions
-     sharing a key would overwrite each other's answer */
-  const keys = EmmausExport.questionKeys(topic).map(k => k.key);
-  check('every question has its own storage key (' + keys.length + ' questions)',
-    new Set(keys).size === keys.length);
-  check('the topic asks at least one question', keys.length > 0);
-
-  /* the export must build and produce a real .docx */
-  const answers = {};
-  keys.forEach((k, i) => { if (i % 2 === 0) { answers[k] = 'A written reflection for ' + k + '.'; } });
-
-  const period = RCIA.periods.find(p => p.id === topic.period);
-  const built = EmmausExport.buildSpec(topic, answers, {
-    name: 'Teresa Lim',
-    period: period,
-    sessionDate: new Date(2026, 8, 5),
-    today: new Date(2026, 7, 20)
-  });
-  const bytes = EmmausDocx.build(built.spec, new Date(2026, 7, 20, 9, 30, 0));
-
-  check('the Word document builds', bytes.length > 2000, bytes.length + ' bytes');
-  check('it is a ZIP archive (PK header)',
-    bytes[0] === 0x50 && bytes[1] === 0x4B && bytes[2] === 0x03 && bytes[3] === 0x04);
-  check('it counts the written reflections correctly',
-    built.wrote === Object.keys(answers).length,
-    built.wrote + ' vs ' + Object.keys(answers).length);
-
-  const outDir = path.join(__dirname, 'sample');
-  fs.mkdirSync(outDir, { recursive: true });
-  const outFile = path.join(outDir, EmmausExport.fileNameFor(topic, 'Sample'));
-  fs.writeFileSync(outFile, Buffer.from(bytes));
-  console.log('        sample written: tools/sample/' + path.basename(outFile));
-  console.log();
 });
+
+/* ---- the fallback path: a Tamil reader opening an English-only note ---- */
+
+console.log('Falling back to English');
+const fallbackTopic = (allTopics.en || {})[16];
+if (fallbackTopic) {
+  const built = EmmausExport.buildSpec(fallbackTopic, {}, {
+    name: '',
+    period: RCIA.periods.find(p => p.id === fallbackTopic.period),
+    today: new Date(2026, 7, 20),
+    lang: 'ta',
+    noteLang: 'en'
+  });
+  check('the document is framed in the chosen language',
+    built.spec.header[0] === Lang.t('brand', null, 'ta'));
+  check('it says the note inside is still in English',
+    built.spec.meta.indexOf(Lang.t('docLanguageNote', null, 'ta')) > -1,
+    built.spec.meta.join(' | '));
+  const bytes = EmmausDocx.build(built.spec, new Date(2026, 7, 20, 9, 30, 0));
+  check('it still builds a real .docx', bytes.length > 2000 &&
+    bytes[0] === 0x50 && bytes[1] === 0x4B);
+  const xml = Buffer.from(bytes).toString('latin1');
+  check('Word is told a face for both scripts',
+    xml.indexOf('w:cs="Nirmala UI"') > -1, 'no complex-script font named');
+}
+console.log();
 
 console.log('----------------------------------------------------');
 console.log(checks + ' checks, ' + failures + ' failed.');

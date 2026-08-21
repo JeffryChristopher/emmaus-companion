@@ -1,7 +1,11 @@
 /* ============================================================
    THE EMMAUS COMPANION — Shell
-   Theme (Daylight / Compline), reading size, and small helpers.
-   Preferences are remembered on this device only.
+   Theme (Daylight / Compline), reading size, language, and small
+   helpers. Preferences are remembered on this device only.
+
+   The language itself lives in assets/js/i18n.js; this file owns the
+   preferences record it is stored in, and applies it early so the
+   page never paints in the wrong typeface.
    ============================================================ */
 
 var Emmaus = (function () {
@@ -75,40 +79,54 @@ var Emmaus = (function () {
 
   /* ---- wire the top bar ---- */
 
+  function themeLabel(theme) {
+    return Lang.t(theme === 'dark' ? 'themeCompline' : 'themeDaylight');
+  }
+
+  function typeLabel(size) {
+    return Lang.t(size === 'larger' ? 'typeLargest'
+                : size === 'large'  ? 'typeLarger'
+                : 'typeReading');
+  }
+
   function mountControls() {
+    Lang.paint();
+
     var themeBtn = document.getElementById('themeBtn');
     var typeBtn = document.getElementById('typeBtn');
 
     if (themeBtn) {
       themeBtn.addEventListener('click', function () {
         var next = toggleTheme();
-        themeBtn.textContent = next === 'dark' ? '☾ Compline' : '☀ Daylight';
+        themeBtn.textContent = themeLabel(next);
         themeBtn.setAttribute('aria-label',
-          next === 'dark' ? 'Switch to the daylight theme' : 'Switch to the candlelit theme');
+          Lang.t(next === 'dark' ? 'themeToLight' : 'themeToDark'));
       });
       var shown = readPrefs().theme || (prefersDark() ? 'dark' : 'light');
-      themeBtn.textContent = shown === 'dark' ? '☾ Compline' : '☀ Daylight';
+      themeBtn.textContent = themeLabel(shown);
+      themeBtn.setAttribute('aria-label',
+        Lang.t(shown === 'dark' ? 'themeToLight' : 'themeToDark'));
     }
 
     if (typeBtn) {
       typeBtn.addEventListener('click', function () {
         var next = cycleType();
         typeBtn.setAttribute('aria-pressed', next ? 'true' : 'false');
-        typeBtn.textContent = next === 'larger' ? 'A Largest'
-                            : next === 'large'  ? 'A Larger'
-                            : 'A Reading size';
+        typeBtn.textContent = typeLabel(next);
       });
       var t = readPrefs().type || '';
       typeBtn.setAttribute('aria-pressed', t ? 'true' : 'false');
-      typeBtn.textContent = t === 'larger' ? 'A Largest' : t === 'large' ? 'A Larger' : 'A Reading size';
+      typeBtn.textContent = typeLabel(t);
     }
   }
 
-  /* Applied as early as possible so the page never flashes the wrong theme. */
+  /* Applied as early as possible so the page never flashes the wrong
+     theme or the wrong script. */
   function boot() {
     var prefs = readPrefs();
     applyTheme(prefs.theme);
     applyType(prefs.type);
+    Lang.apply(prefs.lang);
   }
 
   /* ---- helpers ---- */
@@ -136,16 +154,43 @@ var Emmaus = (function () {
     return null;
   }
 
-  /* Topics that have been transcribed and shipped with this build. */
+  /* ---- the notes, in whichever language they exist ----
+     window.RCIA.topics is keyed by language code, then topic number:
+     RCIA.topics.ta[16]. English is the floor every language stands on;
+     a topic not yet transcribed into the chosen language is served in
+     English so the candidate is never shown an empty page. */
+
+  function topicsIn(code) {
+    var all = (window.RCIA && window.RCIA.topics) || {};
+    return all[code] || {};
+  }
+
+  /* The note to show, and the language it actually turned out to be. */
+  function topicIn(topicNo, code) {
+    var wanted = topicsIn(code)[topicNo];
+    if (wanted) { return { topic: wanted, lang: code, translated: true }; }
+    var english = topicsIn(Lang.DEFAULT)[topicNo];
+    if (english) { return { topic: english, lang: Lang.DEFAULT, translated: false }; }
+    return null;
+  }
+
+  /* Topics shipped with this build, in any language. */
   function availableTopics() {
-    var topics = (window.RCIA && window.RCIA.topics) || {};
-    return Object.keys(topics).map(Number).sort(function (a, b) { return a - b; });
+    var all = (window.RCIA && window.RCIA.topics) || {};
+    var seen = {};
+    Object.keys(all).forEach(function (code) {
+      Object.keys(all[code]).forEach(function (n) { seen[n] = true; });
+    });
+    return Object.keys(seen).map(Number).sort(function (a, b) { return a - b; });
+  }
+
+  /* Topics transcribed into one particular language. */
+  function topicsTranslated(code) {
+    return Object.keys(topicsIn(code)).map(Number).sort(function (a, b) { return a - b; });
   }
 
   function formatDate(date) {
-    var months = ['January', 'February', 'March', 'April', 'May', 'June',
-                  'July', 'August', 'September', 'October', 'November', 'December'];
-    return date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear();
+    return Lang.formatDate(date);
   }
 
   return {
@@ -154,7 +199,9 @@ var Emmaus = (function () {
     el: el,
     periodOf: periodOf,
     sessionOfTopic: sessionOfTopic,
+    topicIn: topicIn,
     availableTopics: availableTopics,
+    topicsTranslated: topicsTranslated,
     formatDate: formatDate,
     readPrefs: readPrefs,
     writePrefs: writePrefs

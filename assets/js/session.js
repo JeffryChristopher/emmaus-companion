@@ -1,13 +1,24 @@
 /* ============================================================
    THE EMMAUS COMPANION — Session page
-   Renders one topic from content/topics/topic-NN.js, mounts the
-   journal, and hands the candidate a Word document on request.
+   Renders one topic from content/topics/<lang>/topic-NN.js, mounts
+   the journal, and hands the candidate a Word document on request.
+
+   The note shown is the one approved in the chosen language. Where a
+   topic has not been transcribed into that language yet, the English
+   note is shown under a notice saying so — never an empty page. The
+   candidate's answers are stored against the topic and not against
+   the language, so they survive the change either way.
    ============================================================ */
 
 (function () {
   'use strict';
 
   var el = Emmaus.el;
+
+  /* "Amen" closes a prayer in every language the app carries; the last
+     line is set apart wherever it is recognised. Declared here, above
+     the render below, because a `var` initialiser does not hoist. */
+  var AMEN = /(?:Amen|Amin|阿门|阿們|ஆமென்)[.。．]?$/;
 
   /* ---------------- which topic ---------------- */
 
@@ -16,21 +27,30 @@
     return match ? parseInt(match[1], 10) : null;
   }
 
+  var chosen = Lang.current();
   var topicNo = requestedTopic();
-  var topic = topicNo != null && window.RCIA.topics ? window.RCIA.topics[topicNo] : null;
+  var found = topicNo != null ? Emmaus.topicIn(topicNo, chosen) : null;
   var root = document.getElementById('sessionRoot');
 
-  if (!topic) {
+  if (!found) {
     root.appendChild(buildNotice(topicNo));
     return;
   }
 
+  var topic = found.topic;
+
   document.body.setAttribute('data-period', topic.period);
-  document.title = 'Topic ' + topic.topic + ' — ' + topic.title + ' · The Emmaus Companion';
+  /* The note's own script, which may differ from the chrome around it. */
+  root.setAttribute('lang', Lang.meta(found.lang).html);
+  document.title = Lang.t('topicLine', { n: topic.topic, title: topic.title }) +
+                   ' · ' + Lang.t('appTitle');
 
   /* ---------------- render ---------------- */
 
   root.appendChild(buildHead(topic));
+  if (!found.translated && chosen !== Lang.DEFAULT) {
+    root.appendChild(buildLanguageNotice());
+  }
   if (Journal.available) {
     root.appendChild(buildSeal());
   } else {
@@ -58,17 +78,27 @@
 
   function buildNotice(requested) {
     var box = el('div', 'notice');
-    box.appendChild(el('h1', null, requested ? 'Topic ' + requested + ' is not in this pilot yet'
-                                             : 'No topic was chosen'));
+    box.appendChild(el('h1', null, requested
+      ? Lang.t('notFoundTitle', { n: requested })
+      : Lang.t('notFoundNone')));
+
     var written = Emmaus.availableTopics();
-    box.appendChild(el('p', null,
-      'This pilot copy carries ' +
-      (written.length === 1 ? 'one topic' : written.length + ' topics') +
-      ': ' + written.map(function (n) { return 'Topic ' + n; }).join(', ') +
-      '. The remaining topics arrive in Phase II, once each has been transcribed and proofread against the approved notes.'));
-    var back = el('a', 'btn', 'Return to the journey');
+    box.appendChild(el('p', null, Lang.t('notFoundBody', {
+      list: written.map(function (n) { return Lang.t('topicName', { n: n }); }).join(', ')
+    })));
+
+    var back = el('a', 'btn', Lang.t('backToJourney'));
     back.href = 'index.html';
     box.appendChild(back);
+    return box;
+  }
+
+  /* Shown when the chosen language has no note for this topic yet. */
+  function buildLanguageNotice() {
+    var box = el('div', 'seal seal--notice');
+    box.appendChild(el('span', 'cross', '✠'));
+    box.appendChild(el('p', null,
+      Lang.t('fallbackNotice', { language: Lang.meta(chosen).endonym })));
     return box;
   }
 
@@ -77,13 +107,15 @@
     var period = Emmaus.periodOf(t.period);
 
     if (period) {
+      var words = Lang.period(period.id);
       head.appendChild(el('p', 'period-tag',
-        period.letter + ' · ' + period.name + ' · ' + period.stage.split(' · ')[0]));
+        period.letter + ' · ' + words.name + ' · ' + words.stage.split(' · ')[0]));
     }
-    head.appendChild(el('p', 'topic-no', 'Topic ' + t.topic + ' · Session ' + t.session));
+    head.appendChild(el('p', 'topic-no',
+      Lang.t('topicSession', { n: t.topic, s: t.session })));
     head.appendChild(el('h1', null, t.title));
     if (t.theme) {
-      head.appendChild(el('p', 'theme', 'Theme: ' + t.theme));
+      head.appendChild(el('p', 'theme', Lang.t('themeLine', { theme: t.theme })));
     }
     if (t.topicQuestion) {
       head.appendChild(el('p', 'question-of-topic', t.topicQuestion));
@@ -94,16 +126,14 @@
   function buildSeal() {
     var seal = el('div', 'seal');
     seal.appendChild(el('span', 'cross', '✠'));
-    seal.appendChild(el('p', null,
-      'Whatever you write below is saved on this device alone. It is never sent anywhere, and no one else can read it unless you save it as a Word document and choose to share it.'));
+    seal.appendChild(el('p', null, Lang.t('sealPrivacy')));
     return seal;
   }
 
   function buildStorageWarning() {
     var seal = el('div', 'seal');
     seal.appendChild(el('span', 'cross', '✠'));
-    seal.appendChild(el('p', null,
-      'This browser is not allowing anything to be saved (private browsing may be switched on). You may still write and save a Word document, but your words will be lost when you close this page.'));
+    seal.appendChild(el('p', null, Lang.t('sealNoStorage')));
     return seal;
   }
 
@@ -116,7 +146,7 @@
     head.appendChild(el('span', 'letter', part.letter));
     head.appendChild(el('h2', null, part.name));
     if (part.ref) {
-      var ref = bibleLink(part.ref, part.ref);
+      var ref = bibleLink(part.ref, part.ref, part.passage);
       ref.className = 'ref';
       head.appendChild(ref);
     }
@@ -185,9 +215,12 @@
       if (item.marginal) {
         var note = el('span', 'marginal');
         note.appendChild(el('span', 'mrk', item.marginal.mark + ' '));
-        /* Scripture marginalia link out; CCC references do not. */
-        if (item.marginal.mark === 'Scripture') {
-          note.appendChild(bibleLink(item.marginal.text, item.marginal.text));
+        /* Scripture marginalia link out; catechism references do not.
+           A translated note names its books in its own language, so
+           `passage` carries the chapter the link should open. */
+        if (item.marginal.passage || item.marginal.mark === 'Scripture') {
+          note.appendChild(bibleLink(item.marginal.text, item.marginal.text,
+                                     item.marginal.passage));
         } else {
           note.appendChild(document.createTextNode(item.marginal.text));
         }
@@ -201,17 +234,26 @@
   /* A reference as printed, made clickable when it can be understood.
      Returns a plain <span> when it cannot, so nothing ever looks like a
      link that goes nowhere. `passage` in the content file overrides the
-     parser, for a heading the parser would read wrongly. */
+     parser, for a heading the parser would read wrongly.
+
+     The link goes to a Bible in the candidate's own language, so a
+     Tamil reader lands in a Tamil Bible. A reference to a book that
+     edition does not carry — the deuterocanonical books are absent
+     from the Malay AVB — is left as plain text rather than pointed at
+     a page that does not hold it. */
   function bibleLink(reference, label, passage) {
-    var href = Scripture.url(passage || reference);
+    var href = Scripture.url(passage || reference, chosen);
     if (!href) { return el('span', null, label); }
 
-    var chapter = Scripture.chapterLabel(passage || reference);
+    var chapter = Scripture.chapterLabel(passage || reference, chosen);
     var a = el('a', null, label);
     a.href = href;
     a.target = '_blank';
     a.rel = 'noopener noreferrer';
-    a.title = 'Read ' + chapter + ' on the USCCB Bible (opens in a new tab)';
+    a.title = Lang.t('readChapterTitle', {
+      chapter: chapter,
+      bible: Scripture.bibleName(chosen)
+    });
     return a;
   }
 
@@ -224,11 +266,16 @@
 
     if (block.instruction) { box.appendChild(el('p', 'instruction', block.instruction)); }
 
-    /* An unmistakable way in, rather than relying on the heading alone. */
-    var chapter = Scripture.chapterLabel(block.passage || block.cite);
-    if (chapter) {
+    /* An unmistakable way in, rather than relying on the heading alone.
+       Only offered when there is somewhere to go: a book the chosen
+       language's Bible does not carry gets no dead invitation. */
+    var chapter = Scripture.chapterLabel(block.passage || block.cite, chosen);
+    if (chapter && Scripture.url(block.passage || block.cite, chosen)) {
       var line = el('p', 'bible-link');
-      var open = bibleLink(block.cite, 'Read ' + chapter + ' on the USCCB Bible ↗', block.passage);
+      var open = bibleLink(block.cite, Lang.t('readChapter', {
+        chapter: chapter,
+        bible: Scripture.bibleName(chosen)
+      }), block.passage);
       line.appendChild(open);
       box.appendChild(line);
     }
@@ -251,7 +298,7 @@
     var box = el('div', 'prayer');
     if (block.label) { box.appendChild(el('span', 'plabel', block.label)); }
     block.lines.forEach(function (line) {
-      var isAmen = /Amen\.?$/.test(line);
+      var isAmen = AMEN.test(line);
       var p = el('p', null, line);
       if (isAmen) { p.className = 'amen-line'; }
       box.appendChild(p);
@@ -294,7 +341,7 @@
 
     if (block.sources && block.sources.length) {
       var sources = el('p', 'sources');
-      sources.appendChild(document.createTextNode('Read more: '));
+      sources.appendChild(document.createTextNode(Lang.t('readMore')));
       block.sources.forEach(function (href, i) {
         if (i > 0) { sources.appendChild(document.createTextNode(' · ')); }
         var a = el('a', null, hostOf(href));
@@ -331,13 +378,12 @@
     figure.appendChild(portrait);
 
     var body = el('div');
-    body.appendChild(el('h3', null, block.caption || 'The picture'));
+    body.appendChild(el('h3', null, block.caption || Lang.t('pictureTitle')));
     if (block.suggested) {
       body.appendChild(el('p', null, block.suggested));
     }
     body.appendChild(el('p', 'sources',
-      'The retreat team shows this image on the day. To place it in the app, save the picture as ' +
-      (block.fileHint || 'assets/img/…') + ' and name that file in the topic content.'));
+      Lang.t('pictureNote', { file: block.fileHint || 'assets/img/…' })));
     figure.appendChild(body);
     return figure;
   }
@@ -360,8 +406,11 @@
       area.className = 'journal-lines';
       area.rows = 3;
       area.setAttribute('data-key', key);
-      area.setAttribute('aria-label', 'Your reflection: ' + question.text);
-      area.placeholder = 'Write here…';
+      area.setAttribute('aria-label', Lang.t('yourReflection', { question: question.text }));
+      area.placeholder = Lang.t('writeHere');
+      /* The candidate writes in their own language, whatever script
+         the question happens to be printed in. */
+      area.setAttribute('lang', Lang.meta(chosen).html);
       wrap.appendChild(area);
     });
 
@@ -370,26 +419,25 @@
 
   function buildExport(t) {
     var box = el('section', 'export');
-    box.appendChild(el('h2', null, 'Save your reflections'));
-    box.appendChild(el('p', null,
-      'Your answers become a Word document, made here on your device and saved straight to it. Nothing is sent anywhere.'));
+    box.appendChild(el('h2', null, Lang.t('exportHeading')));
+    box.appendChild(el('p', null, Lang.t('exportBody')));
 
     var fields = el('div', 'namefield');
 
     var nameWrap = el('div');
-    var nameLabel = el('label', null, 'Your name');
+    var nameLabel = el('label', null, Lang.t('yourName'));
     nameLabel.setAttribute('for', 'candidateName');
     var nameInput = document.createElement('input');
     nameInput.id = 'candidateName';
     nameInput.type = 'text';
-    nameInput.placeholder = 'e.g. Teresa Lim';
+    nameInput.placeholder = Lang.t('namePlaceholder');
     nameInput.value = Journal.getName();
     nameInput.autocomplete = 'name';
     nameWrap.appendChild(nameLabel);
     nameWrap.appendChild(nameInput);
 
     var dateWrap = el('div');
-    var dateLabel = el('label', null, 'Session date');
+    var dateLabel = el('label', null, Lang.t('sessionDate'));
     dateLabel.setAttribute('for', 'sessionDate');
     var dateInput = document.createElement('input');
     dateInput.id = 'sessionDate';
@@ -403,12 +451,12 @@
 
     var actions = el('div', 'actions');
 
-    var saveBtn = el('button', 'btn btn--primary', '⤓  Save as Word document');
+    var saveBtn = el('button', 'btn btn--primary', Lang.t('saveWord'));
     saveBtn.type = 'button';
     saveBtn.id = 'exportBtn';
     actions.appendChild(saveBtn);
 
-    var printBtn = el('button', 'btn btn--quiet', 'Print this session');
+    var printBtn = el('button', 'btn btn--quiet', Lang.t('printSession'));
     printBtn.type = 'button';
     printBtn.addEventListener('click', function () { window.print(); });
     actions.appendChild(printBtn);
@@ -433,24 +481,24 @@
     if (index > 0) {
       var pa = el('a');
       pa.href = 'session.html?topic=' + written[index - 1];
-      pa.appendChild(el('span', 'lbl', 'Previous in this pilot'));
-      pa.appendChild(document.createTextNode('Topic ' + written[index - 1]));
+      pa.appendChild(el('span', 'lbl', Lang.t('prevInPilot')));
+      pa.appendChild(document.createTextNode(Lang.t('topicName', { n: written[index - 1] })));
       prev.appendChild(pa);
     }
 
     var home = el('div');
     var ha = el('a');
     ha.href = 'index.html';
-    ha.appendChild(el('span', 'lbl', 'The journey'));
-    ha.appendChild(document.createTextNode('All sessions'));
+    ha.appendChild(el('span', 'lbl', Lang.t('theJourney')));
+    ha.appendChild(document.createTextNode(Lang.t('allSessions')));
     home.appendChild(ha);
 
     var next = el('div');
     if (index > -1 && index < written.length - 1) {
       var na = el('a');
       na.href = 'session.html?topic=' + written[index + 1];
-      na.appendChild(el('span', 'lbl', 'Next in this pilot'));
-      na.appendChild(document.createTextNode('Topic ' + written[index + 1]));
+      na.appendChild(el('span', 'lbl', Lang.t('nextInPilot')));
+      na.appendChild(document.createTextNode(Lang.t('topicName', { n: written[index + 1] })));
       next.appendChild(na);
     }
 
@@ -462,9 +510,11 @@
 
   function buildColophon() {
     var foot = el('footer', 'colophon');
-    foot.appendChild(el('p', null,
-      'The text of this session is reproduced from the notes approved for publication by the Penang Diocesan Catechetical Commission. Imprimatur: ✠ Cardinal Sebastian Francis, Bishop of Penang, 31 May 2026.'));
-    foot.appendChild(el('p', 'amdg', 'Ad Maiorem Dei Gloriam'));
+    foot.appendChild(el('p', null, Lang.t('colophonSession')));
+    if (chosen !== Lang.DEFAULT) {
+      foot.appendChild(el('p', null, Lang.t('colophonTranslated')));
+    }
+    foot.appendChild(el('p', 'amdg', Lang.t('amdg')));
     return foot;
   }
 
@@ -493,10 +543,10 @@
         Journal.setAnswer(t.topic, key, area.value, function (ok) {
           if (!status) { return; }
           if (ok) {
-            status.textContent = 'Saved on this device · ' + timeNow();
+            status.textContent = Lang.t('savedAt', { time: Lang.formatTime(new Date()) });
             status.setAttribute('data-state', 'saved');
           } else {
-            status.textContent = 'This browser would not let your writing be saved.';
+            status.textContent = Lang.t('saveRefused');
             status.setAttribute('data-state', 'error');
           }
         });
@@ -512,14 +562,6 @@
     window.addEventListener('resize', function () {
       Array.prototype.forEach.call(areas, grow);
     });
-  }
-
-  function timeNow() {
-    var d = new Date();
-    var h = d.getHours(), m = d.getMinutes();
-    var suffix = h >= 12 ? 'pm' : 'am';
-    h = h % 12; if (h === 0) { h = 12; }
-    return h + ':' + (m < 10 ? '0' : '') + m + suffix;
   }
 
   /* ============================================================
@@ -554,21 +596,24 @@
     var built = EmmausExport.buildSpec(t, answers, {
       name: name,
       period: Emmaus.periodOf(t.period),
-      sessionDate: sessionDate
+      sessionDate: sessionDate,
+      /* The chrome of the document follows the candidate's choice; the
+         note inside it is whichever language it was actually found in,
+         and says so when the two differ. */
+      lang: chosen,
+      noteLang: found.lang
     });
-    var fileName = EmmausExport.fileNameFor(t, name);
+    var fileName = EmmausExport.fileNameFor(t, name, chosen);
 
     try {
       EmmausDocx.save(built.spec, fileName);
       status.setAttribute('data-state', 'saved');
       status.textContent = built.wrote
-        ? 'Saved “' + fileName + '” to your device — ' + built.wrote + ' of ' +
-          built.total + ' reflections written.'
-        : 'Saved “' + fileName + '” — the questions are there, ready for you to write.';
+        ? Lang.t('savedFile', { file: fileName, wrote: built.wrote, total: built.total })
+        : Lang.t('savedFileBlank', { file: fileName });
     } catch (e) {
       status.setAttribute('data-state', 'error');
-      status.textContent = 'The document could not be made on this device. ' +
-        'Try the Print button instead, and choose “Save as PDF”.';
+      status.textContent = Lang.t('exportFailed');
     }
   }
 })();
