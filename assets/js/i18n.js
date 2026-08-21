@@ -86,15 +86,15 @@ var Lang = (function () {
       topics1: '1 topic',
       topicLine: 'Topic {n} — {title}',
 
-      colophonPilot: 'A pilot copy. The session notes are reproduced from those approved for publication by the Penang Diocesan Catechetical Commission.',
+      colophonNotes: 'The session notes are reproduced from those approved for publication by the Penang Diocesan Catechetical Commission.',
       colophonImprimatur: 'Imprimatur: ✠ Cardinal Sebastian Francis, Bishop of Penang, 31 May 2026 (PKK/BCR/2026/05/705).',
       colophonSession: 'The text of this session is reproduced from the notes approved for publication by the Penang Diocesan Catechetical Commission. Imprimatur: ✠ Cardinal Sebastian Francis, Bishop of Penang, 31 May 2026.',
       colophonTranslated: 'The session notes are the text approved in this language. The names of the four periods and the wording of the app itself are the app’s own, and await the Commission’s check.',
       amdg: 'Ad Maiorem Dei Gloriam',
 
-      notFoundTitle: 'Topic {n} is not in this pilot yet',
+      notFoundTitle: 'There is no Topic {n}',
       notFoundNone: 'No topic was chosen',
-      notFoundBody: 'This pilot copy carries {list}. The remaining topics arrive in Phase II, once each has been transcribed and proofread against the approved notes.',
+      notFoundBody: 'The session notes run from Topic {first} to Topic {last}. Check the number, or go back to the journey and choose a session.',
       topicName: 'Topic {n}',
       backToJourney: 'Return to the journey',
 
@@ -190,15 +190,15 @@ var Lang = (function () {
       topics1: '1 topik',
       topicLine: 'Topik {n} — {title}',
 
-      colophonPilot: 'Salinan perintis. Nota sesi ini diterbitkan semula daripada nota yang diluluskan untuk penerbitan oleh Suruhanjaya Kateketikal Keuskupan Pulau Pinang.',
+      colophonNotes: 'Nota sesi ini diterbitkan semula daripada nota yang diluluskan untuk penerbitan oleh Suruhanjaya Kateketikal Keuskupan Pulau Pinang.',
       colophonImprimatur: 'Imprimatur: ✠ Kardinal Sebastian Francis, Uskup Pulau Pinang, 31 Mei 2026 (PKK/BCR/2026/05/705).',
       colophonSession: 'Teks sesi ini diterbitkan semula daripada nota yang diluluskan untuk penerbitan oleh Suruhanjaya Kateketikal Keuskupan Pulau Pinang. Imprimatur: ✠ Kardinal Sebastian Francis, Uskup Pulau Pinang, 31 Mei 2026.',
       colophonTranslated: 'Nota sesi ialah teks yang diluluskan dalam bahasa ini. Nama empat tempoh dan perkataan aplikasi ini sendiri adalah milik aplikasi, dan masih menunggu semakan Suruhanjaya.',
       amdg: 'Ad Maiorem Dei Gloriam',
 
-      notFoundTitle: 'Topik {n} belum ada dalam salinan perintis ini',
+      notFoundTitle: 'Tiada Topik {n}',
       notFoundNone: 'Tiada topik dipilih',
-      notFoundBody: 'Salinan perintis ini mengandungi {list}. Topik yang selebihnya akan tiba dalam Fasa II, setelah setiap satu ditranskripsi dan disemak dengan nota yang diluluskan.',
+      notFoundBody: 'Nota sesi bermula daripada Topik {first} hingga Topik {last}. Sila semak nombor itu, atau kembali ke perjalanan dan pilih satu sesi.',
       topicName: 'Topik {n}',
       backToJourney: 'Kembali ke perjalanan',
 
@@ -293,15 +293,15 @@ var Lang = (function () {
       topics1: '1 个主题',
       topicLine: '主题 {n} — {title}',
 
-      colophonPilot: '试行版。课程讲义转载自槟城教区教理委员会核准出版的讲义。',
+      colophonNotes: '课程讲义转载自槟城教区教理委员会核准出版的讲义。',
       colophonImprimatur: '出版许可：✠ 沈保禄枢机，槟城教区主教，2026 年 5 月 31 日（PKK/BCR/2026/05/705）。',
       colophonSession: '本课文本转载自槟城教区教理委员会核准出版的讲义。出版许可：✠ 沈保禄枢机，槟城教区主教，2026 年 5 月 31 日。',
       colophonTranslated: '课程讲义为本语言中获核准的文本。四个阶段的名称以及应用程式本身的用语出自本应用程式，仍待委员会审核。',
       amdg: 'Ad Maiorem Dei Gloriam',
 
-      notFoundTitle: '主题 {n} 尚未收录于此试行版',
+      notFoundTitle: '没有主题 {n}',
       notFoundNone: '未选择主题',
-      notFoundBody: '此试行版收录了 {list}。其余主题将在第二阶段推出，届时每一课都会先转录并对照核准讲义校对。',
+      notFoundBody: '课程讲义涵盖主题 {first} 至主题 {last}。请检查号码，或返回旅程选择一课。',
       topicName: '主题 {n}',
       backToJourney: '返回旅程',
 
@@ -396,15 +396,15 @@ var Lang = (function () {
       topics1: '1 தலைப்பில்',
       topicLine: 'தலைப்பு {n} — {title}',
 
-      colophonPilot: 'ஒரு முன்னோட்ட நகல். அமர்வுக் குறிப்புகள், பினாங்கு மறைமாவட்ட மறைக்கல்வி ஆணையத்தால் வெளியிட ஒப்புதல் அளிக்கப்பட்டவற்றிலிருந்து மீள்பதிப்பு செய்யப்பட்டவை.',
+      colophonNotes: 'அமர்வுக் குறிப்புகள், பினாங்கு மறைமாவட்ட மறைக்கல்வி ஆணையத்தால் வெளியிட ஒப்புதல் அளிக்கப்பட்டவற்றிலிருந்து மீள்பதிப்பு செய்யப்பட்டவை.',
       colophonImprimatur: 'இம்ப்ரிமாதூர்: ✠ கர்தினால் செபஸ்தியான் பிரான்சிஸ், பினாங்கு ஆயர், 31 மே 2026 (PKK/BCR/2026/05/705).',
       colophonSession: 'இந்த அமர்வின் உரை, பினாங்கு மறைமாவட்ட மறைக்கல்வி ஆணையத்தால் வெளியிட ஒப்புதல் அளிக்கப்பட்ட குறிப்புகளிலிருந்து மீள்பதிப்பு செய்யப்பட்டது. இம்ப்ரிமாதூர்: ✠ கர்தினால் செபஸ்தியான் பிரான்சிஸ், பினாங்கு ஆயர், 31 மே 2026.',
       colophonTranslated: 'அமர்வுக் குறிப்புகள் இந்த மொழியில் ஒப்புதல் பெற்ற உரையே. நான்கு காலங்களின் பெயர்களும் இந்தச் செயலியின் சொற்களும் செயலியுடையவை; ஆணையத்தின் சரிபார்ப்புக்குக் காத்திருக்கின்றன.',
       amdg: 'Ad Maiorem Dei Gloriam',
 
-      notFoundTitle: 'தலைப்பு {n} இன்னும் இந்த முன்னோட்டத்தில் இல்லை',
+      notFoundTitle: 'தலைப்பு {n} இல்லை',
       notFoundNone: 'எந்தத் தலைப்பும் தேர்ந்தெடுக்கப்படவில்லை',
-      notFoundBody: 'இந்த முன்னோட்ட நகலில் {list} உள்ளன. மீதமுள்ள தலைப்புகள் இரண்டாம் கட்டத்தில் வரும் — ஒவ்வொன்றும் படியெடுக்கப்பட்டு, ஒப்புதல் பெற்ற குறிப்புகளுடன் ஒப்பிட்டுத் திருத்தப்பட்ட பிறகு.',
+      notFoundBody: 'அமர்வுக் குறிப்புகள் தலைப்பு {first} முதல் தலைப்பு {last} வரை உள்ளன. எண்ணைச் சரிபார்க்கவும், அல்லது பயணத்திற்குத் திரும்பி ஓர் அமர்வைத் தேர்ந்தெடுக்கவும்.',
       topicName: 'தலைப்பு {n}',
       backToJourney: 'பயணத்திற்குத் திரும்பு',
 

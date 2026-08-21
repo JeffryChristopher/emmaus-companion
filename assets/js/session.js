@@ -82,9 +82,12 @@
       ? Lang.t('notFoundTitle', { n: requested })
       : Lang.t('notFoundNone')));
 
+    /* Naming the range rather than listing every topic: with the whole
+       syllabus transcribed, the list would run to thirty-seven. */
     var written = Emmaus.availableTopics();
     box.appendChild(el('p', null, Lang.t('notFoundBody', {
-      list: written.map(function (n) { return Lang.t('topicName', { n: n }); }).join(', ')
+      first: written[0],
+      last: written[written.length - 1]
     })));
 
     var back = el('a', 'btn', Lang.t('backToJourney'));

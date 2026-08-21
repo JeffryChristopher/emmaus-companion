@@ -1,4 +1,4 @@
-# The Emmaus Companion — pilot copy
+# The Emmaus Companion
 
 The RCIA session notes of the Diocese of Penang, as a digital companion for
 candidates, with a private reflection journal that becomes a Word document.
@@ -382,8 +382,10 @@ every time the checker runs.
 - **Which Malay Bible.** *Open — awaiting the catechist's decision.* Alkitab
   Versi Borneo is the one non-Catholic edition of the four, and has no Tobit,
   Judith, Wisdom, Sirach, Baruch or Maccabees; references to those are left
-  unlinked in Malay. None of the three topics in this pilot cites one, so
-  nothing is affected today, but Phase II will reach them. Changing to a
+  unlinked in Malay. Now that all thirty-seven English notes are in, this can
+  be answered rather than guessed at: **not one linked Scripture reference in
+  the whole syllabus is to a deuterocanonical book**, so the choice still
+  changes nothing a candidate would see. It remains worth settling. Changing to a
   Catholic Malay edition is one entry in `BIBLES` and one column of `EDITIONS`
   in `assets/js/scripture.js`, plus a re-run of `check-bible-links.js`.
 - **The four Bible sites.** They are somebody else's, and the app depends on
