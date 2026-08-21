@@ -90,6 +90,24 @@ body {
 .plate, .prayer, .pericope { break-inside: avoid; page-break-inside: avoid; }
 .part-head { break-after: avoid; page-break-after: avoid; }
 
+/* The Saints gallery makes a useful handout: two columns, ruled, and
+   no card broken across a page. */
+.gallery-link { display: none !important; }
+.gallery .month, .saint-card h3 { color: #000000 !important; }
+.gallery .month { border-bottom-color: #000000 !important; }
+.gallery .deck-count, .saint-card .also, .saint-card .patron { color: #444444 !important; }
+.saint-card .feast { color: #000000 !important; }
+.saint-card .monogram { color: #666666 !important; }
+ul.saints { grid-template-columns: 1fr 1fr; gap: 8mm 6mm; }
+.saint-card {
+  background: transparent !important;
+  border-color: #BBBBBB !important;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+.saint-card .to-topic { border-bottom-color: #999999 !important; color: #444444 !important; }
+.gallery .month { break-after: avoid; page-break-after: avoid; }
+
 /* A table prints whole: no scrolling frame, no forced minimum width. */
 .table-frame { overflow: visible !important; }
 table.plain-table { min-width: 0 !important; font-size: 10.5pt; }

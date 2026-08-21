@@ -33,6 +33,7 @@ const EmmausDocx = require(path.join(APP, 'assets/js/docx.js'));
 const EmmausExport = require(path.join(APP, 'assets/js/export.js'));
 const Scripture = require(path.join(APP, 'assets/js/scripture.js'));
 const Lang = require(path.join(APP, 'assets/js/i18n.js'));
+const Saints = require(path.join(APP, 'assets/js/saints.js'));
 
 /* Block types the session renderer can draw (see session.js buildBlock). */
 const KNOWN_BLOCKS = new Set([
@@ -592,6 +593,120 @@ gateNumbers.forEach(function (n) {
     EmmausExport.fileNameFor(gate, 'Sample', Lang.DEFAULT));
   fs.writeFileSync(outFile, Buffer.from(bytes));
   console.log('        sample written: tools/sample/' + path.basename(outFile));
+});
+console.log();
+
+/* ============================================================
+   The Saints gallery
+
+   The gallery writes nothing down: it reads every saint out of the
+   note that names one. So what has to hold is that the notes can be
+   read — that a feast day the app claims to understand really parses,
+   and that one it does not understand is left undated rather than
+   filed under the wrong month.
+   ============================================================ */
+
+console.log('The Saints gallery');
+/* The same fallback the app uses, over the content this script loaded. */
+function topicInSandbox(n, code) {
+  const wanted = (allTopics[code] || {})[n];
+  if (wanted) { return { topic: wanted, lang: code, translated: true }; }
+  const english = (allTopics[Lang.DEFAULT] || {})[n];
+  if (english) { return { topic: english, lang: Lang.DEFAULT, translated: false }; }
+  return null;
+}
+const sandboxContent = { topics: allTopics, topicIn: topicInSandbox };
+
+const saintsList = Saints.gather(Lang.DEFAULT, sandboxContent);
+const topicsWithSaint = Object.keys(allTopics[Lang.DEFAULT] || {}).map(Number)
+  .filter(n => Saints.saintOf(allTopics[Lang.DEFAULT][n]));
+
+check('every note that names a saint is in the gallery',
+  saintsList.length === topicsWithSaint.length,
+  saintsList.length + ' vs ' + topicsWithSaint.length);
+check('the gallery names no saint twice for one topic',
+  new Set(saintsList.map(s => s.topic)).size === saintsList.length);
+
+/* Undated saints must come last, or a reader scanning the calendar
+   would meet a gap in the middle of it. */
+const firstUndated = saintsList.findIndex(s => !s.date);
+check('any saint without a feast day is placed at the end',
+  firstUndated === -1 || saintsList.slice(firstUndated).every(s => !s.date),
+  'first undated at ' + firstUndated);
+
+/* And the dated ones must actually be in calendar order. */
+let ordered = true;
+for (let i = 1; i < saintsList.length; i++) {
+  const a = saintsList[i - 1].date, b = saintsList[i].date;
+  if (!a || !b) { continue; }
+  if (a.month > b.month || (a.month === b.month && a.day > b.day)) { ordered = false; }
+}
+check('the dated saints run in calendar order', ordered);
+
+const undated = saintsList.filter(s => !s.date).map(s => s.topic);
+console.log('        ' + saintsList.length + ' saints; ' +
+  (undated.length ? 'no feast day given in Topic ' + undated.join(', ')
+                  : 'every one carries a feast day'));
+
+/* A date the parser misreads is worse than one it cannot read at all,
+   so each parsed day is checked against the words it came from. */
+const misdated = [];
+saintsList.forEach(function (entry) {
+  if (!entry.date) { return; }
+  const printed = Saints.fact(Saints.saintOf(allTopics[Lang.DEFAULT][entry.topic]), 'feast');
+  const monthName = Saints.monthName(entry.date.month, Lang.DEFAULT);
+  if (printed.toLowerCase().indexOf(monthName.toLowerCase()) < 0 ||
+      printed.indexOf(String(entry.date.day)) < 0) {
+    misdated.push('Topic ' + entry.topic + ': "' + printed + '" read as ' +
+                  monthName + ' ' + entry.date.day);
+  }
+});
+check('every feast day is read as the note prints it',
+  misdated.length === 0, misdated.join(' | '));
+
+/* Each language must be able to find the patronage line in its own
+   notes, or the gallery would show a saint with no patronage at all. */
+LANGS.forEach(function (code) {
+  const prefix = Lang.t('patronLabel', null, code);
+  const topics = allTopics[code] || {};
+  const missed = Object.keys(topics).map(Number).filter(function (n) {
+    const saint = Saints.saintOf(topics[n]);
+    if (!saint || !(saint.facts || []).length) { return false; }
+    /* Only complain when the note HAS a patronage fact the prefix
+       fails to find — some notes give none. */
+    const hasPatron = (saint.facts || []).some(f =>
+      /patron|penaung|主保|பாதுகாவலர்/i.test(f.label));
+    return hasPatron && !Saints.fact(saint, prefix);
+  });
+  check(code + ' finds the patronage line in its own notes ("' + prefix + '")',
+    missed.length === 0, 'missed in Topic ' + missed.join(', '));
+});
+console.log();
+
+/* ============================================================
+   The pages load the same content files
+
+   Three HTML pages each list every content script by hand. A file
+   added to one and forgotten in another would be invisible on that
+   page alone — the kind of fault nobody notices until a candidate
+   opens the wrong page.
+   ============================================================ */
+
+console.log('Every page loads every content file');
+const contentFiles = ['content/syllabus.js', 'content/gates.js'].concat(
+  LANGS.flatMap(code => (loadedFiles[code] || [])
+    .map(name => 'content/topics/' + code + '/' + name)));
+
+['index.html', 'session.html', 'saints.html'].forEach(function (page) {
+  const html = fs.readFileSync(path.join(APP, page), 'utf8');
+  const listed = (html.match(/<script src="(content\/[^"]+)"><\/script>/g) || [])
+    .map(tag => /src="([^"]+)"/.exec(tag)[1]);
+  const missing = contentFiles.filter(f => listed.indexOf(f) < 0);
+  const ghosts = listed.filter(f => contentFiles.indexOf(f) < 0);
+  check(page + ' lists every content file (' + contentFiles.length + ')',
+    missing.length === 0, 'missing: ' + missing.join(', '));
+  check(page + ' lists no file that is not there',
+    ghosts.length === 0, 'stale: ' + ghosts.join(', '));
 });
 console.log();
 

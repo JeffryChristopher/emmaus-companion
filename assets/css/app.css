@@ -680,6 +680,108 @@ table.plain-table th:last-child, table.plain-table td:last-child { padding-right
   letter-spacing: 0.04em;
 }
 
+/* --- the Saints gallery ---------------------------------------------
+   A calendar of the saints the notes name: one month at a time, and
+   inside each month a card per saint. */
+.gallery { margin-top: var(--gap-lg); }
+.gallery .deck-count {
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 var(--gap-lg);
+}
+.gallery .month {
+  font-family: var(--face-display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gilt-ink);
+  margin: var(--gap-lg) 0 var(--gap);
+  padding-bottom: 0.45rem;
+  border-bottom: 1px solid var(--rule);
+}
+.gallery .month--undated { color: var(--ink-soft); }
+
+ul.saints {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+  gap: var(--gap);
+}
+.saint-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.9rem;
+  background: var(--leaf);
+  border: 1px solid var(--rule-faint);
+  padding: 1rem 1.1rem;
+}
+.saint-card .monogram {
+  font-family: var(--face-display);
+  font-size: 1.7rem;
+  line-height: 1;
+  color: var(--gilt);
+  padding-top: 0.15rem;
+}
+.saint-card .feast {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rubric);
+  margin: 0 0 0.25rem;
+  font-variant-numeric: tabular-nums;
+}
+.saint-card h3 {
+  font-family: var(--face-display);
+  font-weight: 600;
+  font-size: 1.02rem;
+  line-height: 1.35;
+  margin: 0 0 0.3rem;
+  color: var(--ink);
+}
+.saint-card .also,
+.saint-card .patron {
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+  margin: 0 0 0.4rem;
+}
+.saint-card .also { font-style: italic; }
+.saint-card .to-topic {
+  display: inline-block;
+  font-size: 0.72rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--gilt-ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 0.1rem;
+  margin-top: 0.2rem;
+}
+.saint-card .to-topic:hover { color: var(--rubric); border-bottom-color: currentColor; }
+
+/* A way through to the gallery, under the legend on the journey map. */
+.gallery-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--gilt-ink);
+  text-decoration: none;
+  border: 1px solid var(--rule);
+  padding: 0.5rem 0.9rem;
+  margin-bottom: var(--gap);
+}
+.gallery-link:hover { border-color: var(--gilt); background: var(--wash); }
+
 /* --- the Rite a briefing leads to -----------------------------------
    The same cross that marks a Rite on the journey map, standing over
    the page that prepares for it. */

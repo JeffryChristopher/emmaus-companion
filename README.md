@@ -95,6 +95,31 @@ flagged in the comment at the top of the file it appears in.
 
 ---
 
+## The Saints
+
+`saints.html` gathers the Saint for the Topic from every note that names
+one — thirty-four of the thirty-seven — and sets them out by the day the
+Church keeps their feast, so a half-remembered name can be found again.
+
+It writes nothing down. Every saint is read out of the note itself at the
+moment the page is drawn, in whichever language that note exists in, so the
+gallery can never drift from the session page.
+
+One thing is worth knowing. A translated note gives its feast day in its own
+script — "28 Januari", "1月28日", "ஜனவரி 28" — and the notes do not even label
+the fact consistently within one language. So a saint is always **dated from
+the English note**, which is complete and writes dates one way; only the words
+shown come from the chosen language. The month headings and the feast days
+themselves are asked of `Intl`, which is why Chinese reads 1月28日 rather than
+a month name with a numeral stuck on the end.
+
+**A saint whose note gives no feast day is not given one.** Topic 7 names St
+Athanasius without a feast; he stands in a group of his own at the end, under
+a heading that says so. Guessing at a saint's day in a catechetical book is
+not the app's to do.
+
+---
+
 ## Opening it
 
 **The simple way.** Double-click `index.html`. It opens in your browser and
@@ -119,6 +144,8 @@ App/
   session.html          one session, opened as session.html?topic=16
   serve.js              the little local server described above
 
+  saints.html           the Saints, by the day of their feast
+
   content/
     syllabus.js         the 42 sessions, four periods, and the Rites
     gates.js            the five stops that carry no candidate note
@@ -139,6 +166,8 @@ App/
 
   assets/js/
     i18n.js             the four languages and every word the app owns
+    saints.js           reading the saints out of the notes
+    gallery.js          drawing the Saints page
     app.js              theme, reading size, language, small helpers
     journal.js          saving what the candidate writes, on their device
     docx.js             writes the Word document, from scratch
