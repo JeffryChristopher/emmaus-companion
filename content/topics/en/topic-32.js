@@ -1,12 +1,12 @@
 /* ============================================================
-   TOPIC 32 — Church as Communion and Fellowship
+   TOPIC 32: Church as Communion and Fellowship
    Source: "PD RCIA Cdt Tp32 Church as Community n Fellowship.pdf"
 
    The teaching text below is transcribed VERBATIM from the note
    approved under the Imprimatur. Do not paraphrase, shorten or
    "improve" it. Proofread against the PDF before publishing.
 
-   NOTE ON THE NUMBER — the Syllabus Schema gives Topic 32 as
+   NOTE ON THE NUMBER. The Syllabus Schema gives Topic 32 as
    "Personal Transformation and Evangelization" and Topic 33 as
    "Communion in the Church, Fellowship". The candidates' notes are
    numbered the other way round, and it is the note's number that

@@ -1,5 +1,5 @@
 /* ============================================================
-   TOPIC 11 — God the Holy Spirit
+   TOPIC 11: God the Holy Spirit
    Source: "PD RCIA Cdt Tp11 God the Holy Spirit.pdf"
 
    The teaching text below is transcribed VERBATIM from the note

@@ -1,10 +1,10 @@
 /* ============================================================
-   தலைப்பு 16 — திருப்பலி விளக்கம்
+   தலைப்பு 16, திருப்பலி விளக்கம்
    மூலம்: "PD tRCIA Cdt Tp16 The Mass Explained.pdf"
 
    Transcribed VERBATIM from the Tamil note approved under the
    Imprimatur. Do not paraphrase, shorten or "improve" it, and do not
-   translate it from the English note — this is its own approved text.
+   translate it from the English note; this is its own approved text.
    Proofread against the PDF before publishing.
 
    Transcription note for the proofreader: Part C point 3 of the Tamil

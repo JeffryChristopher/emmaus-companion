@@ -1,5 +1,5 @@
 /* ============================================================
-   THE EMMAUS COMPANION — Prayers of the Journey
+   THE EMMAUS COMPANION: Prayers of the Journey
 
    Every prayer the notes set down, gathered in the order the
    candidate meets them, for the days between one session and the
@@ -11,7 +11,7 @@
    never drift from the session it came from, and a note transcribed
    into Mandarin tomorrow brings its prayer here with it.
 
-   The notes give a prayer a heading only sometimes — "Prayer for the
+   The notes give a prayer a heading only sometimes: "Prayer for the
    Sick", "Prayer for unity". Where a prayer is printed with no
    heading of its own, none is invented; the note it belongs to is
    named beneath it instead, which is both true and the way back to
@@ -25,7 +25,7 @@ var Prayers = (function () {
         : (typeof require !== 'undefined' ? require('./i18n.js') : null);
 
   /* Every prayer block in a topic, in the order it is read, with the
-     part it stands in — a retreat prays more than once. */
+     part it stands in; a retreat prays more than once. */
   function prayersOf(topic) {
     var found = [];
     (topic.parts || []).forEach(function (part) {

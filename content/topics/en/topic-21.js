@@ -1,5 +1,5 @@
 /* ============================================================
-   TOPIC 21 — Sacrament of Healing: Reconciliation
+   TOPIC 21: Sacrament of Healing: Reconciliation
    Source: "PD RCIA Cdt Tp21 Sac of Healing I - Reconciliation.pdf"
 
    The teaching text below is transcribed VERBATIM from the note
@@ -214,7 +214,7 @@ window.RCIA.topics.en[21] = {
         {
           type: 'journal',
           id: 'E',
-          prompt: 'Your own Examination of Conscience — write the checklist you will use.',
+          prompt: 'Your own Examination of Conscience, write the checklist you will use.',
           questions: [
             { n: '❧', text: 'The questions I will ask myself before I sleep, or before I go for Confession.' }
           ]

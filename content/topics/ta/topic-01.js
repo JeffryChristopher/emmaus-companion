@@ -1,11 +1,11 @@
 /* ============================================================
-   தலைப்பு 1 — வாழ்வின் அர்த்தத்திற்கான நமது தேடுதலும்
+   தலைப்பு 1, வாழ்வின் அர்த்தத்திற்கான நமது தேடுதலும்
                 கடவுளை அறியும் நமது திறனும்
    மூலம்: "PD tRCIA Cdt Tp01 Meaning in Life_Tamil.pdf"
 
    Transcribed VERBATIM from the Tamil note approved under the
    Imprimatur. Do not paraphrase, shorten or "improve" it, and do not
-   translate it from the English note — this is its own approved text.
+   translate it from the English note; this is its own approved text.
    Proofread against the PDF before publishing.
 
    Transcription notes for the proofreader:
@@ -13,10 +13,10 @@
        in Latin script, and is reproduced exactly as printed.
      · Point 4 of Part C carries no bold heading in the source, so it
        is set here as a single paragraph with no title.
-     · Part C point 6 prints a doubled opening bracket —
-       "((நித்திய வாழ்வுக்கான விதை)" — reproduced as printed.
+     · Part C point 6 prints a doubled opening bracket , 
+       "((நித்திய வாழ்வுக்கான விதை)", reproduced as printed.
      · The `marginal` notes and the questions of the Part E journal
-       are the app's own wording, not the note's — see README.md.
+       are the app's own wording, not the note's, see README.md.
 
    Journal ids and question counts MUST match content/topics/en/
    topic-01.js: a candidate's answers are stored against the topic,
@@ -110,7 +110,7 @@ window.RCIA.topics.ta[1] = {
             {
               title: 'கடவுளுக்கான நமது திறன், அவரைத் தேட நம்மை அழைக்கிறது (CCC 27-28)', joiner: ' – ',
               body: 'கடவுள் ஒவ்வொரு மனிதனுக்குள்ளும் தம்மையே நாடும் ஒரு தாகத்தை வைத்திருக்கிறார். நமது தேடலை எளிதாக்குவதற்காக அந்தத் தாகம் மனித இதயத்தில் எழுதப்பட்டுள்ளது, மேலும் கடவுள் நம்மைத் தம்மிடம் ஈர்ப்பதை ஒருபோதும் நிறுத்துவதில்லை. நாம் கடவுளுடன் பேசவும் அவருடன் ஐக்கியத்தில் இருக்கவும் அழைக்கப்படுகிறோம்.',
-              marginal: { mark: 'CCC', text: '27–28 — கடவுளை நாடும் தாகம் மனித இதயத்தில் எழுதப்பட்டுள்ளது.' }
+              marginal: { mark: 'CCC', text: '27–28: கடவுளை நாடும் தாகம் மனித இதயத்தில் எழுதப்பட்டுள்ளது.' }
             },
             {
               title: 'நம் வாழ்வில் இறைவனைக் கண்டறிதல்.', joiner: ' ',
@@ -127,7 +127,7 @@ window.RCIA.topics.ta[1] = {
             {
               title: 'கடவுளை அறிந்துகொள்ள நம்பிக்கை இரண்டாவது வழியாகும்', joiner: ' - ',
               body: 'நம்பிக்கை என்பது உங்களால் நிரூபிக்க முடியாத ஒன்றை நம்புவதாகும். அது, உங்கள் ஐம்புலன்களைக் கொண்டு நிரூபிக்க முடியாத ஒன்றை நம்புவதாகும். நம்பிக்கை என்பது ஒரு சுதந்திரமான மனிதச் செயல். நம்பிக்கை என்பது தனிப்பட்ட மற்றும் சமூக உறவாகும். “நம்பிக்கை என்பது முதலாவதாகக் கடவுளிடம் கொண்டுள்ள தனிப்பட்ட ஈடுபாடு... அதே நேரத்தில், கடவுள் வெளிப்படுத்திய முழு உண்மைக்கும் அளிக்கப்படும் ஒரு சுதந்திரமான ஒப்புதல்” (CCC 150).',
-              marginal: { mark: 'CCC', text: '150 — நம்பிக்கை என்பது கடவுளிடம் கொள்ளும் தனிப்பட்ட ஈடுபாடும், அவர் வெளிப்படுத்திய உண்மைக்கு அளிக்கும் சுதந்திரமான ஒப்புதலும் ஆகும்.' }
+              marginal: { mark: 'CCC', text: '150: நம்பிக்கை என்பது கடவுளிடம் கொள்ளும் தனிப்பட்ட ஈடுபாடும், அவர் வெளிப்படுத்திய உண்மைக்கு அளிக்கும் சுதந்திரமான ஒப்புதலும் ஆகும்.' }
             },
             {
               title: 'மனிதகுலத்திற்கு கடவுளின் வெளிப்பாடு', joiner: ' – ',
@@ -204,7 +204,7 @@ window.RCIA.topics.ta[1] = {
         {
           type: 'journal',
           id: 'E',
-          prompt: 'கடவுளுடன் உங்கள் நடைப்பயணம் — நீங்கள் பார்த்ததையும், நீங்கள் சொன்ன நன்றிச் செபத்தையும் எழுதுங்கள்.',
+          prompt: 'கடவுளுடன் உங்கள் நடைப்பயணம், நீங்கள் பார்த்ததையும், நீங்கள் சொன்ன நன்றிச் செபத்தையும் எழுதுங்கள்.',
           questions: [
             { n: '❧', text: 'நடைப்பயணத்தில் நான் என்ன பார்த்தேன், அதில் என்ன நோக்கத்தை உணர்ந்தேன்?' },
             { n: '❧', text: 'எனது சிறு நன்றிச் செபம்.' }

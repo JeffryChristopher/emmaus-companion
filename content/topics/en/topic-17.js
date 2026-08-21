@@ -1,5 +1,5 @@
 /* ============================================================
-   TOPIC 17 — Introduction to Sacraments and Sacramentals
+   TOPIC 17: Introduction to Sacraments and Sacramentals
    Source: "PD RCIA Cdt Tp17 Intro to Sacraments n Sacramentals.pdf"
 
    The teaching text below is transcribed VERBATIM from the note
@@ -14,8 +14,8 @@
      one list. No word is changed.
    · Point 7 is a three-column table of the matter and form of each
      sacrament, reproduced here column for column. Where a cell in
-     the note holds two lines — Holy Matrimony's "Exchange of vows"
-     and "“I do” (consent)" — they are joined by an em dash.
+     the note holds two lines, Holy Matrimony's "Exchange of vows"
+     and "“I do” (consent)", they are joined by an em dash.
    ============================================================ */
 
 window.RCIA = window.RCIA || {};
@@ -107,15 +107,15 @@ window.RCIA.topics.en[17] = {
               title: 'Why is faith in Jesus a prerequisite for the sacraments?', joiner: '\n',
               body: 'The sacraments are not magic. A sacrament can be effective only if one understands and accepts it in faith. Sacraments not only presuppose faith, but they also strengthen it and give expression to it (CCC 1122-1126).',
               afterBody: 'Christ has entrusted the sacraments to his Church. They are the sacraments “of the Church” to build up the Church. By celebrating the sacraments, the Church professes the faith that comes from the apostles.',
-              marginal: { mark: 'CCC', text: '1122–1126 — Faith and the sacraments; lex orandi, lex credendi.' }
+              marginal: { mark: 'CCC', text: '1122–1126: Faith and the sacraments; lex orandi, lex credendi.' }
             },
             {
               title: 'What are the 3 categories of sacraments?', joiner: '\n',
               body: 'The seven sacraments can be divided into three categories:',
               list: [
-                'Sacraments of Initiation — i. Baptism  ii. Confirmation  iii. Eucharist',
-                'Sacraments of Healing — iv. Penance & Reconciliation  v. Anointing of the Sick',
-                'Sacraments of Service — vi. Holy Orders  vii. Holy Matrimony'
+                'Sacraments of Initiation: i. Baptism  ii. Confirmation  iii. Eucharist',
+                'Sacraments of Healing: iv. Penance & Reconciliation  v. Anointing of the Sick',
+                'Sacraments of Service: vi. Holy Orders  vii. Holy Matrimony'
               ],
               listStyle: 'lettered'
             },
@@ -131,7 +131,7 @@ window.RCIA.topics.en[17] = {
                   ['Penance & Reconciliation (Lk 11:4, Mk 1:15, Jn 20:21-23, 2 Cr 5:18-20)', 'Sin', '“I absolve you from all your sins in the name of the Father, Son and the Holy Spirit.”'],
                   ['Anointing of the Sick (Mk 2:9-12, Mk 16:17-18, 1 Cr 12:7-9, Ja 5:14-15)', 'Oil', '“Through this holy anointing, may the Lord in his love and mercy help you with the grace of the Holy Spirit … May the Lord who saves you from sin save you and raise you up.”'],
                   ['Holy Orders (He 5:1, 4-6, Tt 1:5, Mt. 19:12, 1 Tm 1:4-14, 2 Tm 1:6)', 'Laying of hands/oil', 'Prayer of consecration'],
-                  ['Holy Matrimony (Gn 1:27, Ho 3:1, Mk 10:4-12)', 'Ring', 'Exchange of vows — “I do” (consent)']
+                  ['Holy Matrimony (Gn 1:27, Ho 3:1, Mk 10:4-12)', 'Ring', 'Exchange of vows, “I do” (consent)']
                 ]
               }
             },

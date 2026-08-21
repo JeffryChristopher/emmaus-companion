@@ -1,5 +1,5 @@
 /* ============================================================
-   TOPIC 12 — Nature and Purpose of the Catholic Church
+   TOPIC 12: Nature and Purpose of the Catholic Church
    Source: "PD RCIA Cdt Tp12 Nature and Purpose of Church.pdf"
 
    The teaching text below is transcribed VERBATIM from the note
@@ -8,7 +8,7 @@
 
    Transcription notes for the proofreader:
    · Part B question 1 ends with "What is the lesson in Jn 1:35-42?"
-     — a question that belongs to the Topic 1 note and appears to
+    , a question that belongs to the Topic 1 note and appears to
      have been left in by mistake. It is reproduced as printed.
    · Point 7 reads "Scared Scripture" for "Sacred Scripture";
      reproduced as printed.
@@ -87,12 +87,12 @@ window.RCIA.topics.en[12] = {
             {
               title: 'What is the Definition of “church”?', joiner: '\n',
               body: 'In Christian usage, the word "church" designates the liturgical assembly, but also the local community or the whole universal community of believers. These three meanings are inseparable. "The Church" is the People that God gathers in the whole world. She exists in local communities and is made real as a liturgical, above all a Eucharistic, assembly. She draws her life from the word and the Body of Christ and so herself becomes Christ’s Body (CCC 752).',
-              marginal: { mark: 'CCC', text: '752 — Assembly, local community and universal Church are inseparable.' }
+              marginal: { mark: 'CCC', text: '752: Assembly, local community and universal Church are inseparable.' }
             },
             {
               title: 'What is the Origin and birth of the Church?', joiner: '\n',
               body: 'The Church is a plan born in the Father’s heart, foreshadowed from the world’s beginning, prepared for in the Old Covenant, instituted by Christ Jesus, revealed by the Holy Spirit, perfected in glory (CCC 759-769).',
-              marginal: { mark: 'CCC', text: '759–769 — The origin, foundation and mission of the Church.' }
+              marginal: { mark: 'CCC', text: '759–769: The origin, foundation and mission of the Church.' }
             },
             {
               title: 'What are the Biblical images of the Church?', joiner: '\n',
@@ -117,7 +117,7 @@ window.RCIA.topics.en[12] = {
             {
               title: 'Can someone outside the Church be saved?', joiner: '\n',
               body: 'All salvation comes from Christ the Head through the Church, his Body; those who do not know Christ and his Church but do his will may also achieve eternal salvation. It is our obligation and a sacred right to evangelize all men (CCC 846-848).',
-              marginal: { mark: 'CCC', text: '846–848 — “Outside the Church there is no salvation”, rightly understood.' }
+              marginal: { mark: 'CCC', text: '846–848: “Outside the Church there is no salvation”, rightly understood.' }
             },
             {
               title: 'How does the Catholic Church Renew itself?', joiner: '\n',

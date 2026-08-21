@@ -1,5 +1,5 @@
 /* ============================================================
-   TOPIC 34 — Church and the Human Community
+   TOPIC 34: Church and the Human Community
    Source: "PD RCIA Cdt Tp34 Church n Human Community.pdf"
 
    The teaching text below is transcribed VERBATIM from the note

@@ -1,5 +1,5 @@
 /* ============================================================
-   TOPIC 22 — Sacrament of Healing II: Anointing of the Sick
+   TOPIC 22: Sacrament of Healing II: Anointing of the Sick
    Source: "PD RCIA Cdt Tp22 Sac of Healing II - Anointing of the
    Sick.pdf"
 
@@ -9,7 +9,7 @@
 
    Transcription note for the proofreader: in Part A the source
    reads "In illness, man humanity experiences his powerlessness"
-   — reproduced here exactly as printed.
+  , reproduced here exactly as printed.
 
    The questions under journal E are the APP's, drawn from the
    note's own activity and reflection instructions.

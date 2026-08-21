@@ -1,5 +1,5 @@
 /* ============================================================
-   THE EMMAUS COMPANION — Bible link check
+   THE EMMAUS COMPANION: Bible link check
    Run:  node tools/check-bible-links.js  [en|ms|zh|ta] …
 
    Fetches the page every entry in the EDITIONS table of
@@ -93,23 +93,23 @@ function loose(s) {
 }
 
 async function checkEnglish() {
-  console.log('\nNew Jerusalem Bible — scrutatio.it');
+  console.log('\nNew Jerusalem Bible; scrutatio.it');
   await inBatches(SLUGS, 2, async (slug) => {
     const url = Scripture.url(pretty(slug) + ' 1:1', 'en');
     if (!url) { report(false, 'en ' + slug, 'no url built'); return; }
     const { status, text } = await grab(url);
     if (status !== 200) { report(false, 'en ' + slug, 'HTTP ' + status); return; }
-    /* the page names its own book in the heading — under that
+    /* the page names its own book in the heading, under that
        edition's own name for it, where it differs from the app's */
     const site = (EDITIONS[slug].siteName || {}).en || englishName(slug);
     const body = loose(text.slice(0, 40000));
     report(body.indexOf(loose(site)) > -1, 'en ' + slug,
-      'page does not name "' + site + '" — ' + url);
+      'page does not name "' + site + '"; ' + url);
   });
 }
 
 async function checkTamil() {
-  console.log('\nஅருள்வாக்கு — arulvakku.com');
+  console.log('\nஅருள்வாக்கு; arulvakku.com');
   await inBatches(SLUGS, 3, async (slug) => {
     const url = Scripture.url(pretty(slug) + ' 1:1', 'ta');
     if (!url) { report(false, 'ta ' + slug, 'no url built'); return; }
@@ -117,12 +117,12 @@ async function checkTamil() {
     if (status !== 200) { report(false, 'ta ' + slug, 'HTTP ' + status); return; }
     const want = EDITIONS[slug].name.ta;
     report(text.indexOf(want) > -1, 'ta ' + slug,
-      'page does not name "' + want + '" — ' + url);
+      'page does not name "' + want + '"; ' + url);
   });
 }
 
 async function checkChinese() {
-  console.log('\n思高本圣经 — ccccn.org');
+  console.log('\n思高本圣经; ccccn.org');
   await inBatches(SLUGS, 3, async (slug) => {
     const url = Scripture.url(pretty(slug) + ' 1:1', 'zh');
     if (!url) { report(false, 'zh ' + slug, 'no url built'); return; }
@@ -130,7 +130,7 @@ async function checkChinese() {
     if (status !== 200) { report(false, 'zh ' + slug, 'HTTP ' + status); return; }
     const want = EDITIONS[slug].name.zh;
     report(text.indexOf(want) > -1, 'zh ' + slug,
-      'page does not name "' + want + '" — ' + url);
+      'page does not name "' + want + '"; ' + url);
 
     /* Whatever anchor the table promises for this book must be on the
        page. A book declared anchorless is expected to have none. */
@@ -151,7 +151,7 @@ async function checkChinese() {
 /* AVB is client-rendered; these are the checks that can be made
    without a browser. The names themselves were read off the site. */
 function checkMalay() {
-  console.log('\nAlkitab Versi Borneo — alkitabversiborneo.org (table check)');
+  console.log('\nAlkitab Versi Borneo; alkitabversiborneo.org (table check)');
   const withId = SLUGS.filter(s => EDITIONS[s].ms);
   const without = SLUGS.filter(s => !EDITIONS[s].ms);
 

@@ -1,5 +1,5 @@
 /* ============================================================
-   TOPIC 35 — Dignity and Vocation of the Laity
+   TOPIC 35: Dignity and Vocation of the Laity
    Source: "PD RCIA Cdt Tp35 Dignity n Vocation of Laity.pdf"
 
    The teaching text below is transcribed VERBATIM from the note
@@ -8,8 +8,8 @@
 
    Transcription notes for the proofreader:
    · Part C of this note is headed with a Scripture reference rather
-     than the topic title — "1 Corinthians 12:1-30 (vv 1-11 –
-     Spiritual Gifts; vv 12-30 – One Body with Many Members)" — and
+     than the topic title, "1 Corinthians 12:1-30 (vv 1-11 –
+     Spiritual Gifts; vv 12-30 – One Body with Many Members)", and
      is kept that way, as a link to the chapter.
    · This note has seven teaching points, not the usual ten.
    · Part B prints the same passage and the same three questions as

@@ -1,5 +1,5 @@
 /* ============================================================
-   TOPIC 7 — Introduction to the Creed
+   TOPIC 7: Introduction to the Creed
    Source: "PD RCIA Cdt Tp07 Intro to the Creed.pdf"
 
    The teaching text below is transcribed VERBATIM from the note

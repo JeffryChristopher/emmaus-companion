@@ -1,5 +1,5 @@
 /* ============================================================
-   TOPIC 14 — The Four Last Things (I Believe in Life Everlasting)
+   TOPIC 14: The Four Last Things (I Believe in Life Everlasting)
    Source: "PD RCIA Cdt Tp14 The Four Last Things (I Believe in
    Life Everlasting).pdf"
 
@@ -8,7 +8,7 @@
    "improve" it. Proofread against the PDF before publishing.
 
    Transcription note for the proofreader: in Part D the source
-   prints "Patron simplest mercy" — reproduced here exactly as
+   prints "Patron simplest mercy", reproduced here exactly as
    printed. If the Commission corrects the source, this file should
    be corrected to match it.
    ============================================================ */
@@ -82,17 +82,17 @@ window.RCIA.topics.en[14] = {
             {
               title: 'How can we make sense of death?', joiner: '\n',
               body: 'Death is an inevitable part of our human existence. It marks the end of our earthly life and the separation of our soul from our body. The Catechism teaches that death is a consequence of sin and reminds us of the need to be prepared for the moment when we will face God’s judgment (CCC 1008-1014).',
-              marginal: { mark: 'CCC', text: '1008–1014 — Death, and the Christian meaning of dying.' }
+              marginal: { mark: 'CCC', text: '1008–1014: Death, and the Christian meaning of dying.' }
             },
             {
               title: 'Will every man be brought to judgment after death?', joiner: '\n',
               body: 'After death, each person will face the particular judgment, where our souls will be judged by God based on our actions and the state of our souls at the time of death. The Catechism teaches that this judgment will determine our eternal destiny, either in heaven, purgatory, or hell (CCC 1021-1022).',
-              marginal: { mark: 'CCC', text: '1021–1022 — The particular judgment.' }
+              marginal: { mark: 'CCC', text: '1021–1022: The particular judgment.' }
             },
             {
               title: 'What is heaven?', joiner: '\n',
               body: 'Heaven is the ultimate goal of our existence. It is the state of eternal happiness and union with God, where we will experience the fullness of His love and enjoy eternal life in His presence. The Catechism teaches that heaven is the fulfilment of our deepest desires and the ultimate reward for a life lived in accordance with God’s will (CCC 1023-1029).',
-              marginal: { mark: 'CCC', text: '1023–1029 — Heaven, the perfect life with the Blessed Trinity.' }
+              marginal: { mark: 'CCC', text: '1023–1029: Heaven, the perfect life with the Blessed Trinity.' }
             },
             {
               title: 'What is hell?', joiner: '\n',
@@ -123,7 +123,7 @@ window.RCIA.topics.en[14] = {
             {
               title: 'Will the world come to an end?', joiner: '\n',
               body: 'At the end of time, God will create a new heaven and a new earth. Evil will no longer have any power or attractiveness. The redeemed will stand face to face with God — as his friends. Their yearning for peace and justice will be fulfilled. To behold God will be their blessedness. The Triune God will dwell among them and wipe away every tear from their eyes; there will be no more death, sorrow, lamentation, or trouble (CCC 1042-1050, 1060).',
-              marginal: { mark: 'CCC', text: '1042–1050, 1060 — The new heaven and the new earth.' }
+              marginal: { mark: 'CCC', text: '1042–1050, 1060: The new heaven and the new earth.' }
             }
           ]
         }

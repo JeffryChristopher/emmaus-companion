@@ -1,5 +1,5 @@
 /* ============================================================
-   THE EMMAUS COMPANION — Building the Word document's contents
+   THE EMMAUS COMPANION: Building the Word document's contents
    Penang Diocesan Catechetical Commission
 
    Pure logic: given a topic and the candidate's answers, work out
@@ -9,7 +9,7 @@
 
    The questions and the closing prayer are the note's own words, in
    whichever language the note was written; everything the document
-   adds around them — "Name:", "Session date:", "(not yet written)" —
+   adds around them ("Name:", "Session date:", "(not yet written)")
    is taken from Lang, so the page the candidate saves reads in one
    voice.
    ============================================================ */
@@ -57,7 +57,7 @@ var EmmausExport = (function () {
 
       blocks.push({
         type: 'rubric',
-        text: part.letter + ' · ' + part.name + (part.ref ? ' — ' + part.ref : '')
+        text: part.letter + ' · ' + part.name + (part.ref ? ' · ' + part.ref : '')
       });
 
       journals.forEach(function (journal) {
@@ -93,7 +93,7 @@ var EmmausExport = (function () {
   /* The full specification handed to EmmausDocx.build().
 
      options.lang     the language the candidate is reading in
-     options.noteLang the language this note actually exists in — the
+     options.noteLang the language this note actually exists in: the
                       same, unless it has not been transcribed yet  */
   function buildSpec(topic, answers, options) {
     options = options || {};
@@ -141,13 +141,17 @@ var EmmausExport = (function () {
   }
 
   /* Windows, macOS and Android all refuse some characters in a file
-     name; the note's own title may be in any script, which is fine —
+     name. The note's own title may be in any script, which is fine;
      only the forbidden punctuation is taken out. */
   function fileNameFor(topic, name, code) {
     var candidate = (name || '').trim();
     var raw = L.t('topicLine', { n: topic.topic, title: topic.title }, code) +
-              (candidate ? ' — ' + candidate : '');
-    return raw.replace(/[\\/:*?"<>|]/g, '').replace(/\s+/g, ' ').trim() + '.docx';
+              (candidate ? ' - ' + candidate : '');
+    /* A colon cannot go into a file name, so the one in "Topic 16: The
+       Mass Explained" becomes a dash rather than simply vanishing. */
+    return raw.replace(/:\s*/g, ' - ')
+              .replace(/[\\\/*?"<>|]/g, '')
+              .replace(/\s+/g, ' ').trim() + '.docx';
   }
 
   return {

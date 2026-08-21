@@ -1,5 +1,5 @@
 /* ============================================================
-   TOPIC 5 — Bible Timeline II
+   TOPIC 5: Bible Timeline II
    Source: "PD RCIA Cdt Tp05 Bible Timeline II.pdf"
 
    The teaching text below is transcribed VERBATIM from the note
@@ -163,7 +163,7 @@ window.RCIA.topics.en[5] = {
         {
           type: 'journal',
           id: 'E',
-          prompt: 'Your personal covenant with Jesus — write it here.',
+          prompt: 'Your personal covenant with Jesus, write it here.',
           questions: [
             { n: '❧', text: 'The promises I make to Jesus in my covenant with Him.' },
             { n: '❧', text: 'What will it cost me to turn away from the broad way, and what help will I ask of God?' }

@@ -1,5 +1,5 @@
 /* ============================================================
-   TOPIC 18 — Spiritual Preparation for Christmas
+   TOPIC 18: Spiritual Preparation for Christmas
    Source: "PD RCIA Cdt Tp18 Spiritual Preparation for Christmas.pdf"
 
    The teaching text below is transcribed VERBATIM from the note
@@ -7,8 +7,8 @@
    "improve" it. Proofread against the PDF before publishing.
 
    This note does not follow the ordinary five-part shape. It is a
-   single page in three parts — A) Preparation, B) Read and Reflect,
-   C) Pre-Christmas Fellowship — with no Topic of the Day, no Saint
+   single page in three parts, A) Preparation, B) Read and Reflect,
+   C) Pre-Christmas Fellowship, with no Topic of the Day, no Saint
    and no Personal Activity. Its parts are kept exactly as printed.
    ============================================================ */
 

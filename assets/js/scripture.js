@@ -1,9 +1,9 @@
 /* ============================================================
-   THE EMMAUS COMPANION — Scripture links
+   THE EMMAUS COMPANION: Scripture links
    Penang Diocesan Catechetical Commission
 
-   Turns a reference as it is printed in the notes — "John 6:52–63",
-   "Lk 15:11-32", "Ep 1:9, 2:18" — into a link to that chapter in a
+   Turns a reference as it is printed in the notes; "John 6:52–63",
+   "Lk 15:11-32", "Ep 1:9, 2:18", into a link to that chapter in a
    Bible the candidate can actually read, in their own language:
 
      English   New Jerusalem Bible      scrutatio.it
@@ -17,10 +17,10 @@
    Only the chapter is linked, never a verse range: a candidate lands
    on the right chapter and reads the passage from there. The Chinese
    edition puts a whole book on one page, so those links carry an
-   anchor to reach the chapter — see `zhAnchor` below.
+   anchor to reach the chapter; see `zhAnchor` below.
 
-   The notes are not always tidy — Topic 29 is headed "Matthew The
-   Parable of the Prodigal Son - Lk 15:11-32." — so the parser looks
+   The notes are not always tidy; Topic 29 is headed "Matthew The
+   Parable of the Prodigal Son - Lk 15:11-32.", so the parser looks
    for the first book name that is actually followed by a chapter
    number, rather than trusting the first word it sees.
 
@@ -125,7 +125,7 @@ var Scripture = (function () {
        ms  Alkitab Versi Borneo's own id. AVB is a SIXTY-SIX book
            Bible: it has no deuterocanonical books, so those are 0
            here and simply do not become links in Malay.
-       zh  the file in the 思高本, which is one file per book — except
+       zh  the file in the 思高本, which is one file per book, except
            the Psalter, which it splits into its five traditional
            books, so that entry is a list of [from, to, file].
        ta  அருள்வாக்கு's own id (1–75; it counts the Greek Esther and
@@ -302,14 +302,14 @@ var Scripture = (function () {
   }
 
   /* The 思高本 puts a whole book in one page, so the link needs an
-     anchor to land on the right chapter — and the anchors are not laid
+     anchor to land on the right chapter, and the anchors are not laid
      the same way in every book. Of its 77 pages, 71 mark every verse
      ("1:1"), three mark chapters with a Chinese numeral ("六"), and
      three carry no anchor at all. `zhAnchor` records which, so the
      link is right rather than merely plausible; anything unmarked uses
      the verse form. A fragment a page does not have is ignored by the
      browser, so the worst case is landing at the top of the right
-     book — never on the wrong one. */
+     book; never on the wrong one. */
   var CN_ONES = ['', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
 
   function cnNumeral(n) {
@@ -414,7 +414,10 @@ var Scripture = (function () {
 
   function parse(reference) {
     if (!reference) { return null; }
-    var text = String(reference).replace(/[–—]/g, '-');
+    /* An en or em dash between chapter and verse is normalised to a
+       hyphen. The em dash is written as an escape so that no literal
+       one appears anywhere in the app's own source. */
+    var text = String(reference).replace(/[\u2013\u2014]/g, '-');
 
     /* Run twice: first insisting on a "chapter:verse" colon, which is how
        every reference in the notes is written, then more loosely. */
@@ -444,7 +447,7 @@ var Scripture = (function () {
   }
 
   /* The address of that chapter in the language's own Bible, or null if
-     the reference could not be understood — or if that Bible does not
+     the reference could not be understood, or if that Bible does not
      carry the book at all, which is the case for the deuterocanonical
      books in the Malay AVB. Nothing is ever linked to a page that does
      not hold the passage. */
@@ -458,7 +461,7 @@ var Scripture = (function () {
     return bible.url(edition, found.chapter);
   }
 
-  /* "John 6" in English, "யோவான் 6" in Tamil — what the link says it
+  /* "John 6" in English, "யோவான் 6" in Tamil, what the link says it
      will open, named as that edition names it. */
   function chapterLabel(reference, lang) {
     var found = parse(reference);
@@ -468,7 +471,7 @@ var Scripture = (function () {
     return (localised || found.book) + ' ' + found.chapter;
   }
 
-  /* "New Jerusalem Bible", "அருள்வாக்கு" — the edition being linked to. */
+  /* "New Jerusalem Bible", "அருள்வாக்கு", the edition being linked to. */
   function bibleName(lang) {
     return (BIBLES[lang] || BIBLES[DEFAULT_LANG]).name;
   }

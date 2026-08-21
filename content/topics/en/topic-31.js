@@ -1,5 +1,5 @@
 /* ============================================================
-   TOPIC 31 — The ‘Our Father’ Prayer – Part 2
+   TOPIC 31: The ‘Our Father’ Prayer – Part 2
    Source: "PD RCIA Cdt Tp31 The _Our Father_ Prayer II.pdf"
 
    The teaching text below is transcribed VERBATIM from the note
@@ -7,7 +7,7 @@
    "improve" it. Proofread against the PDF before publishing.
 
    Transcription note for the proofreader: Part A opens "In the
-   picture above, we see two people praying" — the drawing is
+   picture above, we see two people praying", the drawing is
    described in the `plate` block below and is still to be added.
    Point 2 prints a stray closing quotation mark in "This petition”
    Give us this day our daily bread”"; reproduced as printed.
@@ -197,7 +197,7 @@ window.RCIA.topics.en[31] = {
           type: 'journal',
           id: 'E',
           questions: [
-            { n: '❧', text: 'My bad habits — and the one or two I will try to overcome.' },
+            { n: '❧', text: 'My bad habits, and the one or two I will try to overcome.' },
             { n: '❧', text: 'The good habit I will put in their place, and the help I will ask of God.' }
           ]
         }

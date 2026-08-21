@@ -1,5 +1,5 @@
 /* ============================================================
-   TOPIC 33 — Personal Transformation and Evangelization
+   TOPIC 33: Personal Transformation and Evangelization
    Source: "PD RCIA Cdt Tp33 Personal Transformation n
    Evangelization.pdf"
 
@@ -7,7 +7,7 @@
    approved under the Imprimatur. Do not paraphrase, shorten or
    "improve" it. Proofread against the PDF before publishing.
 
-   NOTE ON THE NUMBER — the Syllabus Schema gives this topic as
+   NOTE ON THE NUMBER. The Syllabus Schema gives this topic as
    number 32; the candidates' note is numbered 33, and the note's
    number is the one printed for the candidate, so it is followed
    here. See the comment in content/syllabus.js. This topic

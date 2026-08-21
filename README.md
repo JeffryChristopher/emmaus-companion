@@ -10,13 +10,13 @@ do not follow the ordinary five-part shape and are kept as they are printed:
 
 | Topic | Shape |
 |---|---|
-| 18 — Spiritual Preparation for Christmas | one page: Preparation, Read and Reflect, Pre-Christmas Fellowship |
-| 29 — Prodigal Son Retreat | a retreat: A–D, no Saint, journal-first |
-| 37 — Life in the Holy Spirit Retreat | a retreat in six parts, A–F, no Topic of the Day and no Saint |
+| 18 · Spiritual Preparation for Christmas | one page: Preparation, Read and Reflect, Pre-Christmas Fellowship |
+| 29 · Prodigal Son Retreat | a retreat: A–D, no Saint, journal-first |
+| 37 · Life in the Holy Spirit Retreat | a retreat in six parts, A–F, no Topic of the Day and no Saint |
 
 **The other five stops do not open.** The Welcome, the two briefings, the
 preparation for the Sacraments of Initiation and the Day of Recollection carry
-no candidate note — the Commission has issued none — so they are named on the
+no candidate note (the Commission has issued none), so they are named on the
 road and left at that. There is nothing behind them to read, and the app does
 not write anything in the Commission's place.
 
@@ -43,7 +43,7 @@ notice in the chosen language saying so. The journey map marks those stops the
 same way. Nobody is ever shown an empty page.
 
 **Changing language never costs a candidate their writing.** Answers are stored
-against the topic and the journal id — never against the language — so a
+against the topic and the journal id, never against the language, so a
 reflection typed while reading in English is still there, beside the same
 question, when the page is read in Tamil. `check-content.js` enforces this: a
 translated note must ask the same questions, under the same journal ids, as the
@@ -55,11 +55,11 @@ Two kinds of words live in this app, and they are governed by different rules.
 
 1. **The session notes** are the Commission's, approved under the Imprimatur in
    each language. They are transcribed from the approved PDF for that language
-   and **never translated by this app** — not from the English note, not by
+   and **never translated by this app**, not from the English note, not by
    anyone editing the code. They live in `content/topics/<code>/topic-NN.js`.
 
-2. **The app's own words** — buttons, notices, the privacy seal, the headings
-   of the Word document — are the app's, and live in `assets/js/i18n.js`.
+2. **The app's own words** (buttons, notices, the privacy seal, the headings
+   of the Word document) are the app's, and live in `assets/js/i18n.js`.
 
 One thing sits between the two and should be looked at by the Commission: the
 **names of the four periods** ("Why be a Catholic?" and the rest) and the short
@@ -69,7 +69,7 @@ non-English page carries a line in its colophon saying exactly this. The Rites
 are left in English throughout, as the schema names them.
 
 A handful of things inside the translated content files are also the app's
-words rather than the note's — the `marginal` summaries beside a teaching
+words rather than the note's: the `marginal` summaries beside a teaching
 point, and the journal prompts the English note does not print either. Each is
 flagged in the comment at the top of the file it appears in.
 
@@ -78,7 +78,7 @@ flagged in the comment at the top of the file it appears in.
 ## The Saints
 
 `saints.html` gathers the Saint for the Topic from every note that names
-one — thirty-four of the thirty-seven — and sets them out by the day the
+one (thirty-four of the thirty-seven) and sets them out by the day the
 Church keeps their feast, so a half-remembered name can be found again.
 
 It writes nothing down. Every saint is read out of the note itself at the
@@ -86,7 +86,7 @@ moment the page is drawn, in whichever language that note exists in, so the
 gallery can never drift from the session page.
 
 One thing is worth knowing. A translated note gives its feast day in its own
-script — "28 Januari", "1月28日", "ஜனவரி 28" — and the notes do not even label
+script ("28 Januari", "1月28日", "ஜனவரி 28"), and the notes do not even label
 the fact consistently within one language. So a saint is always **dated from
 the English note**, which is complete and writes dates one way; only the words
 shown come from the chosen language. The month headings and the feast days
@@ -102,8 +102,7 @@ not the app's to do.
 
 ## The Prayers
 
-`prayers.html` gathers every prayer the notes set down — seven of them —
-in the order the road is walked, for the days between one session and the
+`prayers.html` gathers every prayer the notes set down (seven of them) in the order the road is walked, for the days between one session and the
 next. Like the Saints, it reads rather than stores, so a prayer transcribed
 into Mandarin tomorrow appears here in Mandarin with no further work. The
 fallback is per prayer, not per page: a candidate reading in Tamil sees
@@ -113,7 +112,7 @@ Topic 1's prayer in Tamil and the other six in English, never an empty card.
 the seven have none; the note they come from is named beneath them instead,
 which is both true and the way back to the page they came from. Topic 1's
 prayer is headed "Example", because that is the word the note prints above
-it — it is an example of a prayer of thanksgiving, not a title.
+it: it is an example of a prayer of thanksgiving, not a title.
 
 They are gathered in session order rather than by topic number, because the
 two differ in the Mystagogy, and the road is what the candidate walks.
@@ -126,7 +125,7 @@ and no card is broken across a page.
 ## Opening it
 
 **The simple way.** Double-click `index.html`. It opens in your browser and
-works — no installation, no internet needed except for the fonts.
+works, no installation, no internet needed except for the fonts.
 
 **The way it will look on a phone.** From this folder:
 
@@ -143,7 +142,7 @@ your phone using your computer's IP address while on the same wi-fi.
 
 ```
 App/
-  index.html            the journey map — all 42 sessions
+  index.html            the journey map, all 42 sessions
   session.html          one session, opened as session.html?topic=16
   serve.js              the little local server described above
 
@@ -154,7 +153,7 @@ App/
     syllabus.js         the 42 sessions, four periods, and the Rites
     topics/
       en/               one folder per language, one file per topic
-        topic-01.js     — THE APPROVED TEXT, in that language
+        topic-01.js: THE APPROVED TEXT, in that language
         …               topic-01 … topic-37, all 37
         topic-37.js
       ms/  topic-01.js, topic-16.js
@@ -201,8 +200,8 @@ window.RCIA.topics.ta[19] = { … };
 ```
 
 3. Replace the text with the approved note **for that language**, word for
-   word. Do not paraphrase, tidy or shorten it — the Imprimatur covers the text
-   as approved — and do not translate it from the English note; use the PDF the
+   word. Do not paraphrase, tidy or shorten it (the Imprimatur covers the
+   text as approved), and do not translate it from the English note; use the PDF the
    Commission approved in that language. Where the printed note contains an
    error, transcribe it as printed and note it in the comment at the top of the
    file, as `en/topic-01.js` and `ta/topic-29.js` do.
@@ -224,7 +223,7 @@ node tools/check-content.js
 
 The Tamil PDFs cannot simply be copied out of. Word wrote a broken `/ToUnicode`
 map for the Nirmala UI subsets, so the pre-base vowel signs come out shifted by
-one glyph — "தேடுதலும்" extracts as "ததுதலும்" — and the eight files printed through
+one glyph ("தேடுதலும்" extracts as "ததுதலும்"), and the eight files printed through
 "Microsoft: Print To PDF" carry no ligature mappings at all. Text copied
 straight out of them is subtly, invisibly wrong. Rebuild the map from the
 embedded fonts' own glyph names before transcribing anything, and check the
@@ -232,7 +231,7 @@ result has no stray characters from the Tamil symbol block (U+0BD6–U+0BFF).
 
 ### Adding a language
 
-1. Add an entry to `LANGS` in `assets/js/i18n.js` — its code, its name in its
+1. Add an entry to `LANGS` in `assets/js/i18n.js`: its code, its name in its
    own script, its BCP-47 tag, its `Intl` locale, and the Google Fonts family
    if the Latin stack will not carry it.
 2. Add a block to `STRINGS` with **every key the English block has**. The
@@ -267,12 +266,12 @@ Each part (A, B, C…) holds a list of blocks. The available blocks are:
 A `points` item may carry, after its opening sentence and in this order:
 `table`, `afterBody` (a further paragraph), `list`, `afterList`, `list2`. The
 last two exist because a printed note sometimes breaks one lettered list with a
-heading and then carries on — Topic 3 runs a) to d), prints a heading, and
+heading and then carries on: Topic 3 runs a) to d), prints a heading, and
 resumes at e), which is what `list2Start: 5` is for. A `list` may be `lettered`,
 `numbered` or plain, and takes a `start`.
 
 Some printed points answer their own question with nothing but a list or a
-table. Those carry no `body`, and the checker allows it — inventing a sentence
+table. Those carry no `body`, and the checker allows it; inventing a sentence
 to fill the gap would not be transcription.
 
 ### Bible links
@@ -298,7 +297,7 @@ catechism references stay as plain text.
 
 **Alkitab Versi Borneo is a sixty-six book Bible.** It has no Tobit, Judith,
 Wisdom, Sirach, Baruch or Maccabees. A reference to one of those is left as
-plain text in Malay rather than pointed at a page that does not hold it — the
+plain text in Malay rather than pointed at a page that does not hold it; the
 other three editions are complete Catholic Bibles and link it normally. The
 checker asserts this, so nobody can quietly "fix" it into a wrong link.
 
@@ -310,7 +309,7 @@ guessed**, and there is a tool that proves it:
 node tools/check-bible-links.js
 ```
 
-That fetches all 73 books of all four editions — nearly 900 checks — and fails
+That fetches all 73 books of all four editions (nearly 900 checks) and fails
 if a page no longer holds the book it claims. It is the only tool here that
 needs the internet, and it is deliberately separate from `check-content.js`:
 run it when the table changes, or every few months in case a site is
@@ -319,13 +318,13 @@ reorganised. It can be pointed at one edition at a time
 
 Two wrinkles are recorded in that table rather than left to chance. The 思高本
 puts a whole book on one page, so its links carry an anchor to reach the
-chapter — and of its 77 pages, 71 mark every verse, three mark chapters with a
+chapter, and of its 77 pages, 71 mark every verse, three mark chapters with a
 Chinese numeral, and three carry no anchor at all; `zhAnchor` says which. It
 also splits the Psalter into its five traditional books, so that entry is a list
 of chapter ranges.
 
-**A translated note names its books in its own language** — "Yohanes",
-"யோவான்", "若望福音" — which the parser deliberately does not try to read: one
+**A translated note names its books in its own language**; "Yohanes",
+"யோவான்", "若望福音", which the parser deliberately does not try to read: one
 parser, in one language, serves all four editions. Give those references the
 English chapter in a `passage` field and the link resolves while the printed
 reference stays exactly as approved:
@@ -344,8 +343,7 @@ books (`1 Corinthians`, `1Cor`) and multi-word titles (`Song of Songs`). Only th
 chapter is linked, never a verse range: a candidate lands on the right chapter
 and reads the passage from there.
 
-Where a printed heading would mislead the parser, name the passage explicitly —
-Topic 29 does this, because its heading reads "Matthew …  Lk 15:11-32":
+Where a printed heading would mislead the parser, name the passage explicitly: Topic 29 does this, because its heading reads "Matthew …  Lk 15:11-32":
 
 ```js
 { type: 'pericope',
@@ -359,14 +357,14 @@ wrong, it is one line in the `BOOKS` table in `scripture.js`; if a site
 reorganises, it is one line in `EDITIONS`.
 
 In a `points` item, `title` and `body` are joined by `joiner`, which reproduces
-the punctuation of the printed note exactly — a space, an en dash `" – "`, or
+the punctuation of the printed note exactly: a space, an en dash `" – "`, or
 `"\n"` to start a new paragraph.
 
 Every `journal` block needs an **`id` that is unique within the topic**, and
 the **same ids and question counts in every language**. Answers are stored
 under `id:questionIndex` against the topic number alone, so changing an id
-after candidates have started writing — or letting a translation ask a
-different number of questions — would orphan their answers. The checker
+after candidates have started writing (or letting a translation ask a
+different number of questions) would orphan their answers. The checker
 verifies both.
 
 ---
@@ -380,12 +378,11 @@ device**. There is no server, no account, no login and nothing is ever uploaded.
 - The journey map lists the sessions already written in, so a candidate can go
   back to one easily.
 - Clearing the browser's site data erases what is held in the app. Nothing else
-  does — and the Word documents already saved are untouched.
+  does, and the Word documents already saved are untouched.
 
 There is deliberately **no separate backup file**. The candidate saves a Word
 document at the end of each session, and that document is the copy they keep.
-Note the one consequence: the Word document is an archive, not a way back in —
-answers cannot be read from a `.docx` into the app again. If a candidate clears
+Note the one consequence: the Word document is an archive, not a way back in; answers cannot be read from a `.docx` into the app again. If a candidate clears
 their browser data mid-journey, their saved documents are safe but the app
 starts empty. Encourage saving the document at the end of every session.
 
@@ -401,14 +398,14 @@ left unanswered appear as *(not yet written)*, so the sheet is still useful to
 bring to a Personal Accompanier.
 
 It is written in the candidate's language, headings and all. Word keeps three
-font slots per run — Latin, East Asian and complex script — and the file names
+font slots per run (Latin, East Asian and complex script), and the file names
 all three, so a Tamil heading over an English note still renders every
 character. Chinese is set in SimSun and Tamil in Nirmala UI, both of which ship
 with Windows; the letter-spaced small capitals of the Latin headings are
 dropped for those two scripts, where they mean nothing and can spoil the
 shaping of a conjunct.
 
-Sample documents — one per language per topic — are in `tools/sample/`, rebuilt
+Sample documents (one per language per topic) are in `tools/sample/`, rebuilt
 every time the checker runs.
 
 ---
@@ -418,7 +415,7 @@ every time the checker runs.
 - **The name.** *The Emmaus Companion* is a proposal, not a decision. It appears
   in `index.html`, `session.html` and the document header in `export.js`.
 - **The pictures the notes print.** Nine of the English notes carry a picture
-  that a question then depends on — the old photographs of Penang in Topic 3,
+  that a question then depends on: the old photographs of Penang in Topic 3,
   the people of many religions at prayer in Topic 6, the linear-and-cyclical
   time diagram in Topic 15, and so on. Those pages carry a `plate` describing
   the picture and naming the file to save it as, so the question still makes
@@ -432,11 +429,11 @@ every time the checker runs.
 - **Saint portraits and the retreat picture.** The plates are built to look
   right without a picture. To add one, put the file in `assets/img/saints/` and
   name it in the topic's `saint` block (`image: 'assets/img/saints/aquinas.jpg'`).
-  Use public-domain sacred art — Wikimedia Commons is the usual source.
+  Use public-domain sacred art; Wikimedia Commons is the usual source.
 - **Scripture text.** The app reproduces only the references and short excerpts
   the approved notes already contain, and links out to a Bible for the rest.
   Embedding full passages would need the publisher's permission.
-- **Which Malay Bible.** *Open — awaiting the catechist's decision.* Alkitab
+- **Which Malay Bible.** *Open: awaiting the catechist's decision.* Alkitab
   Versi Borneo is the one non-Catholic edition of the four, and has no Tobit,
   Judith, Wisdom, Sirach, Baruch or Maccabees; references to those are left
   unlinked in Malay. Now that all thirty-seven English notes are in, this can
@@ -452,7 +449,7 @@ every time the checker runs.
   view needs internet. Noto Serif Tamil and Noto Serif SC are fetched only when
   Tamil or Mandarin is chosen, so nobody pays for a script they do not read. For
   the offline app in Phase III all of them should be saved into `assets/` and
-  served from there — the two Noto families are large, so subset them.
+  served from there; the two Noto families are large, so subset them.
 - **The period names in each language.** They are the app's translations of an
   English-only schema and want the Commission's eye. They are all in one place:
   `periods` in `assets/js/i18n.js`.
@@ -478,7 +475,7 @@ every time the checker runs.
 
 ## Putting it on the web
 
-The app is a plain static site, so GitHub Pages serves it as it stands — no
+The app is a plain static site, so GitHub Pages serves it as it stands, no
 build step, no configuration. Pages serves whatever is on the chosen branch.
 
 **This repository is the candidate-facing app only.** The source PDFs, the
@@ -497,7 +494,7 @@ branch → main → / (root) → Save.** The site appears at
 `https://<username>.github.io/<repository>/` within a minute or two.
 
 Note that on a free GitHub account, a repository served by Pages must be
-**public** — the session text will be readable by anyone with the address, and
+**public**: the session text will be readable by anyone with the address, and
 search engines will index it. That is a decision for the Commission, not a
 technical detail.
 

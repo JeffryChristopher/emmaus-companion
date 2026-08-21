@@ -1,12 +1,12 @@
 /* ============================================================
-   TOPIC 13 — Mary and the Saints
+   TOPIC 13: Mary and the Saints
    Source: "PD RCIA Cdt Tp13 Mary and the Saints.pdf"
 
    The teaching text below is transcribed VERBATIM from the note
    approved under the Imprimatur. Do not paraphrase, shorten or
    "improve" it. Proofread against the PDF before publishing.
 
-   Transcription notes for the proofreader — two lines in the
+   Transcription notes for the proofreader, two lines in the
    printed note appear to have been left in from the Topic 1 note:
    · Part A opens with the broken line "People seek an identity for
      a variety of reasons, including a sense of belonging, self-"
@@ -90,12 +90,12 @@ window.RCIA.topics.en[13] = {
             {
               title: 'Do Catholics worship Mary and the saints?', joiner: '\n',
               body: 'Catholics do not worship Mary and the saints as how we worship God the Father, the Son, and the Holy Spirit. We honor (or venerate) Mary and the saints, requesting them to intercede for us as we continue our pilgrimage/journey on earth toward our own sainthood, modelling after their good examples in life which led them to be saints (CCC 957).',
-              marginal: { mark: 'CCC', text: '957 — Communion with the saints, who fix us more firmly in Christ.' }
+              marginal: { mark: 'CCC', text: '957: Communion with the saints, who fix us more firmly in Christ.' }
             },
             {
               title: 'Who is Mary in the Scripture, and what is her role in the Church?', joiner: '\n',
               body: 'Mary is mentioned in the Bible and references to her life were recorded. She is thus not any unfounded individual or myth. Mother Mary was Jesus’ very first disciple. She is not only the Mother of God but also the mother of the Church since she is the mother of Jesus Christ, who is the head of the Church (CCC 963). Mary is the “second Eve”; both Eve and Mary were created “full of grace”. Mary is also an intercessor, a channel of God’s grace.',
-              marginal: { mark: 'CCC', text: '963 — Mary is truly Mother of the members of Christ.' }
+              marginal: { mark: 'CCC', text: '963: Mary is truly Mother of the members of Christ.' }
             },
             {
               title: 'What is the Church’s teaching on Mary?', joiner: '\n',
@@ -108,7 +108,7 @@ window.RCIA.topics.en[13] = {
             {
               title: 'What are Marian devotions?', joiner: '\n',
               body: 'Devotions to the Blessed Virgin Mary comprise a significant range of religious practices directed to the Mother of God as the faithful seek her intercession with God (CCC 971), e.g., the Holy Rosary, Novenas, the Angelus, Miraculous Medal, Scapulars, etc.',
-              marginal: { mark: 'CCC', text: '971 — “All generations will call me blessed.”' }
+              marginal: { mark: 'CCC', text: '971: “All generations will call me blessed.”' }
             },
             {
               title: 'Why and how are the saints role models in our daily life?', joiner: '\n',

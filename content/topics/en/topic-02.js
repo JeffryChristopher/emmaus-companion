@@ -1,5 +1,5 @@
 /* ============================================================
-   TOPIC 2 — God Comes to Meet Us
+   TOPIC 2: God Comes to Meet Us
    Source: "PD RCIA Cdt Tp02 God Comes to Meet Us.pdf"
 
    The teaching text below is transcribed VERBATIM from the note
@@ -9,7 +9,7 @@
    Transcription note for the proofreader: in Part D the source says
    of St John Henry Newman "He was also a jurist in the tradition of
    scholasticism from the county of Aquino in the Kingdom of Sicily"
-   — a sentence that belongs to St Thomas Aquinas in the Topic 1
+  , a sentence that belongs to St Thomas Aquinas in the Topic 1
    note. It is reproduced here exactly as printed. If the Commission
    corrects the source, this file should be corrected to match it.
 
@@ -108,7 +108,7 @@ window.RCIA.topics.en[2] = {
             {
               title: 'Sacred Tradition', joiner: ' - ',
               body: 'Sacred Tradition, also known as Apostolic Tradition, is the unwritten Word of God, that is, the truths orally revealed by God to the Apostles and handed down to us. The Apostles transmitted all they received from Christ and learned from the Holy Spirit to their successors, the bishops, and through them to all generations. (DV 7)',
-              marginal: { mark: 'DV', text: '7 — Dei Verbum, the Council’s constitution on divine revelation.' }
+              marginal: { mark: 'DV', text: '7: Dei Verbum, the Council’s constitution on divine revelation.' }
             },
             {
               title: 'Sacred Scripture', joiner: ' - ',

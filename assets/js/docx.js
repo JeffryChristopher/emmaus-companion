@@ -1,5 +1,5 @@
 /* ============================================================
-   THE EMMAUS COMPANION — Word (.docx) writer
+   THE EMMAUS COMPANION: Word (.docx) writer
    Penang Diocesan Catechetical Commission
 
    A .docx file is a ZIP archive of XML parts. This module builds
@@ -8,7 +8,7 @@
    server, and it keeps working offline for ever.
 
    ZIP entries are written "stored" (uncompressed), which needs
-   only a CRC-32 — no compression code. Word opens such files
+   only a CRC-32, no compression code. Word opens such files
    normally; a reflection journal is small enough that the saved
    bytes would not be noticed.
 
@@ -17,7 +17,7 @@
 
    Fonts: Word has neither Cinzel nor EB Garamond, so titles use
    letter-spaced small capitals in Garamond (shipped with Office,
-   falling back to Cambria) — the same inscriptional feeling with
+   falling back to Cambria), the same inscriptional feeling with
    a face every machine already has.
 
    Chinese and Tamil are set through the two other slots Word keeps

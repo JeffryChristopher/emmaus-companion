@@ -1,5 +1,5 @@
 /* ============================================================
-   TOPIC 10 — God the Son – 2) Jesus Our Savior
+   TOPIC 10: God the Son – 2) Jesus Our Savior
    Source: "PD RCIA Cdt Tp10 God the Son - 2) Jesus Our Saviour.pdf"
 
    The teaching text below is transcribed VERBATIM from the note

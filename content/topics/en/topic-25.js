@@ -1,5 +1,5 @@
 /* ============================================================
-   TOPIC 25 — Introduction to Christian Morality
+   TOPIC 25: Introduction to Christian Morality
    Source: "PD RCIA Cdt Tp25 Intro to Christian Morality.pdf"
 
    The teaching text below is transcribed VERBATIM from the note

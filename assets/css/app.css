@@ -1,5 +1,5 @@
 /* ============================================================
-   THE EMMAUS COMPANION — Layout & Components
+   THE EMMAUS COMPANION: Layout & Components
    Depends on tokens.css. No colour literals below this line.
    ============================================================ */
 
@@ -234,7 +234,7 @@ img { max-width: 100%; height: auto; }
 }
 
 /* The number column is fixed so the titles line up down the whole
-   road — each stop is its own grid, so `auto` would leave them
+   road: each stop is its own grid, so `auto` would leave them
    ragged. Scripts that set the word "Topic" longer widen it. */
 .road { --stop-num: 4.6rem; }
 .stop-link, .stop-blank {
@@ -250,7 +250,7 @@ img { max-width: 100%; height: auto; }
 .stop-link:hover { background: var(--period-wash); }
 .stop-blank { color: var(--ink-soft); }
 
-/* The Topic number — the note's own name for itself. */
+/* The Topic number: the note's own name for itself. */
 .stop .topicno {
   font-family: var(--face-display);
   font-size: 0.76rem;

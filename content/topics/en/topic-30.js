@@ -1,5 +1,5 @@
 /* ============================================================
-   TOPIC 30 — The ‘Our Father’ Prayer – Part 1
+   TOPIC 30: The ‘Our Father’ Prayer – Part 1
    Source: "PD RCIA Cdt Tp30 The _Our Father_ Prayer I.pdf"
 
    The teaching text below is transcribed VERBATIM from the note

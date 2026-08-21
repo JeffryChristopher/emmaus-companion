@@ -1,5 +1,5 @@
 /* ============================================================
-   THE EMMAUS COMPANION — Drawing the Saints gallery
+   THE EMMAUS COMPANION: Drawing the Saints gallery
    The page itself. Saints.gather() does the reading; this only
    sets it out, month by month.
    ============================================================ */
@@ -61,10 +61,11 @@
 
     var body = el('div');
 
-    var day = el('p', 'feast');
-    day.appendChild(document.createTextNode(
-      Saints.feastLabel(entry.date, lang) || '—'));
-    body.appendChild(day);
+    /* No feast day, no line: the group this saint stands in already
+       says the note gives none. */
+    if (entry.date) {
+      body.appendChild(el('p', 'feast', Saints.feastLabel(entry.date, lang)));
+    }
 
     var name = el('h3', null, saint.name);
     if (!entry.translated) { name.setAttribute('lang', 'en'); }

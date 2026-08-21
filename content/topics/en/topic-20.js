@@ -1,5 +1,5 @@
 /* ============================================================
-   TOPIC 20 — Sacrament of Initiation – The Eucharist
+   TOPIC 20: Sacrament of Initiation – The Eucharist
    Source: "PD RCIA Cdt Tp20 Sac of Initiation II - The
    Eucharist.pdf"
 
@@ -167,8 +167,8 @@ window.RCIA.topics.en[20] = {
           type: 'media',
           label: 'Watch these two videos:',
           items: [
-            { label: 'Eucharistic miracles — first video', href: 'https://youtu.be/iyQGpvpcHxk?t=59' },
-            { label: 'Eucharistic miracles — second video', href: 'https://youtu.be/wXLfwdw2yUk?t=63' }
+            { label: 'Eucharistic miracles, first video', href: 'https://youtu.be/iyQGpvpcHxk?t=59' },
+            { label: 'Eucharistic miracles, second video', href: 'https://youtu.be/wXLfwdw2yUk?t=63' }
           ]
         },
         { type: 'label', text: 'Reflection:' },

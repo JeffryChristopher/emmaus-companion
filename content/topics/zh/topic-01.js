@@ -1,15 +1,15 @@
 /* ============================================================
-   主题 1 — 我们对生命意义的追寻，以及我们认识天主的能力
+   主题 1, 我们对生命意义的追寻，以及我们认识天主的能力
    来源: "PD cRCIA Cdt ⛪主题01：生命意义的追寻.pdf"
 
    Transcribed VERBATIM from the Mandarin note approved under the
    Imprimatur. Do not paraphrase, shorten or "improve" it, and do not
-   translate it from the English note — this is its own approved text.
+   translate it from the English note; this is its own approved text.
    Proofread against the PDF before publishing.
 
    Transcription notes for the proofreader:
      · Point 8 of Part C is printed with stray Markdown emphasis in
-       the source — "**五种方式（五路论证）**" — which is reproduced
+       the source, "**五种方式（五路论证）**", which is reproduced
        here without the asterisks, as the note plainly intends the
        phrase itself and not the marks. Flag this to the Commission.
      · The Mandarin note cites the Catechism as 《天主教教理》27-28
@@ -110,7 +110,7 @@ window.RCIA.topics.zh[1] = {
             {
               title: '我们认识天主的能力召叫我们去寻找天主（《天主教教理》27-28）：', joiner: ' ',
               body: '天主在每个人心中都植下了对祂的渴望。这种渴望铭刻在人心深处，以促进我们的寻找，而天主从未停止吸引我们走向祂。我们蒙召与天主交谈，并与祂共融。',
-              marginal: { mark: '教理', text: '27–28 — 对天主的渴望铭刻在人心深处。' }
+              marginal: { mark: '教理', text: '27–28, 对天主的渴望铭刻在人心深处。' }
             },
             {
               title: '在生活中发现天主：', joiner: ' ',
@@ -127,7 +127,7 @@ window.RCIA.topics.zh[1] = {
             {
               title: '信德是认识天主的第二条途径：', joiner: ' ',
               body: '信德是相信你无法证明的事物，是相信你无法用五官去证实的事物。信德是一种自由的人类行为，是一种个人且团体的关系。“信德首先是人对天主的个人依附。。。它也是对天主所启示的全部真理的自由认同”（教理150）。',
-              marginal: { mark: '教理', text: '150 — 信德是人对天主的个人依附，也是对祂所启示真理的自由认同。' }
+              marginal: { mark: '教理', text: '150, 信德是人对天主的个人依附，也是对祂所启示真理的自由认同。' }
             },
             {
               title: '天主对人类的启示：', joiner: ' ',
@@ -200,7 +200,7 @@ window.RCIA.topics.zh[1] = {
         {
           type: 'journal',
           id: 'E',
-          prompt: '你与天主同行的散步 — 写下你所见到的，以及你所献上的感恩祷词。',
+          prompt: '你与天主同行的散步, 写下你所见到的，以及你所献上的感恩祷词。',
           questions: [
             { n: '❧', text: '我在散步时看见了什么？我推想出它有什么目的？' },
             { n: '❧', text: '我简短的感恩祷词。' }

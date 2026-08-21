@@ -1,5 +1,5 @@
 /* ============================================================
-   THE EMMAUS COMPANION — The Journey
+   THE EMMAUS COMPANION: The Journey
    Transcribed from "New RCIA Syllabus Schema 2026".
 
    42 sessions across four periods. "topic" is the number on the
@@ -48,7 +48,7 @@ window.RCIA.sessions = [
   { session: 1,  topic: null, period: 'A', title: 'Welcome & Self-introduction: What is RCIA?' },
   { session: 2,  topic: 1,    period: 'A', title: 'Our Search for Meaning in Life and our Capacity for God' },
   { session: 3,  topic: 2,    period: 'A', title: 'God Comes to Meet Man' },
-  { session: 4,  topic: 3,    period: 'A', title: 'Sacred Scripture — The Bible' },
+  { session: 4,  topic: 3,    period: 'A', title: 'Sacred Scripture - The Bible' },
   { session: 5,  topic: 4,    period: 'A', title: 'Bible Timeline I' },
   { session: 6,  topic: 5,    period: 'A', title: 'Bible Timeline II' },
   { session: 7,  topic: 6,    period: 'A', title: 'Prayer (Public / Private)' },
@@ -56,8 +56,8 @@ window.RCIA.sessions = [
   /* ---------- B · Precatechumenate & Catechumenate ---------- */
   { session: 8,  topic: 7,    period: 'B', title: 'Introduction to the Creed' },
   { session: 9,  topic: 8,    period: 'B', title: 'God the Father Almighty' },
-  { session: 10, topic: 9,    period: 'B', title: 'God the Son — 1) Who is Jesus?' },
-  { session: 11, topic: 10,   period: 'B', title: 'God the Son — 2) Jesus Our Saviour' },
+  { session: 10, topic: 9,    period: 'B', title: 'God the Son - 1) Who is Jesus?' },
+  { session: 11, topic: 10,   period: 'B', title: 'God the Son - 2) Jesus Our Saviour' },
   { session: 12, topic: 11,   period: 'B', title: 'God the Holy Spirit' },
   { session: 13, topic: 12,   period: 'B', title: 'Nature & Purpose of the Catholic Church' },
   { session: 14, topic: 13,   period: 'B', title: 'Mary & the Saints' },
@@ -85,16 +85,16 @@ window.RCIA.sessions = [
     gateAfter: { name: 'Rite of the First Scrutiny', when: 'Third Sunday of Lent' } },
   { session: 32, topic: 29,   period: 'C', title: 'Prodigal Son Retreat',
     gateAfter: { name: 'Rite of the Second Scrutiny', when: 'Fourth Sunday of Lent' } },
-  { session: 33, topic: 30,   period: 'C', title: 'The “Our Father”: Part 1 — Petitions 1–3',
+  { session: 33, topic: 30,   period: 'C', title: 'The “Our Father”: Part 1 - Petitions 1-3',
     gateAfter: { name: 'Rite of the Third Scrutiny', when: 'Fifth Sunday of Lent' } },
-  { session: 34, topic: 31,   period: 'C', title: 'The “Our Father”: Part 2 — Petitions 4–7' },
+  { session: 34, topic: 31,   period: 'C', title: 'The “Our Father”: Part 2 - Petitions 4-7' },
   { session: 35, topic: null, period: 'C', title: 'Preparing for the Sacraments of Initiation' },
   { session: 36, topic: null, period: 'C', title: 'Day of Recollection',
     gateAfter: { name: 'Sacraments of Initiation', when: 'The Easter Vigil', major: true } },
 
   /* ---------- D · Mystagogy ----------
 
-     NOTE FOR THE COMMISSION — the Schema and the candidates' notes
+     NOTE FOR THE COMMISSION: the Schema and the candidates' notes
      disagree about which of these two is Topic 32 and which is
      Topic 33. The Schema gives session 37 as Topic 32 "Personal
      Transformation and Evangelization" and session 38 as Topic 33
@@ -104,7 +104,7 @@ window.RCIA.sessions = [
      Transformation and Evangelization*.
 
      The order of the sessions and their titles are the same in
-     both, so only the topic number is in question — and the topic
+     both, so only the topic number is in question, and the topic
      number is what is printed on the note in the candidate's hand.
      The notes are therefore followed here: session 37 carries the
      note numbered 33, session 38 the note numbered 32. Nothing else
@@ -115,6 +115,6 @@ window.RCIA.sessions = [
   { session: 39, topic: 34,   period: 'D', title: 'Church and Human Community' },
   { session: 40, topic: 35,   period: 'D', title: 'Dignity & Vocation of the Lay Faithful' },
   { session: 41, topic: 36,   period: 'D', title: 'Ecumenism and Interreligious Dialogue' },
-  { session: 42, topic: 37,   period: 'D', title: 'Retreat — Living a Spiritual Life with the Holy Spirit',
+  { session: 42, topic: 37,   period: 'D', title: 'Retreat - Living a Spiritual Life with the Holy Spirit',
     gateAfter: { name: 'Rite of Commissioning', when: 'Pentecost · Presentation of Baptism Certificates' } }
 ];

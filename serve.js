@@ -1,8 +1,8 @@
 /* ============================================================
-   THE EMMAUS COMPANION — a local server for viewing the app
+   THE EMMAUS COMPANION: a local server for viewing the app
    Run:  node serve.js      then open http://localhost:4173
 
-   Not needed to use the app — index.html opens straight from the
+   Not needed to use the app; index.html opens straight from the
    file system. This is for viewing it the way a phone will, and
    for checking it before it is put on the web.
    ============================================================ */

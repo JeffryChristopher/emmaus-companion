@@ -1,19 +1,19 @@
 /* ============================================================
-   TOPIK 1 — Pencarian akan Makna Hidup dan Keupayaan Kita
+   TOPIK 1, Pencarian akan Makna Hidup dan Keupayaan Kita
              Terhadap Tuhan
    Sumber: "PD_ IKD_Calon_Tp01 Pencarian Makna Hidup.pdf"
 
    The teaching text below is transcribed VERBATIM from the Bahasa
    Malaysia note approved under the Imprimatur. Do not paraphrase,
    shorten or "improve" it, and do not translate it from the English
-   note — this is its own approved text. Proofread against the PDF
+   note, this is its own approved text. Proofread against the PDF
    before publishing.
 
    Transcription notes for the proofreader:
      · The source cites the Catechism as "KKK 27-28" in point 5 and
        "KGK 150" in point 9. Both are reproduced exactly as printed.
      · The `marginal` notes and the questions of the Part E journal
-       are the app's own wording, not the note's — see README.md.
+       are the app's own wording, not the note's, see README.md.
      · `passage` gives the English chapter the Bible link opens; the
        printed reference itself stays in Bahasa Malaysia.
 
@@ -109,7 +109,7 @@ window.RCIA.topics.ms[1] = {
             {
               title: 'Keupayaan kita terhadap Tuhan memanggil kita untuk mencari Tuhan (KKK 27-28)', joiner: ' – ',
               body: 'Tuhan telah meletakkan keinginan terhadap Diri-Nya dalam setiap insan. Keinginan itu tertulis dalam hati manusia untuk memudahkan pencarian kita, dan Tuhan tidak pernah berhenti menarik kita kepada Diri-Nya. Kita dipanggil untuk berbicara dengan Tuhan dan berada dalam persekutuan dengan-Nya.',
-              marginal: { mark: 'KKK', text: '27–28 — Keinginan terhadap Tuhan tertulis dalam hati manusia.' }
+              marginal: { mark: 'KKK', text: '27–28, Keinginan terhadap Tuhan tertulis dalam hati manusia.' }
             },
             {
               title: 'Menemui Tuhan dalam kehidupan.', joiner: ' ',
@@ -126,7 +126,7 @@ window.RCIA.topics.ms[1] = {
             {
               title: 'Iman merupakan jalan kedua untuk kita mengenali Tuhan.', joiner: ' ',
               body: 'Ia adalah pegangan teguh terhadap sesuatu yang tidak mampu dibuktikan oleh logik akal, mahupun dikesan oleh lima pancaindera. Iman adalah satu tindakan manusia yang bebas, yang merangkumi dimensi peribadi dan komuniti. ‘Iman utamanya adalah penyerahan peribadi . . . kepada Tuhan. Pada masa yang sama, ia merupakan persetujuan bebas terhadap seluruh kebenaran yang telah diwahyukan oleh-Nya’ (KGK 150).',
-              marginal: { mark: 'KGK', text: '150 — Iman ialah penyerahan peribadi kepada Tuhan, dan persetujuan bebas terhadap kebenaran yang diwahyukan-Nya.' }
+              marginal: { mark: 'KGK', text: '150, Iman ialah penyerahan peribadi kepada Tuhan, dan persetujuan bebas terhadap kebenaran yang diwahyukan-Nya.' }
             },
             {
               title: 'Wahyu Tuhan kepada umat manusia.', joiner: ' ',
@@ -202,7 +202,7 @@ window.RCIA.topics.ms[1] = {
         {
           type: 'journal',
           id: 'E',
-          prompt: 'Perjalanan anda bersama Tuhan — tuliskan apa yang anda lihat, dan doa kesyukuran yang anda panjatkan.',
+          prompt: 'Perjalanan anda bersama Tuhan, tuliskan apa yang anda lihat, dan doa kesyukuran yang anda panjatkan.',
           questions: [
             { n: '❧', text: 'Apakah yang saya lihat semasa berjalan, dan apakah tujuan yang saya fikirkan di sebaliknya?' },
             { n: '❧', text: 'Doa kesyukuran ringkas saya.' }

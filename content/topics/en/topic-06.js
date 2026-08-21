@@ -1,5 +1,5 @@
 /* ============================================================
-   TOPIC 6 — Prayer – Public and Private
+   TOPIC 6: Prayer – Public and Private
    Source: "PD RCIA Cdt Tp06 Prayer - Public n Private.pdf"
 
    The teaching text below is transcribed VERBATIM from the note
@@ -8,8 +8,8 @@
 
    Transcription note for the proofreader: Part A of the printed
    note has no introduction beyond the instruction to look at the
-   picture. The picture — a montage of people of several religions
-   at prayer — is described in the `plate` block below and is still
+   picture. The picture, a montage of people of several religions
+   at prayer, is described in the `plate` block below and is still
    to be added; the first question refers to it directly.
 
    The questions under journal E are the APP's, drawn from the
@@ -182,7 +182,7 @@ window.RCIA.topics.en[6] = {
         {
           type: 'journal',
           id: 'E',
-          prompt: 'Your prayer card — write the text you chose and the prayer you made from it.',
+          prompt: 'Your prayer card, write the text you chose and the prayer you made from it.',
           questions: [
             { n: '❧', text: 'The Bible text I chose, and the personal prayer I made from it.' },
             { n: '❧', text: 'What words touched me, and why is this text meaningful to me?' }

@@ -1,10 +1,10 @@
 /* ============================================================
-   TOPIK 16 — Penjelasan Tentang Misa Kudus
+   TOPIK 16, Penjelasan Tentang Misa Kudus
    Sumber: "PD_ IKD_Calon_Tp16_Penjelasan Misa Kudus.pdf"
 
    Transcribed VERBATIM from the Bahasa Malaysia note approved under
    the Imprimatur. Do not paraphrase, shorten or "improve" it, and do
-   not translate it from the English note — this is its own approved
+   not translate it from the English note, this is its own approved
    text. Proofread against the PDF before publishing.
 
    Transcription note for the proofreader: point 9 of Part C reads

@@ -1,5 +1,5 @@
 /* ============================================================
-   TOPIC 4 — Bible Timeline I
+   TOPIC 4: Bible Timeline I
    Source: "PD RCIA Cdt Tp04 Bible Timeline I.pdf"
 
    The teaching text below is transcribed VERBATIM from the note
@@ -171,7 +171,7 @@ window.RCIA.topics.en[4] = {
         {
           type: 'journal',
           id: 'E',
-          prompt: 'The map of your own journey of faith — begin it here.',
+          prompt: 'The map of your own journey of faith, begin it here.',
           questions: [
             { n: '❧', text: 'What moment first led you to begin this journey in the RCIA?' },
             { n: '❧', text: 'What has happened in your faith journey since then, and how have you progressed?' }

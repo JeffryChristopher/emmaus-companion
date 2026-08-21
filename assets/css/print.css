@@ -1,5 +1,5 @@
 /* ============================================================
-   THE EMMAUS COMPANION — Print
+   THE EMMAUS COMPANION: Print
    The same session on paper: black ink, ruled writing lines left
    open, and none of the screen furniture.
    ============================================================ */
@@ -91,8 +91,7 @@ body {
 .part-head { break-after: avoid; page-break-after: avoid; }
 
 /* The Saints gallery makes a useful handout: two columns, ruled, and
-   no card broken across a page. The Prayers make a better one still —
-   they are meant to be carried. */
+   no card broken across a page. The Prayers make a better one still; they are meant to be carried. */
 .gallery-link, .side-doors { display: none !important; }
 .prayer-card { break-inside: avoid; page-break-inside: avoid; }
 .prayerbook .deck-count { color: #444444 !important; }

@@ -1,5 +1,5 @@
 /* ============================================================
-   THE EMMAUS COMPANION — Shell
+   THE EMMAUS COMPANION: Shell
    Theme (Daylight / Compline), reading size, language, and small
    helpers. Preferences are remembered on this device only.
 

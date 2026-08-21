@@ -1,5 +1,5 @@
 /* ============================================================
-   TOPIC 1 — Our Search for Meaning in Life and Our Capacity for God
+   TOPIC 1: Our Search for Meaning in Life and Our Capacity for God
    Source: "PD RCIA Cdt Tp01 Meaning in Life n Capacity for God.pdf"
 
    The teaching text below is transcribed VERBATIM from the note
@@ -8,7 +8,7 @@
 
    Transcription note for the proofreader: in Part D the source
    reads "Thomas Aquinas is, he was one of the Catholic Church's
-   greatest theologians a Doctor of the Church" — reproduced here
+   greatest theologians a Doctor of the Church", reproduced here
    exactly as printed. If the Commission corrects the source, this
    file should be corrected to match it.
    ============================================================ */
@@ -54,7 +54,7 @@ window.RCIA.topics.en[1] = {
       blocks: [
         {
           type: 'pericope',
-          cite: 'John 1:35–51 — The First Disciples of Jesus',
+          cite: 'John 1:35–51, The First Disciples of Jesus',
           instruction: 'Read Text and prepare answers for Questions below:'
         },
         {
@@ -97,7 +97,7 @@ window.RCIA.topics.en[1] = {
             {
               title: 'Our capacity for God calls us to search for God (CCC 27-28)', joiner: ' – ',
               body: 'God has placed a desire for Himself in every person. That desire is written in the human heart to facilitate our search, and God never ceases to draw us to Himself. We are called to speak with God and be in communion with Him.',
-              marginal: { mark: 'CCC', text: '27–28 — The desire for God is written in the human heart.' }
+              marginal: { mark: 'CCC', text: '27–28: The desire for God is written in the human heart.' }
             },
             {
               title: 'Discovering God in our lives.', joiner: ' ',
@@ -114,7 +114,7 @@ window.RCIA.topics.en[1] = {
             {
               title: 'Faith is the second way we can come to know God', joiner: ' – ',
               body: 'Faith is believing in something you cannot prove. It is believing in something you cannot use your five senses to prove. Faith is a free, human act. Faith is a personal and communal relationship. “Faith is first of all a personal adherence . . . to God. At the same time, it is a free assent to the whole truth that God has revealed” (CCC 150).',
-              marginal: { mark: 'CCC', text: '150 — Faith is a personal adherence to God, and a free assent to the truth He has revealed.' }
+              marginal: { mark: 'CCC', text: '150: Faith is a personal adherence to God, and a free assent to the truth He has revealed.' }
             },
             {
               title: 'God’s revelation to humanity', joiner: ' – ',
@@ -189,7 +189,7 @@ window.RCIA.topics.en[1] = {
         {
           type: 'journal',
           id: 'E',
-          prompt: 'Your walk with God — write what you saw, and the prayer of thanksgiving you made.',
+          prompt: 'Your walk with God, write what you saw, and the prayer of thanksgiving you made.',
           questions: [
             { n: '❧', text: 'What did I see on my walk, and what purpose did I reason in it?' },
             { n: '❧', text: 'My short prayer of thanksgiving.' }

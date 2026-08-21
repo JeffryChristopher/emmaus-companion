@@ -1,5 +1,5 @@
 /* ============================================================
-   TOPIC 8 — God the Father Almighty
+   TOPIC 8: God the Father Almighty
    Source: "PD RCIA Cdt Tp08 God the Father Almighty.pdf"
 
    The teaching text below is transcribed VERBATIM from the note

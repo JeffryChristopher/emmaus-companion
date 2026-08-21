@@ -1,5 +1,5 @@
 /* ============================================================
-   THE EMMAUS COMPANION — Drawing the Prayers page
+   THE EMMAUS COMPANION: Drawing the Prayers page
    Prayers.gather() does the reading; this only sets it out.
    ============================================================ */
 

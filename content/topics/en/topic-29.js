@@ -1,5 +1,5 @@
 /* ============================================================
-   TOPIC 29 — Prodigal Son Retreat
+   TOPIC 29: Prodigal Son Retreat
    Source: "PD RCIA Cdt Tp29 Prodigal Son Retreat.pdf"
 
    A RETREAT note: four parts (A–D), no Saint of the Topic, and
@@ -83,7 +83,7 @@ window.RCIA.topics.en[29] = {
         {
           type: 'plate',
           image: null,
-          suggested: 'The Return of the Prodigal Son — Rembrandt van Rijn, c. 1668, Hermitage Museum (public domain).',
+          suggested: 'The Return of the Prodigal Son, Rembrandt van Rijn, c. 1668, Hermitage Museum (public domain).',
           fileHint: 'assets/img/prodigal-son.jpg',
           caption: 'Look at the picture and reflect silently.'
         },
@@ -162,7 +162,7 @@ window.RCIA.topics.en[29] = {
         {
           type: 'journal',
           id: 'D-ii',
-          prompt: 'My thanksgiving prayer to God for His love and His mercy — to pray daily.',
+          prompt: 'My thanksgiving prayer to God for His love and His mercy, to pray daily.',
           questions: [
             { n: '❧', text: 'Write your prayer here.' }
           ]

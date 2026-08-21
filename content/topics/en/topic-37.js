@@ -1,5 +1,5 @@
 /* ============================================================
-   TOPIC 37 — Life In The Holy Spirit Retreat
+   TOPIC 37: Life In The Holy Spirit Retreat
    Source: "PD RCIA Cdt Tp37 Life in the Holy Spirit Retreat.pdf"
 
    The teaching text below is transcribed VERBATIM from the note
@@ -14,7 +14,7 @@
 
    Transcription note for the proofreader:
    · Part E question 1 asks about "both Joshua and Nick". Nick is
-     not introduced anywhere in the candidate's note — he belongs to
+     not introduced anywhere in the candidate's note; he belongs to
      the video shown in Part C. Reproduced as printed.
    · The prayer at the end of Part C is printed without its closing
      quotation mark; reproduced as printed.

@@ -1,5 +1,5 @@
 /* ============================================================
-   THE EMMAUS COMPANION — Content check
+   THE EMMAUS COMPANION: Content check
    Run:  node tools/check-content.js
 
    Reads every topic file the app ships, in every language, and
@@ -10,7 +10,7 @@
      · every block type is one the app knows how to draw
      · journal ids are unique, so no two answers share a key
      · a translated note asks the SAME questions, under the same
-       journal ids, as the English one — answers are stored against
+       journal ids, as the English one; answers are stored against
        the topic and not the language, so a mismatch would strand
        whatever a candidate had already written
      · every Scripture reference still resolves, whatever language
@@ -91,7 +91,7 @@ const allTopics = RCIA.topics || {};
 LANGS.forEach(code => {
   const found = Object.keys(allTopics[code] || {}).map(Number).sort((a, b) => a - b);
   console.log('  ' + code + ': ' + loadedFiles[code].length + ' file(s)' +
-              (found.length ? ' — Topic ' + found.join(', ') : ''));
+              (found.length ? '; Topic ' + found.join(', ') : ''));
 });
 console.log();
 
@@ -275,14 +275,14 @@ LANGS.forEach(function (code) {
   const topics = allTopics[code] || {};
   const numbers = Object.keys(topics).map(Number).sort((a, b) => a - b);
   if (!numbers.length) {
-    console.log('— ' + Lang.meta(code).english + ': no topics transcribed yet —');
+    console.log('; ' + Lang.meta(code).english + ': no topics transcribed yet; ');
     console.log();
     return;
   }
 
   numbers.forEach(function (n) {
     const topic = topics[n];
-    console.log('[' + code + '] Topic ' + n + ' — ' + topic.title);
+    console.log('[' + code + '] Topic ' + n + '; ' + topic.title);
 
     check('has a title, period and session number',
       !!topic.title && !!topic.period && Number.isInteger(topic.session));
@@ -320,7 +320,7 @@ LANGS.forEach(function (code) {
           block.items.forEach(function (item, j) {
             /* A point must say something. Usually that is a sentence,
                but some printed points answer their own question with
-               a bare list or a table and no prose — and inventing a
+               a bare list or a table and no prose, and inventing a
                sentence to fill the gap would not be transcription. */
             const hasSomething = (item.body && item.body.trim()) ||
                                  (item.afterBody && item.afterBody.trim()) ||
@@ -371,7 +371,7 @@ LANGS.forEach(function (code) {
        working link. A translated note names its books in its own
        language, which the parser cannot read, so those carry an
        explicit `passage`. A reference with neither would silently
-       render as plain text — worth failing the build over. */
+       render as plain text; worth failing the build over. */
     const unresolved = [];
     const falseLinks = [];
     topic.parts.forEach(function (part) {
@@ -419,7 +419,7 @@ LANGS.forEach(function (code) {
       new Set(journalIds).size === journalIds.length,
       'ids: ' + journalIds.join(', '));
 
-    /* answer keys must be unique across the whole topic — two questions
+    /* answer keys must be unique across the whole topic, two questions
        sharing a key would overwrite each other's answer */
     const keys = EmmausExport.questionKeys(topic).map(k => k.key);
     check('every question has its own storage key (' + keys.length + ' questions)',
@@ -464,7 +464,7 @@ LANGS.forEach(function (code) {
       built.spec.meta[0] === Lang.t('docName', { name: 'Teresa Lim' }, code),
       built.spec.meta[0]);
 
-    const outFile = path.join(outDir, code + ' — ' + EmmausExport.fileNameFor(topic, 'Sample', code));
+    const outFile = path.join(outDir, code + ' · ' + EmmausExport.fileNameFor(topic, 'Sample', code));
     fs.writeFileSync(outFile, Buffer.from(bytes));
     console.log('        sample written: tools/sample/' + path.basename(outFile));
     console.log();
@@ -476,7 +476,7 @@ LANGS.forEach(function (code) {
 
    The gallery writes nothing down: it reads every saint out of the
    note that names one. So what has to hold is that the notes can be
-   read — that a feast day the app claims to understand really parses,
+   read, that a feast day the app claims to understand really parses,
    and that one it does not understand is left undated rather than
    filed under the wrong month.
    ============================================================ */
@@ -548,7 +548,7 @@ LANGS.forEach(function (code) {
     const saint = Saints.saintOf(topics[n]);
     if (!saint || !(saint.facts || []).length) { return false; }
     /* Only complain when the note HAS a patronage fact the prefix
-       fails to find — some notes give none. */
+       fails to find, some notes give none. */
     const hasPatron = (saint.facts || []).some(f =>
       /patron|penaung|主保|பாதுகாவலர்/i.test(f.label));
     return hasPatron && !Saints.fact(saint, prefix);
@@ -596,7 +596,7 @@ check('every prayer names a part that is really in its note',
   badLinks.map(p => 'Topic ' + p.topic + ' part ' + p.part).join(', '));
 
 /* They are gathered in the order the road is walked, not by topic
-   number — the two differ in the Mystagogy. */
+   number, the two differ in the Mystagogy. */
 const walked = RCIA.sessions.filter(s => s.topic != null).map(s => s.topic);
 let inOrder = true;
 for (let i = 1; i < prayerList.length; i++) {
@@ -614,7 +614,7 @@ console.log();
 
    Three HTML pages each list every content script by hand. A file
    added to one and forgotten in another would be invisible on that
-   page alone — the kind of fault nobody notices until a candidate
+   page alone, the kind of fault nobody notices until a candidate
    opens the wrong page.
    ============================================================ */
 

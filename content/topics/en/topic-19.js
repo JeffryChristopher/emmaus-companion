@@ -1,5 +1,5 @@
 /* ============================================================
-   TOPIC 19 — Sacraments of Initiation: Baptism and Confirmation
+   TOPIC 19: Sacraments of Initiation: Baptism and Confirmation
    Source: "PD RCIA Cdt Tp19 Sac of Initiation I - Baptism n
    Conf.pdf"
 
@@ -8,7 +8,7 @@
    "improve" it. Proofread against the PDF before publishing.
 
    Transcription note for the proofreader: Part A of the printed
-   note carries no introduction text — only a montage of
+   note carries no introduction text, only a montage of
    photographs, which both questions refer to ("the picture above").
    It is described in the `plate` block below and is still to be
    added.
@@ -97,7 +97,7 @@ window.RCIA.topics.en[19] = {
             {
               title: 'What is required of one who is to be baptized?', joiner: '\n',
               body: 'Everyone who is to be baptized is required to make a profession of faith (faith & obedience) (CCC 1252-1255).',
-              marginal: { mark: 'CCC', text: '1252–1255 — Faith, and the role of the godparent, in Baptism.' }
+              marginal: { mark: 'CCC', text: '1252–1255: Faith, and the role of the godparent, in Baptism.' }
             },
             {
               title: 'Is Baptism necessary for salvation?', joiner: '\n',

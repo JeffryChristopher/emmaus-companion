@@ -1,5 +1,5 @@
 /* ============================================================
-   TOPIC 16 — The Mass Explained
+   TOPIC 16: The Mass Explained
    Source: "PD RCIA Cdt Tp16 The Mass Explained.pdf"
 
    The teaching text below is transcribed VERBATIM from the note
@@ -49,7 +49,7 @@ window.RCIA.topics.en[16] = {
       blocks: [
         {
           type: 'pericope',
-          cite: 'John 6:52–63 — The Words of Eternal Life',
+          cite: 'John 6:52–63, The Words of Eternal Life',
           instruction: 'Read Text and prepare answers for Questions below:'
         },
         {

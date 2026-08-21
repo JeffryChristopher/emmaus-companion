@@ -1,5 +1,5 @@
 /* ============================================================
-   THE EMMAUS COMPANION — Languages
+   THE EMMAUS COMPANION: Languages
    Penang Diocesan Catechetical Commission
 
    The candidate chooses a language on the journey map and the whole
@@ -8,7 +8,7 @@
 
    Two rules govern what may live in this file.
 
-   1. Only the APP'S OWN words are translated here — buttons, notices,
+   1. Only the APP'S OWN words are translated here: buttons, notices,
       headings the app invents. The teaching text of a session note is
       never translated by this app: it is transcribed from the note the
       Commission approved in that language, and lives in
@@ -17,7 +17,7 @@
    2. The period names under `periods` are navigation labels rendered
       from the syllabus schema, which exists in English only. They are
       the app's translations and are marked for the Commission to
-      check — see the note in README.md.
+      check. See the note in README.md.
 
    Adding a language: add an entry to LANGS, a block to STRINGS with
    every key the English block has (check-content.js enforces this),
@@ -28,7 +28,7 @@ var Lang = (function () {
   'use strict';
 
   /* code:    what preferences and folder names use
-     endonym: the language's name in itself — how it is offered
+     endonym: the language's name in itself, as it is offered
      html:    the BCP-47 tag put on <html lang>
      locale:  what Intl is asked for when a date is written out
      webfont: the Google Fonts family fetched on demand, if any    */
@@ -80,12 +80,12 @@ var Lang = (function () {
       englishOnly: 'In English',
 
       journalHeading: 'Your journal',
-      journalEmpty: 'Nothing is written yet. Open a session and begin — whatever you write stays on this device, and you save it as a Word document when you are done.',
-      journalSummary: 'You have written {reflections} across {topics}. Remember to save each session as a Word document — that is the copy that stays with you.',
+      journalEmpty: 'Nothing is written yet. Open a session and begin. Whatever you write stays on this device, and you save it as a Word document when you are done.',
+      journalSummary: 'You have written {reflections} across {topics}. Remember to save each session as a Word document. That is the copy that stays with you.',
       topicsCount: '{n} topics',
       topics1: '1 topic',
       saintsTitle: 'The Saints of the Journey',
-      saintsDeck: 'A saint stands beside almost every topic on the road. Here they are together, set out by the day the Church keeps their feast — so a name half-remembered can be found again.',
+      saintsDeck: 'A saint stands beside almost every topic on the road. Here they are together, set out by the day the Church keeps their feast, so a name half-remembered can be found again.',
       saint1: '1 saint',
       saintsCount: '{n} saints',
       saintsSummary: '{saints}, one for each topic that names one.',
@@ -100,7 +100,7 @@ var Lang = (function () {
       prayersSummary: '{prayers}, as the notes print them.',
       prayersLink: 'The Prayers',
       prayersEmpty: 'No prayer is set down in the notes yet.',
-      topicLine: 'Topic {n} — {title}',
+      topicLine: 'Topic {n}: {title}',
 
       colophonNotes: 'The session notes are reproduced from those approved for publication by the Penang Diocesan Catechetical Commission.',
       colophonImprimatur: 'Imprimatur: ✠ Cardinal Sebastian Francis, Bishop of Penang, 31 May 2026 (PKK/BCR/2026/05/705).',
@@ -116,7 +116,7 @@ var Lang = (function () {
 
       topicNo: 'Topic {n}',
       themeLine: 'Theme: {theme}',
-      fallbackNotice: 'This session’s notes have not been transcribed into {language} yet. The approved English text is below — whatever you write is kept, and will still be there when the {language} notes arrive.',
+      fallbackNotice: 'This session’s notes have not been transcribed into {language} yet. The approved English text is below. Whatever you write is kept, and will still be there when the {language} notes arrive.',
 
       sealPrivacy: 'Whatever you write below is saved on this device alone. It is never sent anywhere, and no one else can read it unless you save it as a Word document and choose to share it.',
       sealNoStorage: 'This browser is not allowing anything to be saved (private browsing may be switched on). You may still write and save a Word document, but your words will be lost when you close this page.',
@@ -139,8 +139,8 @@ var Lang = (function () {
       printSession: 'Print this session',
       savedAt: 'Saved on this device · {time}',
       saveRefused: 'This browser would not let your writing be saved.',
-      savedFile: 'Saved “{file}” to your device — {wrote} of {total} reflections written.',
-      savedFileBlank: 'Saved “{file}” — the questions are there, ready for you to write.',
+      savedFile: 'Saved “{file}” to your device. {wrote} of {total} reflections written.',
+      savedFileBlank: 'Saved “{file}”. The questions are there, ready for you to write.',
       exportFailed: 'The document could not be made on this device. Try the Print button instead, and choose “Save as PDF”.',
 
       prevTopic: 'Previous',
@@ -157,7 +157,7 @@ var Lang = (function () {
       docSaved: 'Saved {date}',
       docNotWritten: '(not yet written)',
       docClosingPrayer: 'Closing prayer',
-      docClosingPrayerLabelled: '{label} — closing prayer',
+      docClosingPrayerLabelled: '{label}: closing prayer',
       docCandidate: 'RCIA Candidate',
       docFooter: 'Ad maiorem Dei gloriam',
       docLanguageNote: 'Session note in English (not yet translated).'
@@ -200,12 +200,12 @@ var Lang = (function () {
       englishOnly: 'Dalam bahasa Inggeris',
 
       journalHeading: 'Jurnal anda',
-      journalEmpty: 'Belum ada apa-apa yang ditulis. Bukalah satu sesi dan mulakan — apa sahaja yang anda tulis kekal pada peranti ini, dan anda menyimpannya sebagai dokumen Word apabila selesai.',
-      journalSummary: 'Anda telah menulis {reflections} merentasi {topics}. Ingatlah untuk menyimpan setiap sesi sebagai dokumen Word — itulah salinan yang kekal bersama anda.',
+      journalEmpty: 'Belum ada apa-apa yang ditulis. Bukalah satu sesi dan mulakan. Apa sahaja yang anda tulis kekal pada peranti ini, dan anda menyimpannya sebagai dokumen Word apabila selesai.',
+      journalSummary: 'Anda telah menulis {reflections} merentasi {topics}. Ingatlah untuk menyimpan setiap sesi sebagai dokumen Word. Itulah salinan yang kekal bersama anda.',
       topicsCount: '{n} topik',
       topics1: '1 topik',
       saintsTitle: 'Para Kudus dalam Perjalanan',
-      saintsDeck: 'Seorang kudus berdiri di sisi hampir setiap topik di sepanjang jalan ini. Di sini mereka dikumpulkan, disusun mengikut hari Gereja merayakan pesta mereka — supaya nama yang separuh diingati dapat ditemui semula.',
+      saintsDeck: 'Seorang kudus berdiri di sisi hampir setiap topik di sepanjang jalan ini. Di sini mereka dikumpulkan, disusun mengikut hari Gereja merayakan pesta mereka, supaya nama yang separuh diingati dapat ditemui semula.',
       saint1: '1 orang kudus',
       saintsCount: '{n} orang kudus',
       saintsSummary: '{saints}, satu bagi setiap topik yang menamakannya.',
@@ -220,7 +220,7 @@ var Lang = (function () {
       prayersSummary: '{prayers}, sebagaimana tercetak dalam nota.',
       prayersLink: 'Doa-doa',
       prayersEmpty: 'Belum ada doa ditetapkan dalam nota.',
-      topicLine: 'Topik {n} — {title}',
+      topicLine: 'Topik {n}: {title}',
 
       colophonNotes: 'Nota sesi ini diterbitkan semula daripada nota yang diluluskan untuk penerbitan oleh Suruhanjaya Kateketikal Keuskupan Pulau Pinang.',
       colophonImprimatur: 'Imprimatur: ✠ Kardinal Sebastian Francis, Uskup Pulau Pinang, 31 Mei 2026 (PKK/BCR/2026/05/705).',
@@ -236,7 +236,7 @@ var Lang = (function () {
 
       topicNo: 'Topik {n}',
       themeLine: 'Tema: {theme}',
-      fallbackNotice: 'Nota sesi ini belum ditranskripsi ke dalam {language}. Teks bahasa Inggeris yang diluluskan ada di bawah — apa sahaja yang anda tulis akan disimpan, dan masih ada apabila nota {language} tiba.',
+      fallbackNotice: 'Nota sesi ini belum ditranskripsi ke dalam {language}. Teks bahasa Inggeris yang diluluskan ada di bawah. Apa sahaja yang anda tulis akan disimpan, dan masih ada apabila nota {language} tiba.',
 
       sealPrivacy: 'Apa sahaja yang anda tulis di bawah disimpan pada peranti ini sahaja. Ia tidak pernah dihantar ke mana-mana, dan tiada sesiapa boleh membacanya melainkan anda menyimpannya sebagai dokumen Word dan memilih untuk berkongsi.',
       sealNoStorage: 'Pelayar ini tidak membenarkan apa-apa disimpan (mungkin mod pelayaran peribadi dihidupkan). Anda masih boleh menulis dan menyimpan dokumen Word, tetapi tulisan anda akan hilang apabila halaman ini ditutup.',
@@ -259,8 +259,8 @@ var Lang = (function () {
       printSession: 'Cetak sesi ini',
       savedAt: 'Disimpan pada peranti ini · {time}',
       saveRefused: 'Pelayar ini tidak membenarkan tulisan anda disimpan.',
-      savedFile: 'Menyimpan “{file}” ke peranti anda — {wrote} daripada {total} renungan ditulis.',
-      savedFileBlank: 'Menyimpan “{file}” — soalan-soalannya ada di situ, sedia untuk anda tulis.',
+      savedFile: 'Menyimpan “{file}” ke peranti anda. {wrote} daripada {total} renungan ditulis.',
+      savedFileBlank: 'Menyimpan “{file}”. Soalan-soalannya ada di situ, sedia untuk anda tulis.',
       exportFailed: 'Dokumen tidak dapat dihasilkan pada peranti ini. Cuba butang Cetak, dan pilih “Simpan sebagai PDF”.',
 
       prevTopic: 'Sebelum ini',
@@ -276,7 +276,7 @@ var Lang = (function () {
       docSaved: 'Disimpan {date}',
       docNotWritten: '(belum ditulis)',
       docClosingPrayer: 'Doa penutup',
-      docClosingPrayerLabelled: '{label} — doa penutup',
+      docClosingPrayerLabelled: '{label}: doa penutup',
       docCandidate: 'Calon IKD',
       docFooter: 'Ad maiorem Dei gloriam',
       docLanguageNote: 'Nota sesi dalam bahasa Inggeris (belum diterjemahkan).'
@@ -319,8 +319,8 @@ var Lang = (function () {
       englishOnly: '英文版',
 
       journalHeading: '你的札记',
-      journalEmpty: '还没有写下任何内容。打开一课就可以开始——你所写的一切都留在这部装置上，写完后再存成 Word 文件。',
-      journalSummary: '你已在 {topics} 中写下 {reflections}。记得把每一课都存成 Word 文件——那才是留在你身边的一份。',
+      journalEmpty: '还没有写下任何内容。打开一课就可以开始。你所写的一切都留在这部装置上，写完后再存成 Word 文件。',
+      journalSummary: '你已在 {topics} 中写下 {reflections}。记得把每一课都存成 Word 文件。那才是留在你身边的一份。',
       topicsCount: '{n} 个主题',
       topics1: '1 个主题',
       saintsTitle: '旅程中的圣人',
@@ -339,7 +339,7 @@ var Lang = (function () {
       prayersSummary: '{prayers}，一如讲义所印。',
       prayersLink: '祷词',
       prayersEmpty: '讲义中尚未列出任何祷词。',
-      topicLine: '主题 {n} — {title}',
+      topicLine: '主题 {n}：{title}',
 
       colophonNotes: '课程讲义转载自槟城教区教理委员会核准出版的讲义。',
       colophonImprimatur: '出版许可：✠ 沈保禄枢机，槟城教区主教，2026 年 5 月 31 日（PKK/BCR/2026/05/705）。',
@@ -355,7 +355,7 @@ var Lang = (function () {
 
       topicNo: '主题 {n}',
       themeLine: '主题思想：{theme}',
-      fallbackNotice: '本课讲义尚未转录成{language}。下方是获核准的英文本——你所写的一切都会保留，{language}讲义推出后仍在。',
+      fallbackNotice: '本课讲义尚未转录成{language}。下方是获核准的英文本。你所写的一切都会保留，{language}讲义推出后仍在。',
 
       sealPrivacy: '你在下方写的一切只存在这部装置上。它不会被送往任何地方，除非你把它存成 Word 文件并选择分享，否则没有人能读到。',
       sealNoStorage: '此浏览器不允许储存任何内容（可能开启了无痕浏览）。你仍可书写并储存 Word 文件，但关闭本页后文字将会遗失。',
@@ -378,8 +378,8 @@ var Lang = (function () {
       printSession: '列印本课',
       savedAt: '已存于此装置 · {time}',
       saveRefused: '此浏览器不允许保存你的书写。',
-      savedFile: '已将“{file}”存到你的装置——共 {total} 题中已写 {wrote} 题。',
-      savedFileBlank: '已保存“{file}”——题目都在，等你书写。',
+      savedFile: '已将“{file}”存到你的装置。共 {total} 题中已写 {wrote} 题。',
+      savedFileBlank: '已保存“{file}”。题目都在，等你书写。',
       exportFailed: '无法在此装置上生成文件。请改用列印按钮，并选择“另存为 PDF”。',
 
       prevTopic: '上一课',
@@ -395,7 +395,7 @@ var Lang = (function () {
       docSaved: '保存于 {date}',
       docNotWritten: '（尚未书写）',
       docClosingPrayer: '结束祷词',
-      docClosingPrayerLabelled: '{label} — 结束祷词',
+      docClosingPrayerLabelled: '{label}：结束祷词',
       docCandidate: '慕道者',
       docFooter: 'Ad maiorem Dei gloriam',
       docLanguageNote: '本课讲义为英文（尚未翻译）。'
@@ -406,7 +406,7 @@ var Lang = (function () {
       brand: 'பினாங்கு மறைமாவட்ட மறைக்கல்வி ஆணையம்',
       eyebrow: 'பெரியோர் கிறிஸ்தவ அருட்பொழிவு · பினாங்கு மறைமாவட்டம்',
       appTitle: 'எம்மாவு துணைவர்',
-      deck: '“வழியில் அவர் நம்மோடு பேசியபோதும், மறைநூலை நமக்கு விளக்கியபோதும், நம் உள்ளம் பற்றி எரியவில்லையா?” ஒரே பாதையில் நாற்பத்திரண்டு நிறுத்தங்கள் — முதல் வினாக்களிலிருந்து நீங்கள் அனுப்பப்படும் நாள்வரை.',
+      deck: '“வழியில் அவர் நம்மோடு பேசியபோதும், மறைநூலை நமக்கு விளக்கியபோதும், நம் உள்ளம் பற்றி எரியவில்லையா?” ஒரே பாதையில் நாற்பத்திரண்டு நிறுத்தங்கள்: முதல் வினாக்களிலிருந்து நீங்கள் அனுப்பப்படும் நாள்வரை.',
 
       langLabel: 'மொழி',
       langChoose: 'உங்கள் அமர்வுக் குறிப்புகளின் மொழியைத் தேர்ந்தெடுங்கள்',
@@ -438,27 +438,27 @@ var Lang = (function () {
       englishOnly: 'ஆங்கிலத்தில்',
 
       journalHeading: 'உங்கள் குறிப்பேடு',
-      journalEmpty: 'இன்னும் எதுவும் எழுதப்படவில்லை. ஓர் அமர்வைத் திறந்து தொடங்குங்கள் — நீங்கள் எழுதுவது இந்தச் சாதனத்திலேயே இருக்கும்; முடித்ததும் அதை Word ஆவணமாகச் சேமிக்கலாம்.',
-      journalSummary: '{topics} சேர்த்து {reflections} எழுதியுள்ளீர்கள். ஒவ்வோர் அமர்வையும் Word ஆவணமாகச் சேமிக்க மறவாதீர்கள் — உங்களோடு நிலைத்திருப்பது அந்த நகலே.',
+      journalEmpty: 'இன்னும் எதுவும் எழுதப்படவில்லை. ஓர் அமர்வைத் திறந்து தொடங்குங்கள். நீங்கள் எழுதுவது இந்தச் சாதனத்திலேயே இருக்கும்; முடித்ததும் அதை Word ஆவணமாகச் சேமிக்கலாம்.',
+      journalSummary: '{topics} சேர்த்து {reflections} எழுதியுள்ளீர்கள். ஒவ்வோர் அமர்வையும் Word ஆவணமாகச் சேமிக்க மறவாதீர்கள்; உங்களோடு நிலைத்திருப்பது அந்த நகலே.',
       topicsCount: '{n} தலைப்புகளில்',
       topics1: '1 தலைப்பில்',
       saintsTitle: 'பயணத்தின் புனிதர்கள்',
-      saintsDeck: 'பாதையில் ஏறக்குறைய ஒவ்வொரு தலைப்பின் அருகிலும் ஒரு புனிதர் நிற்கிறார். திருச்சபை அவர்களின் திருவிழாவைக் கொண்டாடும் நாளின்படி அவர்கள் இங்கே ஒன்றாகத் தொகுக்கப்பட்டுள்ளனர் — பாதி நினைவிலுள்ள ஒரு பெயரை மீண்டும் கண்டறியலாம்.',
+      saintsDeck: 'பாதையில் ஏறக்குறைய ஒவ்வொரு தலைப்பின் அருகிலும் ஒரு புனிதர் நிற்கிறார். திருச்சபை அவர்களின் திருவிழாவைக் கொண்டாடும் நாளின்படி அவர்கள் இங்கே ஒன்றாகத் தொகுக்கப்பட்டுள்ளனர்; பாதி நினைவிலுள்ள ஒரு பெயரை மீண்டும் கண்டறியலாம்.',
       saint1: '1 புனிதர்',
       saintsCount: '{n} புனிதர்கள்',
-      saintsSummary: '{saints} — புனிதரைக் குறிப்பிடும் ஒவ்வொரு தலைப்புக்கும் ஒருவர்.',
+      saintsSummary: '{saints}, புனிதரைக் குறிப்பிடும் ஒவ்வொரு தலைப்புக்கும் ஒருவர்.',
       saintsNoFeast: 'குறிப்பில் திருவிழா நாள் தரப்படவில்லை',
       saintsLink: 'புனிதர்கள்',
       saintsEmpty: 'குறிப்புகளில் இதுவரை எந்தப் புனிதரும் குறிப்பிடப்படவில்லை.',
       patronLabel: 'பாதுகாவலர்',
       prayersTitle: 'பயணத்தின் செபங்கள்',
-      prayersDeck: 'குறிப்புகளில் தரப்பட்டுள்ள செபங்கள், நீங்கள் அவற்றைச் சந்திக்கும் வரிசையில் — ஒரு அமர்வுக்கும் அடுத்த அமர்வுக்கும் இடையிலான நாட்களுக்காக.',
+      prayersDeck: 'குறிப்புகளில் தரப்பட்டுள்ள செபங்கள், நீங்கள் அவற்றைச் சந்திக்கும் வரிசையில்: ஒரு அமர்வுக்கும் அடுத்த அமர்வுக்கும் இடையிலான நாட்களுக்காக.',
       prayer1: '1 செபம்',
       prayersCount: '{n} செபங்கள்',
-      prayersSummary: '{prayers} — குறிப்புகளில் அச்சிடப்பட்டவாறே.',
+      prayersSummary: '{prayers}, குறிப்புகளில் அச்சிடப்பட்டவாறே.',
       prayersLink: 'செபங்கள்',
       prayersEmpty: 'குறிப்புகளில் இதுவரை எந்தச் செபமும் தரப்படவில்லை.',
-      topicLine: 'தலைப்பு {n} — {title}',
+      topicLine: 'தலைப்பு {n}: {title}',
 
       colophonNotes: 'அமர்வுக் குறிப்புகள், பினாங்கு மறைமாவட்ட மறைக்கல்வி ஆணையத்தால் வெளியிட ஒப்புதல் அளிக்கப்பட்டவற்றிலிருந்து மீள்பதிப்பு செய்யப்பட்டவை.',
       colophonImprimatur: 'இம்ப்ரிமாதூர்: ✠ கர்தினால் செபஸ்தியான் பிரான்சிஸ், பினாங்கு ஆயர், 31 மே 2026 (PKK/BCR/2026/05/705).',
@@ -474,7 +474,7 @@ var Lang = (function () {
 
       topicNo: 'தலைப்பு {n}',
       themeLine: 'கருப்பொருள்: {theme}',
-      fallbackNotice: 'இந்த அமர்வின் குறிப்புகள் இன்னும் {language} மொழியில் படியெடுக்கப்படவில்லை. ஒப்புதல் பெற்ற ஆங்கில உரை கீழே உள்ளது — நீங்கள் எழுதுவது பாதுகாக்கப்படும்; {language} குறிப்புகள் வந்தபிறகும் அது அங்கேயே இருக்கும்.',
+      fallbackNotice: 'இந்த அமர்வின் குறிப்புகள் இன்னும் {language} மொழியில் படியெடுக்கப்படவில்லை. ஒப்புதல் பெற்ற ஆங்கில உரை கீழே உள்ளது. நீங்கள் எழுதுவது பாதுகாக்கப்படும்; {language} குறிப்புகள் வந்தபிறகும் அது அங்கேயே இருக்கும்.',
 
       sealPrivacy: 'கீழே நீங்கள் எழுதுவது இந்தச் சாதனத்தில் மட்டுமே சேமிக்கப்படுகிறது. அது எங்கும் அனுப்பப்படுவதில்லை; நீங்கள் அதை Word ஆவணமாகச் சேமித்துப் பகிர்ந்தாலொழிய வேறு யாரும் படிக்க முடியாது.',
       sealNoStorage: 'இந்த உலாவி எதையும் சேமிக்க அனுமதிக்கவில்லை (தனிப்பட்ட உலாவல் இயங்கிக் கொண்டிருக்கலாம்). நீங்கள் எழுதி Word ஆவணமாகச் சேமிக்க முடியும், ஆனால் இந்தப் பக்கத்தை மூடியதும் உங்கள் சொற்கள் இழக்கப்படும்.',
@@ -489,7 +489,7 @@ var Lang = (function () {
       yourReflection: 'உங்கள் சிந்தனை: {question}',
 
       exportHeading: 'உங்கள் சிந்தனைகளைச் சேமியுங்கள்',
-      exportBody: 'உங்கள் பதில்கள் ஒரு Word ஆவணமாகும் — உங்கள் சாதனத்திலேயே உருவாக்கப்பட்டு, அதிலேயே சேமிக்கப்படும். எதுவும் எங்கும் அனுப்பப்படுவதில்லை.',
+      exportBody: 'உங்கள் பதில்கள் ஒரு Word ஆவணமாகும்: உங்கள் சாதனத்திலேயே உருவாக்கப்பட்டு, அதிலேயே சேமிக்கப்படும். எதுவும் எங்கும் அனுப்பப்படுவதில்லை.',
       yourName: 'உங்கள் பெயர்',
       namePlaceholder: 'எ.கா. தெரேசா லிம்',
       sessionDate: 'அமர்வு நாள்',
@@ -497,8 +497,8 @@ var Lang = (function () {
       printSession: 'இந்த அமர்வை அச்சிடு',
       savedAt: 'இந்தச் சாதனத்தில் சேமிக்கப்பட்டது · {time}',
       saveRefused: 'உங்கள் எழுத்தைச் சேமிக்க இந்த உலாவி அனுமதிக்கவில்லை.',
-      savedFile: '“{file}” உங்கள் சாதனத்தில் சேமிக்கப்பட்டது — {total}-ல் {wrote} சிந்தனைகள் எழுதப்பட்டுள்ளன.',
-      savedFileBlank: '“{file}” சேமிக்கப்பட்டது — கேள்விகள் அங்கே உள்ளன, நீங்கள் எழுதத் தயார்.',
+      savedFile: '“{file}” உங்கள் சாதனத்தில் சேமிக்கப்பட்டது. {total}-ல் {wrote} சிந்தனைகள் எழுதப்பட்டுள்ளன.',
+      savedFileBlank: '“{file}” சேமிக்கப்பட்டது. கேள்விகள் அங்கே உள்ளன, நீங்கள் எழுதத் தயார்.',
       exportFailed: 'இந்தச் சாதனத்தில் ஆவணத்தை உருவாக்க முடியவில்லை. அச்சிடு பொத்தானைப் பயன்படுத்தி “PDF ஆகச் சேமி” என்பதைத் தேர்ந்தெடுங்கள்.',
 
       prevTopic: 'முந்தையது',
@@ -514,7 +514,7 @@ var Lang = (function () {
       docSaved: '{date} அன்று சேமிக்கப்பட்டது',
       docNotWritten: '(இன்னும் எழுதப்படவில்லை)',
       docClosingPrayer: 'நிறைவுச் செபம்',
-      docClosingPrayerLabelled: '{label} — நிறைவுச் செபம்',
+      docClosingPrayerLabelled: '{label}: நிறைவுச் செபம்',
       docCandidate: 'RCIA விண்ணப்பதாரர்',
       docFooter: 'Ad maiorem Dei gloriam',
       docLanguageNote: 'அமர்வுக் குறிப்பு ஆங்கிலத்தில் (இன்னும் மொழிபெயர்க்கப்படவில்லை).'
@@ -633,7 +633,7 @@ var Lang = (function () {
     var nodes = scope.querySelectorAll('[data-i18n]');
     Array.prototype.forEach.call(nodes, function (node) {
       /* data-i18n-when="translated" marks a line that is only worth
-         saying when the app is not speaking English — the note about
+         saying when the app is not speaking English, the note about
          which words are the Commission's and which are the app's. */
       if (node.getAttribute('data-i18n-when') === 'translated' && !translated) {
         node.hidden = true;

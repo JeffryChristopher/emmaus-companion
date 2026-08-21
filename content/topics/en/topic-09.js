@@ -1,5 +1,5 @@
 /* ============================================================
-   TOPIC 9 — God the Son – 1) Who is Jesus
+   TOPIC 9: God the Son – 1) Who is Jesus
    Source: "PD RCIA Cdt Tp09 God the Son - 1) Who is Jesus.pdf"
 
    The teaching text below is transcribed VERBATIM from the note
@@ -8,7 +8,7 @@
 
    Transcription note for the proofreader: in Part D the source
    reads "He studied Christianity Christology mystical body of
-   Christ" — reproduced here exactly as printed.
+   Christ", reproduced here exactly as printed.
 
    The questions under journal E are the APP's, drawn from the
    note's own activity and reflection instructions.
@@ -110,7 +110,7 @@ window.RCIA.topics.en[9] = {
             {
               title: 'What does it mean when we say that Jesus Christ is both fully God and fully man?', joiner: '\n',
               body: 'The bible tells us that Jesus Christ is fully God and fully man according to 1Tim 3:16 and Colossians 2:9:',
-              afterBody: '“He was revealed in flesh, vindicated in spirit, seen by angels, proclaimed among Gentiles, believed in throughout the world, taken up in glory.” (1Tim 3:16) — “For in him the whole fullness of deity dwells bodily.” (Colossians 2:9).',
+              afterBody: '“He was revealed in flesh, vindicated in spirit, seen by angels, proclaimed among Gentiles, believed in throughout the world, taken up in glory.” (1Tim 3:16), “For in him the whole fullness of deity dwells bodily.” (Colossians 2:9).',
               marginal: { mark: 'Scripture', text: '1 Timothy 3:16' }
             },
             {

@@ -1,5 +1,5 @@
 /* ============================================================
-   THE EMMAUS COMPANION — Design Tokens
+   THE EMMAUS COMPANION: Design Tokens
    Penang Diocesan Catechetical Commission
    "Missal, not Material"
 
@@ -23,12 +23,12 @@
   --wash:        rgba(166, 124, 46, 0.07);
 
   /* ---- The colours of the four periods ---- */
-  --seed:        #46704F;   /* A · Evangelization      — green, the sowing */
-  --water:       #2F4E6E;   /* B · Catechumenate       — deep water, the font */
-  --lenten:      #5C3A6E;   /* C · Purification        — violet, Lent */
-  --paschal:     #8A6624;   /* D · Mystagogy           — gold (text-safe) */
+  --seed:        #46704F;   /* A · Evangelization: green, the sowing */
+  --water:       #2F4E6E;   /* B · Catechumenate: deep water, the font */
+  --lenten:      #5C3A6E;   /* C · Purification: violet, Lent */
+  --paschal:     #8A6624;   /* D · Mystagogy: gold (text-safe) */
   --paschal-lit: #C29A33;   /* D · ornament gold        (brighter, not for text) */
-  --pentecost:   #9E2B25;   /* the sending             — red */
+  --pentecost:   #9E2B25;   /* the sending: red */
 
   --seed-wash:    rgba(70, 112, 79, 0.11);
   --water-wash:   rgba(47, 78, 110, 0.11);

@@ -1,11 +1,11 @@
 /* ============================================================
-   THE EMMAUS COMPANION — Session page
+   THE EMMAUS COMPANION: Session page
    Renders one topic from content/topics/<lang>/topic-NN.js, mounts
    the journal, and hands the candidate a Word document on request.
 
    The note shown is the one approved in the chosen language. Where a
    topic has not been transcribed into that language yet, the English
-   note is shown under a notice saying so — never an empty page. The
+   note is shown under a notice saying so; never an empty page. The
    candidate's answers are stored against the topic and not against
    the language, so they survive the change either way.
    ============================================================ */
@@ -185,7 +185,7 @@
 
   /* `style` is 'lettered' (a, b, c…), 'numbered' (1, 2, 3…) or plain
      (a ✠, or whatever `marker` says). `start` continues a lettering
-     that the printed note broke in two — Topic 3 runs a) to d), prints
+     that the printed note broke in two; Topic 3 runs a) to d), prints
      a heading, then carries on at e). */
   function buildList(block) {
     var ordered = block.style === 'lettered' || block.style === 'numbered';
@@ -199,7 +199,7 @@
     return list;
   }
 
-  /* A table as the note prints one — Topic 17's matter and form of each
+  /* A table as the note prints one; Topic 17's matter and form of each
      sacrament, Topic 28's Sunday readings. `head` is a row of column
      headings; `rows` are rows of cells. Both are plain strings. It
      scrolls sideways inside its own frame rather than pushing the page
@@ -225,7 +225,7 @@
     (block.rows || []).forEach(function (cells) {
       var tr = el('tr');
       cells.forEach(function (cell, i) {
-        /* The first column names the row — a sacrament, a Sunday — so
+        /* The first column names the row, a sacrament, a Sunday, so
            it is a heading, and a screen reader says it before the cell. */
         var td = el(i === 0 && block.head ? 'th' : 'td', null, cell);
         if (i === 0 && block.head) { td.setAttribute('scope', 'row'); }
@@ -284,8 +284,8 @@
 
       /* Everything a printed point can carry after its opening
          sentence, in the order the note prints it: a table, a further
-         paragraph, a list, and — where the note breaks one list with a
-         heading and resumes it — a second paragraph and a second list. */
+         paragraph, a list, and, where the note breaks one list with a
+         heading and resumes it, a second paragraph and a second list. */
       if (item.table) { li.appendChild(buildTable(item.table)); }
       if (item.afterBody) {
         li.appendChild(el('p', null, item.afterBody));
@@ -334,8 +334,8 @@
 
      The link goes to a Bible in the candidate's own language, so a
      Tamil reader lands in a Tamil Bible. A reference to a book that
-     edition does not carry — the deuterocanonical books are absent
-     from the Malay AVB — is left as plain text rather than pointed at
+     edition does not carry, the deuterocanonical books are absent
+     from the Malay AVB; is left as plain text rather than pointed at
      a page that does not hold it. */
   function bibleLink(reference, label, passage) {
     var href = Scripture.url(passage || reference, chosen);

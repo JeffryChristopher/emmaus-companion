@@ -1,5 +1,5 @@
 /* ============================================================
-   TOPIC 27 — The Season of Lent
+   TOPIC 27: The Season of Lent
    Source: "PD RCIA Cdt Tp27 The Season of Lent.pdf"
 
    The teaching text below is transcribed VERBATIM from the note
@@ -7,7 +7,7 @@
    "improve" it. Proofread against the PDF before publishing.
 
    Transcription note for the proofreader: point 1 derives "Lent"
-   from "an old Anglo-Saxon word ‘lectern’" — reproduced here
+   from "an old Anglo-Saxon word ‘lectern’", reproduced here
    exactly as printed. If the Commission corrects the source, this
    file should be corrected to match it.
 

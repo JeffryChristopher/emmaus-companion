@@ -1,11 +1,11 @@
 /* ============================================================
-   தலைப்பு 29 — ஊதாரி மகன் - தியானம்
+   தலைப்பு 29, ஊதாரி மகன் - தியானம்
    மூலம்: "PD tRCIA Cdt Tp29 Prodigal Son Retreat.pdf"
 
    A RETREAT note: four parts (A–D), no Saint of the Topic, and
    journal-first throughout. Transcribed VERBATIM from the Tamil note
    approved under the Imprimatur. Do not paraphrase, shorten or
-   "improve" it, and do not translate it from the English note — this
+   "improve" it, and do not translate it from the English note, this
    is its own approved text. Proofread against the PDF before
    publishing.
 
@@ -19,7 +19,7 @@
        where the English note numbers them "i." and "ii.". Reproduced
        as printed.
      · The two `journal` prompts of Part D are the app's own wording,
-       not the note's — see README.md.
+       not the note's, see README.md.
 
    Journal ids and question counts MUST match content/topics/en/
    topic-29.js.
@@ -100,7 +100,7 @@ window.RCIA.topics.ta[29] = {
         {
           type: 'plate',
           image: null,
-          suggested: 'ஊதாரி மகனின் திரும்புதல் — ரெம்ப்ராண்ட் வான் ரெய்ன், சுமார் 1668, ஹெர்மிடேஜ் அருங்காட்சியகம் (பொதுக் களம்).',
+          suggested: 'ஊதாரி மகனின் திரும்புதல், ரெம்ப்ராண்ட் வான் ரெய்ன், சுமார் 1668, ஹெர்மிடேஜ் அருங்காட்சியகம் (பொதுக் களம்).',
           fileHint: 'assets/img/prodigal-son.jpg',
           caption: 'படத்தைப் பார்த்து மௌனமாகச் சிந்தியுங்கள்.'
         },
@@ -181,7 +181,7 @@ window.RCIA.topics.ta[29] = {
         {
           type: 'journal',
           id: 'D-ii',
-          prompt: 'கடவுளின் அன்புக்கும் இரக்கத்திற்கும் நன்றி செலுத்தும் எனது ஜெபம் — தினமும் ஜெபிக்க.',
+          prompt: 'கடவுளின் அன்புக்கும் இரக்கத்திற்கும் நன்றி செலுத்தும் எனது ஜெபம், தினமும் ஜெபிக்க.',
           questions: [
             { n: '❧', text: 'உங்கள் ஜெபத்தை இங்கே எழுதுங்கள்.' }
           ]

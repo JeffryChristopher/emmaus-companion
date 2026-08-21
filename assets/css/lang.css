@@ -1,11 +1,11 @@
 /* ============================================================
-   THE EMMAUS COMPANION — Scripts and the language chooser
+   THE EMMAUS COMPANION: Scripts and the language chooser
    Penang Diocesan Catechetical Commission
 
    tokens.css declares one Latin voice for the whole app. Tamil and
    Chinese are not served by it, so this file redeclares the three
-   type tokens for those languages and softens the Latin mannerisms —
-   wide tracking, drop capitals — that do not carry across.
+   type tokens for those languages and softens the Latin mannerisms (wide tracking, drop
+   capitals) that do not carry across.
 
    The webfonts these stacks reach for are fetched only when the
    language is chosen (see Lang.ensureFont in assets/js/i18n.js), so
@@ -121,7 +121,7 @@ html[data-lang="zh"] [lang="en"] {
 
 /* It stands at the very top of the page, above the title, so it is the
    first thing a candidate meets. Being first, it needs no rule above
-   it — the head of the page is edge enough — but it keeps the one
+   it (the head of the page is edge enough), but it keeps the one
    below, which separates it from the title it sits over. */
 .langpick {
   margin: -1.4rem 0 var(--gap-lg);
@@ -197,7 +197,7 @@ html[data-lang="zh"] .langpick-label {
 /* --- compact: the same control in a session's top bar ---
    A convenience for a reader who wants to change language without
    leaving the session. On a phone the top bar has no room for four
-   more names — it grew to three rows — so below 48rem this is put
+   more names; it grew to three rows, so below 48rem this is put
    away and the chooser on the journey map, one tap behind the
    "back" link, is the way to change language. */
 .langpick--compact {

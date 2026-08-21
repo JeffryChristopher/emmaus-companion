@@ -1,10 +1,10 @@
 /* ============================================================
-   THE EMMAUS COMPANION — The Journey map
+   THE EMMAUS COMPANION: The Journey map
    The forty-two sessions drawn as one road through four periods,
    with the Rites standing along it as gates.
 
    A session's title is shown in the chosen language when the note
-   itself exists in that language — the title then comes from the
+   itself exists in that language, the title then comes from the
    approved note, not from a translation this app made. Where the
    note has not been transcribed yet, the syllabus's own English
    title stands, and the stop says so.
@@ -73,7 +73,7 @@
     /* Only a stop that carries a candidate note opens. The Welcome,
        the briefings, the preparation and the Day of Recollection have
        no note in the syllabus, so they are named on the road and left
-       as they are — there is nothing behind them to read. */
+       as they are; there is nothing behind them to read. */
     var row;
     if (isWritten) {
       row = el('a', 'stop-link');

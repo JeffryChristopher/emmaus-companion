@@ -1,5 +1,5 @@
 /* ============================================================
-   TOPIC 23 — Sacrament of Service I: Marriage
+   TOPIC 23: Sacrament of Service I: Marriage
    Source: "PD RCIA Cdt Tp23 Sac of Service I - Marriage.pdf"
 
    The teaching text below is transcribed VERBATIM from the note
@@ -106,7 +106,7 @@ window.RCIA.topics.en[23] = {
             {
               title: 'What are the effects of the Sacrament of Matrimony/Marriage?', joiner: ' ',
               body: 'This sacrament establishes a perpetual and exclusive bond between the spouses, where love is self-giving, forgiving, faithful, creative, and there is oneness (CCC 1638-1642).',
-              marginal: { mark: 'CCC', text: '1638–1642 — The bond and the graces of the sacrament of Matrimony.' }
+              marginal: { mark: 'CCC', text: '1638–1642: The bond and the graces of the sacrament of Matrimony.' }
             },
             {
               title: 'What are the sins that gravely oppose the Sacrament of Marriage?', joiner: ' ',
@@ -128,7 +128,7 @@ window.RCIA.topics.en[23] = {
                 '(v) Annulment (CCC 1629). The church can annul and declare that a real and valid marriage never existed. People who are granted annulments are free to marry again.',
                 '(vi) Separation in a Marriage (CCC 1649). Separation is allowed when, for serious reasons, living together becomes practically impossible, even though there may be hope for reconciliation.'
               ],
-              marginal: { mark: 'CCC', text: '1629, 1649 — Declaration of nullity; separation while the bond remains.' }
+              marginal: { mark: 'CCC', text: '1629, 1649: Declaration of nullity; separation while the bond remains.' }
             },
             {
               title: 'What does it mean that the Christian family is the domestic Church?', joiner: ' ',

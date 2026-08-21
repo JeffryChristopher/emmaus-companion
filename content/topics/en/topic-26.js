@@ -1,5 +1,5 @@
 /* ============================================================
-   TOPIC 26 — Overview of the Ten Commandments
+   TOPIC 26: Overview of the Ten Commandments
    Source: "PD RCIA Cdt Tp26 Overview of the Ten Commandments.pdf"
 
    The teaching text below is transcribed VERBATIM from the note

@@ -1,5 +1,5 @@
 /* ============================================================
-   THE EMMAUS COMPANION — The Saints of the Journey
+   THE EMMAUS COMPANION: The Saints of the Journey
 
    Every Saint for the Topic, gathered from the notes themselves and
    set out in the order of the calendar, so that a candidate who
@@ -11,16 +11,15 @@
    session page says and can never drift from it.
 
    One wrinkle worth knowing. A translated note gives its feast day
-   in its own language and script — "28 Januari", "1月28日",
-   "ஜனவரி 28" — and even labels the fact differently from one note
+   in its own language and script; "28 Januari", "1月28日",
+   "ஜனவரி 28", and even labels the fact differently from one note
    to the next. So the DATE a saint is filed under is always read
    from the English note, which is complete and writes dates one way;
    only the words shown are taken from the chosen language. The month
    headings are asked of Intl, so they appear in the reader's
    language without being written down here at all.
 
-   A saint whose note gives no feast day — Athanasius, in Topic 7 —
-   is not given one. The app does not know it, and guessing at a
+   A saint whose note gives no feast day; Athanasius, in Topic 7; is not given one. The app does not know it, and guessing at a
    saint's day in a catechetical book is not the app's to do. Those
    stand in a group of their own at the end.
    ============================================================ */
@@ -48,8 +47,8 @@ var Saints = (function () {
     return found;
   }
 
-  /* The notes label their facts inconsistently — "Feast day", "Feast
-     Day", "Patron", "Patron of", "Born", "Birth" — so a fact is found
+  /* The notes label their facts inconsistently; "Feast day", "Feast
+     Day", "Patron", "Patron of", "Born", "Birth", so a fact is found
      by what its label starts with, not by an exact match. */
   function fact(saint, prefix) {
     var hit = (saint.facts || []).filter(function (f) {
@@ -122,7 +121,7 @@ var Saints = (function () {
   /* The feast day written the way the reader's language writes a date
      with no year in it: "January 28", "28 Januari", "1月28日". Gluing
      a numeral onto a month name would give "一月 28", which is not how
-     Chinese writes a date at all — so Intl is asked for the whole
+     Chinese writes a date at all, so Intl is asked for the whole
      thing. A leap year, so that a 29 February feast could be held. */
   function feastLabel(date, code) {
     if (!date) { return null; }

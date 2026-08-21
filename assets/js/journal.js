@@ -1,5 +1,5 @@
 /* ============================================================
-   THE EMMAUS COMPANION — The Journal
+   THE EMMAUS COMPANION: The Journal
    Penang Diocesan Catechetical Commission
 
    Everything the candidate writes is kept in this browser's own

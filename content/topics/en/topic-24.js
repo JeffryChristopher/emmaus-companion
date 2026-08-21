@@ -1,5 +1,5 @@
 /* ============================================================
-   TOPIC 24 — Sacrament of Service II: Holy Orders
+   TOPIC 24: Sacrament of Service II: Holy Orders
    Source: "PD RCIA Cdt Tp24 Sac of Service II - Holy Orders.pdf"
 
    The teaching text below is transcribed VERBATIM from the note
@@ -10,7 +10,7 @@
    note is numbered "6." where every other point is numbered "6)";
    the numbering here is drawn by the app, so the inconsistency is
    not visible. Point 3 reads "every Christian share in the
-   priesthood" — reproduced as printed.
+   priesthood", reproduced as printed.
 
    The questions under journal E are the APP's, drawn from the
    note's own activity and reflection instructions.

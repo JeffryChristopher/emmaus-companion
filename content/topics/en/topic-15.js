@@ -1,5 +1,5 @@
 /* ============================================================
-   TOPIC 15 — Liturgical Year & Calendar, Advent/Christmas Season
+   TOPIC 15: Liturgical Year & Calendar, Advent/Christmas Season
    Source: "PD RCIA Cdt Tp15 Liturgical Yr n Calendar, Advent n
    Xmas Season.pdf"
 
@@ -37,7 +37,7 @@ window.RCIA.topics.en[15] = {
         {
           type: 'plate',
           image: null,
-          suggested: 'The note prints a diagram in two halves. Above, "Time as Linear": an arrow running from The Past through The Present to The Future. Below, "Time as Cycle": the four seasons turning from spring through summer, autumn and winter, beside the life cycle of a butterfly — eggs, caterpillar, pupa, butterfly.',
+          suggested: 'The note prints a diagram in two halves. Above, "Time as Linear": an arrow running from The Past through The Present to The Future. Below, "Time as Cycle": the four seasons turning from spring through summer, autumn and winter, beside the life cycle of a butterfly, eggs, caterpillar, pupa, butterfly.',
           fileHint: 'assets/img/topics/time-linear-cycle.jpg',
           caption: 'The diagram in the note'
         },

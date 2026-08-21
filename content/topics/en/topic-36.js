@@ -1,5 +1,5 @@
 /* ============================================================
-   TOPIC 36 — Ecumenism and Interreligious Dialogue
+   TOPIC 36: Ecumenism and Interreligious Dialogue
    Source: "PD RCIA Cdt Tp36 Ecumenism n Interreligious
    Dialogue.pdf"
 

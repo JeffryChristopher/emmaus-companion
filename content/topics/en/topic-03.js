@@ -1,5 +1,5 @@
 /* ============================================================
-   TOPIC 3 — Scripture – The Bible
+   TOPIC 3: Scripture – The Bible
    Source: "PD RCIA Cdt Tp03 Sacred Scripture - The Bible.pdf"
 
    The teaching text below is transcribed VERBATIM from the note
@@ -7,7 +7,7 @@
    "improve" it. Proofread against the PDF before publishing.
 
    Transcription notes for the proofreader:
-   · Part A of the printed note carries NO introduction text — only
+   · Part A of the printed note carries NO introduction text, only
      a montage of four old photographs of Penang, which the first
      question refers to ("the above pictures"). The picture is
      described in the `plate` block below and is still to be added;
@@ -140,7 +140,7 @@ window.RCIA.topics.en[3] = {
             {
               title: 'Inerrancy of the Bible', joiner: ' - ',
               body: 'Inerrancy, meaning “the quality of being without error”, describes the truth of Scripture through the doctrine that is inspired by the Holy Spirit. Since God is the author of Scripture, everything that the human authors affirm is affirmed by the Holy Spirit (CCC 107).',
-              marginal: { mark: 'CCC', text: '107 — The books of Scripture teach the truth God wished to see confided to them.' }
+              marginal: { mark: 'CCC', text: '107: The books of Scripture teach the truth God wished to see confided to them.' }
             },
             {
               title: 'The Context of Sacred Scripture', joiner: ' – ',
@@ -149,7 +149,7 @@ window.RCIA.topics.en[3] = {
             {
               title: 'Reading and interpreting the bible', joiner: ' - ',
               body: 'To interpret Scripture correctly, the reader must be attentive to the original social and historical context and what the human authors truly wanted to affirm, and to what God wanted to reveal to us by their words (CCC 109).',
-              marginal: { mark: 'CCC', text: '109 — Attend to what the human authors truly wanted to affirm.' }
+              marginal: { mark: 'CCC', text: '109: Attend to what the human authors truly wanted to affirm.' }
             },
             {
               title: 'The senses of Scripture', joiner: ' – ',

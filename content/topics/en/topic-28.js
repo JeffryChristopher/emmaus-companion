@@ -1,5 +1,5 @@
 /* ============================================================
-   TOPIC 28 — Preparation for the Period of Purification and
+   TOPIC 28: Preparation for the Period of Purification and
    Enlightenment
    Source: "PD RCIA Cdt Tp28 Prep for Prd of Purifi n
    Enlightenment.pdf"
@@ -9,7 +9,7 @@
    "improve" it. Proofread against the PDF before publishing.
 
    Point 6 of the printed note carries a table of the Scrutiny
-   readings — Sunday, Gospel passage, theme and sacramental symbol —
+   readings, Sunday, Gospel passage, theme and sacramental symbol , 
    reproduced here column for column. The note has only eight
    teaching points, not the usual ten.
 
@@ -142,7 +142,7 @@ window.RCIA.topics.en[28] = {
               title: 'What is the reason for choosing a baptismal name?', joiner: '\n',
               body: '“In Baptism, the Lord’s name sanctifies man, and the Christian receives his name in the Church. This can be the name of a saint, that is, of a disciple who has lived a life of exemplary fidelity to the Lord…. (CCC2156).',
               afterBody: '“God calls each one by name. Everyone’s name is sacred. The name is the icon of the person. It demands respect as a sign of the dignity of the one who bears it” (CCC 2158).',
-              marginal: { mark: 'CCC', text: '2156, 2158 — The Christian name, and the reverence due to every name.' }
+              marginal: { mark: 'CCC', text: '2156, 2158: The Christian name, and the reverence due to every name.' }
             }
           ]
         }
