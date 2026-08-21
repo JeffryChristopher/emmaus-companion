@@ -24,7 +24,18 @@ body {
 .export .namefield,
 .export .status,
 .seal,
+.langpick,
 .legend { display: none !important; }
+
+/* The notice that this session is printed in English because the
+   chosen language has none yet belongs on the paper: it explains
+   what the reader is holding. */
+.seal--notice {
+  display: flex !important;
+  border: 1px solid #999999 !important;
+  background: none !important;
+  color: #000000 !important;
+}
 
 .shell { max-width: none; padding: 0; }
 

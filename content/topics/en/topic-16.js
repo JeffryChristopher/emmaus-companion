@@ -9,8 +9,9 @@
 
 window.RCIA = window.RCIA || {};
 window.RCIA.topics = window.RCIA.topics || {};
+window.RCIA.topics.en = window.RCIA.topics.en || {};
 
-window.RCIA.topics[16] = {
+window.RCIA.topics.en[16] = {
   topic: 16,
   session: 17,
   period: 'B',

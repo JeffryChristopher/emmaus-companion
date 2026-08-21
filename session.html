@@ -6,12 +6,28 @@
 <title>Session · The Emmaus Companion</title>
 <meta name="color-scheme" content="light dark">
 
+<!-- The chosen language decides the typeface, so it is put on <html>
+     before the first paint. -->
+<script>
+(function () {
+  try {
+    var prefs = JSON.parse(localStorage.getItem('emmaus.prefs.v1')) || {};
+    var tags = { en: 'en', ms: 'ms', zh: 'zh-Hans', ta: 'ta' };
+    if (tags[prefs.lang]) {
+      document.documentElement.setAttribute('lang', tags[prefs.lang]);
+      document.documentElement.setAttribute('data-lang', prefs.lang);
+    }
+  } catch (e) { /* no storage: English, as the markup already says */ }
+})();
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Caveat:wght@500;600&display=swap">
 
 <link rel="stylesheet" href="assets/css/tokens.css">
 <link rel="stylesheet" href="assets/css/app.css">
+<link rel="stylesheet" href="assets/css/lang.css">
 <link rel="stylesheet" href="assets/css/print.css" media="print">
 </head>
 <body>
@@ -19,8 +35,11 @@
 <div class="ribbon" aria-hidden="true"></div>
 
 <div class="topbar">
-  <a class="home-link" href="index.html">← The journey</a>
+  <a class="home-link" href="index.html" data-i18n="backLink">← The journey</a>
   <div class="tools">
+    <!-- The language is chosen on the journey map; it can also be
+         changed here, without leaving the session being read. -->
+    <div id="langPickCompact"></div>
     <button class="tool-btn" type="button" id="typeBtn" aria-pressed="false">A Reading size</button>
     <button class="tool-btn" type="button" id="themeBtn" aria-label="Switch theme">☀ Daylight</button>
   </div>
@@ -28,17 +47,27 @@
 
 <main class="shell" id="sessionRoot"></main>
 
+<script src="assets/js/i18n.js"></script>
 <script src="assets/js/app.js"></script>
 <script src="assets/js/journal.js"></script>
 <script src="assets/js/docx.js"></script>
 <script src="assets/js/export.js"></script>
 <script src="assets/js/scripture.js"></script>
 <script src="content/syllabus.js"></script>
-<script src="content/topics/topic-01.js"></script>
-<script src="content/topics/topic-16.js"></script>
-<script src="content/topics/topic-29.js"></script>
+<script src="content/topics/en/topic-01.js"></script>
+<script src="content/topics/en/topic-16.js"></script>
+<script src="content/topics/en/topic-29.js"></script>
+<script src="content/topics/ms/topic-01.js"></script>
+<script src="content/topics/ms/topic-16.js"></script>
+<script src="content/topics/zh/topic-01.js"></script>
+<script src="content/topics/ta/topic-01.js"></script>
+<script src="content/topics/ta/topic-16.js"></script>
+<script src="content/topics/ta/topic-29.js"></script>
 <script src="assets/js/session.js"></script>
-<script>Emmaus.mountControls();</script>
+<script>
+Emmaus.mountControls();
+Lang.mountPicker(document.getElementById('langPickCompact'), { compact: true });
+</script>
 
 </body>
 </html>

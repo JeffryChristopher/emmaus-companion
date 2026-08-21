@@ -16,8 +16,9 @@
 
 window.RCIA = window.RCIA || {};
 window.RCIA.topics = window.RCIA.topics || {};
+window.RCIA.topics.en = window.RCIA.topics.en || {};
 
-window.RCIA.topics[29] = {
+window.RCIA.topics.en[29] = {
   topic: 29,
   session: 32,
   period: 'C',

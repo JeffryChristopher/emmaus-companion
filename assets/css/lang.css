@@ -1,0 +1,234 @@
+/* ============================================================
+   THE EMMAUS COMPANION — Scripts and the language chooser
+   Penang Diocesan Catechetical Commission
+
+   tokens.css declares one Latin voice for the whole app. Tamil and
+   Chinese are not served by it, so this file redeclares the three
+   type tokens for those languages and softens the Latin mannerisms —
+   wide tracking, drop capitals — that do not carry across.
+
+   The webfonts these stacks reach for are fetched only when the
+   language is chosen (see Lang.ensureFont in assets/js/i18n.js), so
+   an English or Malay reader never pays for them.
+   ============================================================ */
+
+/* --- Bahasa Malaysia keeps the Latin faces exactly as they are. --- */
+
+/* --- Tamil ------------------------------------------------------ */
+html[data-lang="ta"] {
+  --face-display: "Noto Serif Tamil", "Nirmala UI", Latha, "EB Garamond", Georgia, serif;
+  --face-body:    "Noto Serif Tamil", "Nirmala UI", Latha, "EB Garamond", Georgia, serif;
+  --face-hand:    "Noto Serif Tamil", "Nirmala UI", Latha, cursive;
+  /* Tamil sets a taller x-height and needs more room between lines. */
+  --lh-body: 1.78;
+}
+
+/* --- Chinese ---------------------------------------------------- */
+html[data-lang="zh"] {
+  --face-display: "Noto Serif SC", "Songti SC", SimSun, "Source Han Serif SC", Georgia, serif;
+  --face-body:    "Noto Serif SC", "Songti SC", SimSun, "Source Han Serif SC", Georgia, serif;
+  --face-hand:    "Noto Serif SC", "Songti SC", "Kaiti SC", KaiTi, cursive;
+  --lh-body: 1.85;
+}
+
+/* --- what does not travel ---------------------------------------
+   Letter-spacing pulls a Tamil conjunct apart and loosens a Chinese
+   character grid; a drop capital in either script is a whole
+   syllable or word blown up to three lines. Both are dropped, and
+   the weight of the display face carries the emphasis instead. */
+
+html[data-lang="ta"] .display,
+html[data-lang="zh"] .display,
+html[data-lang="ta"] .part-head h2,
+html[data-lang="zh"] .part-head h2,
+html[data-lang="ta"] .period-head h2,
+html[data-lang="zh"] .period-head h2,
+html[data-lang="ta"] .session-head h1,
+html[data-lang="zh"] .session-head h1,
+html[data-lang="ta"] .export h2,
+html[data-lang="zh"] .export h2,
+html[data-lang="ta"] .notice h1,
+html[data-lang="zh"] .notice h1 {
+  letter-spacing: normal;
+}
+
+html[data-lang="ta"] .part .lead::first-letter,
+html[data-lang="zh"] .part .lead::first-letter {
+  font-size: inherit;
+  float: none;
+  padding: 0;
+  line-height: inherit;
+  font-weight: inherit;
+  color: inherit;
+  font-family: inherit;
+}
+
+/* Uppercasing is a no-op in both scripts, but the tracking that goes
+   with it is not: these small rubric labels stay legible only when
+   the letters are left alone. */
+html[data-lang="ta"] .sec-rubric,
+html[data-lang="zh"] .sec-rubric,
+html[data-lang="ta"] .period-tag,
+html[data-lang="zh"] .period-tag,
+html[data-lang="ta"] .topic-no,
+html[data-lang="zh"] .topic-no,
+html[data-lang="ta"] .eyebrow,
+html[data-lang="zh"] .eyebrow,
+html[data-lang="ta"] .flag,
+html[data-lang="zh"] .flag,
+html[data-lang="ta"] .pager .lbl,
+html[data-lang="zh"] .pager .lbl,
+html[data-lang="ta"] .namefield label,
+html[data-lang="zh"] .namefield label,
+html[data-lang="ta"] .versicle .vref,
+html[data-lang="zh"] .versicle .vref {
+  letter-spacing: 0.04em;
+}
+
+/* A word in Tamil or Chinese has no spaces to break at the way a
+   long English one does; let the browser break inside it rather than
+   push the column sideways. */
+html[data-lang="ta"] .stop .title,
+html[data-lang="zh"] .stop .title,
+html[data-lang="ta"] .session-head h1,
+html[data-lang="zh"] .session-head h1 {
+  overflow-wrap: anywhere;
+}
+
+/* An English note under a Tamil or Chinese chrome keeps the Latin
+   voice it was set in. */
+[lang="en"] {
+  font-family: var(--face-body);
+}
+html[data-lang="ta"] [lang="en"],
+html[data-lang="zh"] [lang="en"] {
+  font-family: "EB Garamond", Georgia, "Times New Roman", serif;
+}
+
+/* ============================================================
+   The language chooser
+   Four names, each written in its own script, so a candidate who
+   reads no English can still find their own language.
+   ============================================================ */
+
+.langpick {
+  margin: 0 0 var(--gap-lg);
+  padding: var(--gap) var(--gap-sm);
+  border-top: 1px solid var(--rule-faint);
+  border-bottom: 1px solid var(--rule-faint);
+  text-align: center;
+}
+
+.langpick-label {
+  margin: 0 0 var(--gap-sm);
+  font-family: var(--face-body);
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--rubric);
+}
+html[data-lang="ta"] .langpick-label,
+html[data-lang="zh"] .langpick-label {
+  letter-spacing: 0.04em;
+  font-size: 0.86rem;
+}
+
+.langpick-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--gap-xs);
+}
+
+.langpick-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  min-height: 44px;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: 1px solid var(--rule-faint);
+  border-radius: 2px;
+  color: var(--ink-soft);
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.3;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.langpick-btn:hover {
+  border-color: var(--rule);
+  background: var(--wash);
+  color: var(--ink);
+}
+
+.langpick-btn:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* The chosen one is marked the way the journey marks a place you
+   have reached: in rubric red, with the gilt rule beneath it. */
+.langpick-btn[aria-checked="true"] {
+  border-color: var(--gilt);
+  background: var(--wash);
+  color: var(--rubric);
+  font-weight: 600;
+  cursor: default;
+}
+
+.langpick-name { display: block; }
+
+.langpick-gloss {
+  display: block;
+  font-family: "EB Garamond", Georgia, serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.langpick-btn[aria-checked="true"] .langpick-gloss { color: var(--gilt-ink); }
+
+/* A language whose own name is its English name needs no gloss line;
+   keeping the others level looks tidier than letting one sit high. */
+.langpick-btn:not(:has(.langpick-gloss)) { justify-content: center; }
+
+/* --- compact: the same control in a session's top bar ---
+   A convenience for a reader who wants to change language without
+   leaving the session. On a phone the top bar has no room for four
+   more names — it grew to three rows — so below 48rem this is put
+   away and the chooser on the journey map, one tap behind the
+   "back" link, is the way to change language. */
+.langpick--compact {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-xs);
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.langpick--compact .langpick-label {
+  margin: 0;
+  font-size: 0.68rem;
+}
+.langpick--compact .langpick-btn {
+  /* the same 44px touch target every other control in the app keeps */
+  min-height: 44px;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.92rem;
+}
+
+@media (max-width: 48rem) {
+  .langpick--compact { display: none; }
+}
+
+/* ============================================================
+   The notice shown when a topic is not in the chosen language yet
+   ============================================================ */
+
+.seal--notice {
+  border-color: var(--gilt);
+  background: var(--paschal-wash);
+}
