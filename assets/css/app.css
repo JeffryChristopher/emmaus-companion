@@ -35,18 +35,34 @@ a:hover { text-decoration-color: currentColor; }
 
 img { max-width: 100%; height: auto; }
 
-/* ---------- The ribbon: where you are ---------- */
+/* ---------- The ribbon ----------------------------------------------
+   A bookmark hanging from the top of the leaf. On a phone and on any
+   screen narrow enough that the reading column has no margin to spare,
+   it tucks against the very edge and scrolls away with the page, so it
+   never sits over the words.                                          */
 .ribbon {
-  position: fixed;
+  position: absolute;
   top: 0;
-  left: clamp(0.7rem, 3.5vw, 3rem);
-  width: 13px;
-  height: 108px;
+  left: 0;
+  width: 10px;
+  height: 58px;
   background: var(--rubric);
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 9px), 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 7px), 0 100%);
   opacity: 0.92;
   z-index: 20;
   pointer-events: none;
+}
+
+/* Only once the widest page (the journey map, 62rem) has a real gutter
+   does the ribbon hang in it and stay put while the page scrolls. */
+@media (min-width: 1100px) {
+  .ribbon {
+    position: fixed;
+    left: clamp(0.7rem, 3.5vw, 3rem);
+    width: 13px;
+    height: 108px;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 9px), 0 100%);
+  }
 }
 
 /* ---------- Shell ---------- */
