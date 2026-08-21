@@ -81,9 +81,17 @@ html[data-lang="zh"] .pager .lbl,
 html[data-lang="ta"] .namefield label,
 html[data-lang="zh"] .namefield label,
 html[data-lang="ta"] .versicle .vref,
-html[data-lang="zh"] .versicle .vref {
+html[data-lang="zh"] .versicle .vref,
+html[data-lang="ta"] .stop .topicno,
+html[data-lang="zh"] .stop .topicno {
   letter-spacing: 0.04em;
 }
+
+/* "Topic" is a longer word in Tamil (தலைப்பு) than in English, so the
+   column that holds it on the journey map has to be wider or the
+   number wraps under its own label. */
+html[data-lang="ta"] .road { --stop-num: 7.1rem; }
+html[data-lang="ms"] .road { --stop-num: 4.7rem; }
 
 /* A word in Tamil or Chinese has no spaces to break at the way a
    long English one does; let the browser break inside it rather than

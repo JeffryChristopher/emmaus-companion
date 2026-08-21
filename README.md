@@ -4,16 +4,19 @@ The RCIA session notes of the Diocese of Penang, as a digital companion for
 candidates, with a private reflection journal that becomes a Word document.
 In **English, Bahasa Malaysia, Mandarin and Tamil**.
 
-**Phase I.** Three topics are built end to end, one for each shape of note:
+**All 37 topics are transcribed in English.** Every stop on the journey map
+that carries a session note can be opened and written in. Three of the notes
+do not follow the ordinary five-part shape and are kept as they are printed:
 
-| Topic | Session | Period | Why it is in the pilot |
-|---|---|---|---|
-| 1 — Our Search for Meaning in Life and Our Capacity for God | 2 | A | the standard five-part note (A–E) |
-| 16 — The Mass Explained | 17 | B | question-and-answer teaching points, sub-lists, an activity |
-| 29 — Prodigal Son Retreat | 32 | C | the retreat shape (A–D, no Saint, journal-first) |
+| Topic | Shape |
+|---|---|
+| 18 — Spiritual Preparation for Christmas | one page: Preparation, Read and Reflect, Pre-Christmas Fellowship |
+| 29 — Prodigal Son Retreat | a retreat: A–D, no Saint, journal-first |
+| 37 — Life in the Holy Spirit Retreat | a retreat in six parts, A–F, no Topic of the Day and no Saint |
 
-The other 34 topics appear on the journey map, marked *Phase II*, so the whole
-road is visible from the first day.
+The other five stops on the map — the Welcome, the briefings and the Day of
+Recollection — have no candidate note in the syllabus, so they are shown on the
+map but do not open.
 
 ---
 
@@ -25,11 +28,13 @@ they save, and the typeface the page is set in.
 
 Which notes are transcribed so far:
 
-| Topic | English | Bahasa Malaysia | 华语 | தமிழ் |
+| | English | Bahasa Malaysia | 华语 | தமிழ் |
 |---|:-:|:-:|:-:|:-:|
-| 1 — Meaning in Life | ✓ | ✓ | ✓ | ✓ |
-| 16 — The Mass Explained | ✓ | ✓ | — | ✓ |
-| 29 — Prodigal Son Retreat | ✓ | — | — | ✓ |
+| Notes approved by the Commission | 37 | 20 | 11 | 37 |
+| Transcribed into the app | **37** | 2 | 1 | 3 |
+
+Bahasa Malaysia has Topics 1 and 16; 华语 has Topic 1; தமிழ் has Topics 1, 16
+and 29.
 
 A topic with no note in the chosen language **falls back to English**, under a
 notice in the chosen language saying so. The journey map marks those stops the
@@ -97,8 +102,8 @@ App/
     topics/
       en/               one folder per language, one file per topic
         topic-01.js     — THE APPROVED TEXT, in that language
-        topic-16.js
-        topic-29.js
+        …               topic-01 … topic-37, all 37
+        topic-37.js
       ms/  topic-01.js, topic-16.js
       zh/  topic-01.js
       ta/  topic-01.js, topic-16.js, topic-29.js
@@ -127,7 +132,7 @@ App/
 
 ---
 
-## Adding a topic (Phase II)
+## Adding a topic
 
 1. Copy `content/topics/en/topic-16.js` to `content/topics/<code>/topic-NN.js`,
    where `<code>` is `en`, `ms`, `zh` or `ta`.
@@ -197,8 +202,21 @@ Each part (A, B, C…) holds a list of blocks. The available blocks are:
 | `list` | a bulleted (✠) or lettered list |
 | `saint` | the Saint of the Topic plate |
 | `plate` | a picture with its caption |
+| `table` | a table the note prints, ruled and scrollable |
+| `media` | a video or page the note sends the candidate to |
 | `prayer` | a closing prayer |
 | `journal` | questions with ruled writing lines |
+
+A `points` item may carry, after its opening sentence and in this order:
+`table`, `afterBody` (a further paragraph), `list`, `afterList`, `list2`. The
+last two exist because a printed note sometimes breaks one lettered list with a
+heading and then carries on — Topic 3 runs a) to d), prints a heading, and
+resumes at e), which is what `list2Start: 5` is for. A `list` may be `lettered`,
+`numbered` or plain, and takes a `start`.
+
+Some printed points answer their own question with nothing but a list or a
+table. Those carry no `body`, and the checker allows it — inventing a sentence
+to fill the gap would not be transcription.
 
 ### Bible links
 
@@ -342,6 +360,18 @@ every time the checker runs.
 
 - **The name.** *The Emmaus Companion* is a proposal, not a decision. It appears
   in `index.html`, `session.html` and the document header in `export.js`.
+- **The pictures the notes print.** Nine of the English notes carry a picture
+  that a question then depends on — the old photographs of Penang in Topic 3,
+  the people of many religions at prayer in Topic 6, the linear-and-cyclical
+  time diagram in Topic 15, and so on. Those pages carry a `plate` describing
+  the picture and naming the file to save it as, so the question still makes
+  sense; the picture itself is not in this repository, because publishing the
+  notes' photographs on a public site is the Commission's decision, not a
+  technical one. The extracted images are staged outside the app, in
+  `Transcription Tools/extracted-images/`, ready to be copied into
+  `assets/img/topics/` if the Commission agrees. Purely decorative pictures
+  (Topic 21's page-1 photographs) were left out entirely and are noted in the
+  file that omits them.
 - **Saint portraits and the retreat picture.** The plates are built to look
   right without a picture. To add one, put the file in `assets/img/saints/` and
   name it in the topic's `saint` block (`image: 'assets/img/saints/aquinas.jpg'`).
@@ -367,10 +397,23 @@ every time the checker runs.
 - **The period names in each language.** They are the app's translations of an
   English-only schema and want the Commission's eye. They are all in one place:
   `periods` in `assets/js/i18n.js`.
-- **The remaining translated notes.** Bahasa Malaysia has 20 of the 37 topics,
-  Mandarin 11, Tamil all 37. Of the three topics in this pilot, Mandarin is
-  missing 16 and 29, and Bahasa Malaysia is missing 29 — those fall back to
-  English until the Commission issues them.
+- **The remaining translated notes.** English is complete. Bahasa Malaysia has
+  2 of its 20 approved notes transcribed, 华语 1 of 11, தமிழ் 3 of 37. Every
+  topic not yet transcribed in a language falls back to English under a notice.
+- **Which of these two is Topic 32.** The Syllabus Schema and the candidates'
+  notes disagree: the Schema numbers *Personal Transformation and
+  Evangelization* as Topic 32 and *Communion in the Church, Fellowship* as
+  Topic 33; the notes are numbered the other way round. The order of the
+  sessions and their titles agree, so only the number is in question. The app
+  follows the notes, because the number on the note is the one in the
+  candidate's hand. It is one line in `content/syllabus.js` to change back.
+- **Two dozen small errors in the printed notes.** Copy-paste leftovers from
+  the Topic 1 note appear in Topics 12 and 13; Topic 2's saint carries a
+  sentence belonging to St Thomas Aquinas; Topic 27 derives "Lent" from
+  "lectern"; Topic 37 asks about a "Nick" the candidate's note never
+  introduces. All are transcribed exactly as printed and flagged in the comment
+  at the top of the file that contains them, so a proofreader can find every
+  one by searching the content folder for "Transcription note".
 
 ---
 

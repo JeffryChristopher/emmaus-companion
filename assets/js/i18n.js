@@ -76,8 +76,8 @@ var Lang = (function () {
       briefing: 'Briefing',
       reflections: '{n} reflections',
       reflection1: '1 reflection',
-      comingLater: 'Topic {n} · Phase II',
-      englishOnly: 'Topic {n} · in English',
+      comingLater: 'Phase II',
+      englishOnly: 'In English',
 
       journalHeading: 'Your journal',
       journalEmpty: 'Nothing is written yet. Open a session and begin — whatever you write stays on this device, and you save it as a Word document when you are done.',
@@ -109,7 +109,7 @@ var Lang = (function () {
       readChapterTitle: 'Read {chapter} in the {bible} (opens in a new tab)',
       readMore: 'Read more: ',
       pictureTitle: 'The picture',
-      pictureNote: 'The retreat team shows this image on the day. To place it in the app, save the picture as {file} and name that file in the topic content.',
+      pictureNote: 'This picture is printed in the session note. To place it in the app, save it as {file} and name that file in the topic content.',
 
       writeHere: 'Write here…',
       yourReflection: 'Your reflection: {question}',
@@ -180,8 +180,8 @@ var Lang = (function () {
       briefing: 'Taklimat',
       reflections: '{n} renungan',
       reflection1: '1 renungan',
-      comingLater: 'Topik {n} · Fasa II',
-      englishOnly: 'Topik {n} · dalam bahasa Inggeris',
+      comingLater: 'Fasa II',
+      englishOnly: 'Dalam bahasa Inggeris',
 
       journalHeading: 'Jurnal anda',
       journalEmpty: 'Belum ada apa-apa yang ditulis. Bukalah satu sesi dan mulakan — apa sahaja yang anda tulis kekal pada peranti ini, dan anda menyimpannya sebagai dokumen Word apabila selesai.',
@@ -213,7 +213,7 @@ var Lang = (function () {
       readChapterTitle: 'Baca {chapter} dalam {bible} (dibuka dalam tab baharu)',
       readMore: 'Baca lanjut: ',
       pictureTitle: 'Gambar',
-      pictureNote: 'Pasukan retret menunjukkan imej ini pada hari tersebut. Untuk meletakkannya dalam aplikasi, simpan gambar sebagai {file} dan namakan fail itu dalam kandungan topik.',
+      pictureNote: 'Gambar ini dicetak dalam nota sesi. Untuk meletakkannya dalam aplikasi, simpan gambar sebagai {file} dan namakan fail itu dalam kandungan topik.',
 
       writeHere: 'Tulis di sini…',
       yourReflection: 'Renungan anda: {question}',
@@ -283,8 +283,8 @@ var Lang = (function () {
       briefing: '说明',
       reflections: '{n} 篇反思',
       reflection1: '1 篇反思',
-      comingLater: '主题 {n} · 第二阶段',
-      englishOnly: '主题 {n} · 英文版',
+      comingLater: '第二阶段',
+      englishOnly: '英文版',
 
       journalHeading: '你的札记',
       journalEmpty: '还没有写下任何内容。打开一课就可以开始——你所写的一切都留在这部装置上，写完后再存成 Word 文件。',
@@ -316,7 +316,7 @@ var Lang = (function () {
       readChapterTitle: '在《{bible}》阅读{chapter}（在新分页开启）',
       readMore: '延伸阅读：',
       pictureTitle: '图像',
-      pictureNote: '避静团队会在当天展示此图像。若要放入应用程式，请将图片存为 {file}，并在主题内容中指明该档案。',
+      pictureNote: '此图像印在课程讲义中。若要放入应用程式，请将图片存为 {file}，并在主题内容中指明该档案。',
 
       writeHere: '在此书写…',
       yourReflection: '你的反思：{question}',
@@ -386,8 +386,8 @@ var Lang = (function () {
       briefing: 'விளக்கம்',
       reflections: '{n} சிந்தனைகள்',
       reflection1: '1 சிந்தனை',
-      comingLater: 'தலைப்பு {n} · இரண்டாம் கட்டம்',
-      englishOnly: 'தலைப்பு {n} · ஆங்கிலத்தில்',
+      comingLater: 'இரண்டாம் கட்டம்',
+      englishOnly: 'ஆங்கிலத்தில்',
 
       journalHeading: 'உங்கள் குறிப்பேடு',
       journalEmpty: 'இன்னும் எதுவும் எழுதப்படவில்லை. ஓர் அமர்வைத் திறந்து தொடங்குங்கள் — நீங்கள் எழுதுவது இந்தச் சாதனத்திலேயே இருக்கும்; முடித்ததும் அதை Word ஆவணமாகச் சேமிக்கலாம்.',
@@ -419,7 +419,7 @@ var Lang = (function () {
       readChapterTitle: '{bible} நூலில் {chapter} படிக்க (புதிய தத்தலில் திறக்கும்)',
       readMore: 'மேலும் படிக்க: ',
       pictureTitle: 'படம்',
-      pictureNote: 'தியானக் குழு அன்று இந்தப் படத்தைக் காட்டுகிறது. செயலியில் சேர்க்க, படத்தை {file} எனச் சேமித்து, அந்தக் கோப்பைத் தலைப்பு உள்ளடக்கத்தில் குறிப்பிடுங்கள்.',
+      pictureNote: 'இந்தப் படம் அமர்வுக் குறிப்பில் அச்சிடப்பட்டுள்ளது. செயலியில் சேர்க்க, படத்தை {file} எனச் சேமித்து, அந்தக் கோப்பைத் தலைப்பு உள்ளடக்கத்தில் குறிப்பிடுங்கள்.',
 
       writeHere: 'இங்கே எழுதுங்கள்…',
       yourReflection: 'உங்கள் சிந்தனை: {question}',

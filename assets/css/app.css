@@ -233,9 +233,13 @@ img { max-width: 100%; height: auto; }
   border: 2px solid var(--period);
 }
 
+/* The number column is fixed so the titles line up down the whole
+   road — each stop is its own grid, so `auto` would leave them
+   ragged. Scripts that set the word "Topic" longer widen it. */
+.road { --stop-num: 4.6rem; }
 .stop-link, .stop-blank {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: var(--stop-num) 1fr auto;
   gap: 0.9rem;
   align-items: baseline;
   padding: 0.6rem 0.7rem 0.6rem 0.35rem;
@@ -245,6 +249,19 @@ img { max-width: 100%; height: auto; }
 }
 .stop-link:hover { background: var(--period-wash); }
 .stop-blank { color: var(--ink-soft); }
+
+/* The Topic number — the note's own name for itself. */
+.stop .topicno {
+  font-family: var(--face-display);
+  font-size: 0.76rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.stop-link:hover .topicno { color: var(--period); }
+
 .stop .title { font-size: 1.05rem; line-height: 1.4; }
 .stop-link .title { color: var(--ink); }
 .stop-link:hover .title { color: var(--period); }
@@ -262,9 +279,12 @@ img { max-width: 100%; height: auto; }
 .stop .flag--soon { color: var(--ink-soft); border-color: var(--rule-faint); }
 .stop .flag--written { color: var(--period); border-color: currentColor; }
 
+/* On a phone the number stands on its own line above the title,
+   rather than eating a third of the width. */
 @media (max-width: 560px) {
-  .stop-link, .stop-blank { grid-template-columns: 1fr; row-gap: 0.3rem; }
+  .stop-link, .stop-blank { grid-template-columns: 1fr; row-gap: 0.25rem; }
   .stop .flag { justify-self: start; }
+  .stop .topicno:empty { display: none; }
 }
 
 /* --- a Rite standing across the road --- */
@@ -570,6 +590,94 @@ ol.lettered > li { margin-bottom: 0.5rem; padding-left: 0.2em; }
 @media (max-width: 620px) {
   .plate { grid-template-columns: 1fr; }
   .plate .portrait { max-width: 9rem; aspect-ratio: 3 / 4; }
+}
+
+/* --- a table the note prints ---------------------------------------
+   Ruled, not boxed: horizontal rules only, in the manner of a missal's
+   tables of feasts. It scrolls inside its own frame so a wide table
+   never makes the page itself scroll sideways on a phone.            */
+.table-frame {
+  margin: 0 0 1.3rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.points .table-frame { margin: 0.7rem 0 0.4rem; }
+table.plain-table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 30rem;
+  font-size: 0.98rem;
+  line-height: 1.45;
+  text-align: left;
+}
+table.plain-table caption {
+  caption-side: top;
+  text-align: left;
+  font-size: 0.74rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--rubric);
+  padding-bottom: 0.5rem;
+}
+table.plain-table thead th {
+  font-family: var(--face-display);
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--gilt-ink);
+  border-bottom: 1px solid var(--rule);
+  padding: 0.35rem 0.9rem 0.5rem 0;
+  vertical-align: bottom;
+}
+table.plain-table tbody th,
+table.plain-table tbody td {
+  border-bottom: 1px solid var(--rule-faint);
+  padding: 0.6rem 0.9rem 0.6rem 0;
+  vertical-align: top;
+}
+table.plain-table tbody th { font-weight: 600; text-align: left; }
+table.plain-table tbody tr:last-child th,
+table.plain-table tbody tr:last-child td { border-bottom: 0; }
+table.plain-table th:last-child, table.plain-table td:last-child { padding-right: 0; }
+.table-note { font-size: 0.88rem; font-style: italic; color: var(--ink-soft); margin: 0.6rem 0 0; }
+@media (max-width: 620px) {
+  table.plain-table { min-width: 26rem; font-size: 0.94rem; }
+}
+
+/* --- a video or page the note sends the candidate to --- */
+.media { margin: 0 0 1.3rem; }
+.points .media { margin: 0.7rem 0 0.4rem; }
+.media-lead { margin: 0 0 0.5rem; }
+.media-item {
+  margin: 0 0 0.55rem;
+  padding-left: 1.6em;
+  position: relative;
+  line-height: 1.5;
+}
+.media-item::before {
+  content: "▶";
+  position: absolute;
+  left: 0;
+  top: 0.12em;
+  font-size: 0.72em;
+  color: var(--gilt);
+}
+.media-item a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--rule);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+.media-item a:hover { color: var(--rubric); text-decoration-color: currentColor; }
+.media-note { color: var(--ink-soft); font-style: italic; }
+.media-note::before { content: " · "; }
+.media-host {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.04em;
 }
 
 /* --- prayer --- */

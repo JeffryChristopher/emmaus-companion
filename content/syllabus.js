@@ -92,9 +92,26 @@ window.RCIA.sessions = [
   { session: 36, topic: null, period: 'C', title: 'Day of Recollection',
     gateAfter: { name: 'Sacraments of Initiation', when: 'The Easter Vigil', major: true } },
 
-  /* ---------- D · Mystagogy ---------- */
-  { session: 37, topic: 32,   period: 'D', title: 'Personal Transformation and Evangelization' },
-  { session: 38, topic: 33,   period: 'D', title: 'Communion in the Church, Fellowship' },
+  /* ---------- D · Mystagogy ----------
+
+     NOTE FOR THE COMMISSION — the Schema and the candidates' notes
+     disagree about which of these two is Topic 32 and which is
+     Topic 33. The Schema gives session 37 as Topic 32 "Personal
+     Transformation and Evangelization" and session 38 as Topic 33
+     "Communion in the Church, Fellowship". The session notes are
+     numbered the other way round: "PD RCIA Cdt Tp32" is *Church as
+     Communion and Fellowship* and "Tp33" is *Personal
+     Transformation and Evangelization*.
+
+     The order of the sessions and their titles are the same in
+     both, so only the topic number is in question — and the topic
+     number is what is printed on the note in the candidate's hand.
+     The notes are therefore followed here: session 37 carries the
+     note numbered 33, session 38 the note numbered 32. Nothing else
+     changes. If the Commission renumbers the notes instead, swap
+     these two `topic` values back.                               */
+  { session: 37, topic: 33,   period: 'D', title: 'Personal Transformation and Evangelization' },
+  { session: 38, topic: 32,   period: 'D', title: 'Communion in the Church, Fellowship' },
   { session: 39, topic: 34,   period: 'D', title: 'Church and Human Community' },
   { session: 40, topic: 35,   period: 'D', title: 'Dignity & Vocation of the Lay Faithful' },
   { session: 41, topic: 36,   period: 'D', title: 'Ecumenism and Interreligious Dialogue' },

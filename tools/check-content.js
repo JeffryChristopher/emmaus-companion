@@ -37,7 +37,8 @@ const Lang = require(path.join(APP, 'assets/js/i18n.js'));
 /* Block types the session renderer can draw (see session.js buildBlock). */
 const KNOWN_BLOCKS = new Set([
   'label', 'subhead', 'aside', 'lead', 'para', 'list', 'points',
-  'pericope', 'versicle', 'prayer', 'saint', 'plate', 'journal'
+  'pericope', 'versicle', 'prayer', 'saint', 'plate', 'journal',
+  'table', 'media'
 ]);
 
 let failures = 0;
@@ -221,6 +222,38 @@ console.log();
    in order, and how many questions each holds. Every language must
    present the same shape or a change of language would strand
    whatever has already been written. */
+/* A table is only readable if every row has as many cells as the
+   heading promises; a short row silently shifts the columns. */
+function checkTable(block, where, problems) {
+  if (!Array.isArray(block.rows) || !block.rows.length) {
+    problems.push(where + ': a table with no rows');
+    return;
+  }
+  const width = (block.head && block.head.length) || block.rows[0].length;
+  block.rows.forEach(function (row, r) {
+    if (!Array.isArray(row) || row.length !== width) {
+      problems.push(where + ': table row ' + (r + 1) + ' has ' +
+                    (Array.isArray(row) ? row.length : '?') + ' cells, not ' + width);
+    }
+    (row || []).forEach(function (cell) {
+      if (typeof cell !== 'string') {
+        problems.push(where + ': table row ' + (r + 1) + ' has a cell that is not text');
+      }
+    });
+  });
+}
+
+/* Every link the note sends a candidate to must actually go somewhere. */
+function checkMedia(block, where, problems) {
+  const items = block.items || [block];
+  if (!items.length) { problems.push(where + ': a media block with no links'); }
+  items.forEach(function (item) {
+    if (!item.href || !/^https?:\/\//.test(item.href)) {
+      problems.push(where + ': media link "' + item.label + '" has no http address');
+    }
+  });
+}
+
 function answerShape(topic) {
   const shape = [];
   topic.parts.forEach(part => {
@@ -283,10 +316,17 @@ LANGS.forEach(function (code) {
         }
         if (block.type === 'points') {
           block.items.forEach(function (item, j) {
-            if (!item.body || !item.body.trim()) {
-              emptyText.push(part.letter + ' point ' + (j + 1) + ' has no body');
+            /* A point must say something. Usually that is a sentence,
+               but some printed points answer their own question with
+               a bare list or a table and no prose — and inventing a
+               sentence to fill the gap would not be transcription. */
+            const hasSomething = (item.body && item.body.trim()) ||
+                                 (item.afterBody && item.afterBody.trim()) ||
+                                 (item.list && item.list.length) || item.table;
+            if (!hasSomething) {
+              emptyText.push(part.letter + ' point ' + (j + 1) + ' has nothing in it');
             }
-            if (/undefined/.test(item.body) || (item.title && /undefined/.test(item.title))) {
+            if (/undefined/.test(item.body || '') || (item.title && /undefined/.test(item.title))) {
               emptyText.push(part.letter + ' point ' + (j + 1) + ' contains the word "undefined"');
             }
           });
@@ -307,6 +347,20 @@ LANGS.forEach(function (code) {
           if (!Array.isArray(block.facts) || !block.facts.length) {
             emptyText.push('saint ' + block.name + ' has no facts');
           }
+        }
+        /* A ragged table renders with empty cells and reads as if the
+           note lost a column, so the widths are checked here. */
+        if (block.type === 'table') { checkTable(block, part.letter + ' block ' + i, emptyText); }
+        if (block.type === 'media') { checkMedia(block, part.letter + ' block ' + i, emptyText); }
+        if (block.type === 'points') {
+          block.items.forEach(function (item, j) {
+            const where = part.letter + ' point ' + (j + 1);
+            if (item.table) { checkTable(item.table, where, emptyText); }
+            if (item.media) { checkMedia(item.media, where, emptyText); }
+            if (item.list2 && !item.list) {
+              emptyText.push(where + ' has a second list but no first one');
+            }
+          });
         }
       });
     });

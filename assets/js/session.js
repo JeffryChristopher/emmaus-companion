@@ -173,20 +173,91 @@
       case 'prayer':   return buildPrayer(block);
       case 'saint':    return buildSaint(block);
       case 'plate':    return buildPlate(block);
+      case 'table':    return buildTable(block);
+      case 'media':    return buildMedia(block);
       case 'journal':  return buildJournal(block, part);
       default:         return el('p', null, block.text || '');
     }
   }
 
+  /* `style` is 'lettered' (a, b, c…), 'numbered' (1, 2, 3…) or plain
+     (a ✠, or whatever `marker` says). `start` continues a lettering
+     that the printed note broke in two — Topic 3 runs a) to d), prints
+     a heading, then carries on at e). */
   function buildList(block) {
-    var lettered = block.style === 'lettered';
-    var list = el(lettered ? 'ol' : 'ul', lettered ? 'lettered' : 'plain');
-    if (lettered) { list.setAttribute('type', 'a'); }
+    var ordered = block.style === 'lettered' || block.style === 'numbered';
+    var list = el(ordered ? 'ol' : 'ul', ordered ? 'lettered' : 'plain');
+    if (block.style === 'lettered') { list.setAttribute('type', 'a'); }
+    if (block.start) { list.setAttribute('start', block.start); }
     block.items.forEach(function (item) {
       list.appendChild(el('li', null, item));
     });
     if (block.marker) { list.style.setProperty('--marker', '"' + block.marker + '"'); }
     return list;
+  }
+
+  /* A table as the note prints one — Topic 17's matter and form of each
+     sacrament, Topic 28's Sunday readings. `head` is a row of column
+     headings; `rows` are rows of cells. Both are plain strings. It
+     scrolls sideways inside its own frame rather than pushing the page
+     wider than the phone it is read on. */
+  function buildTable(block) {
+    var frame = el('div', 'table-frame');
+    var table = el('table', 'plain-table');
+
+    if (block.caption) { table.appendChild(el('caption', null, block.caption)); }
+    if (block.head && block.head.length) {
+      var thead = el('thead');
+      var hrow = el('tr');
+      block.head.forEach(function (cell) {
+        var th = el('th', null, cell);
+        th.setAttribute('scope', 'col');
+        hrow.appendChild(th);
+      });
+      thead.appendChild(hrow);
+      table.appendChild(thead);
+    }
+
+    var tbody = el('tbody');
+    (block.rows || []).forEach(function (cells) {
+      var tr = el('tr');
+      cells.forEach(function (cell, i) {
+        /* The first column names the row — a sacrament, a Sunday — so
+           it is a heading, and a screen reader says it before the cell. */
+        var td = el(i === 0 && block.head ? 'th' : 'td', null, cell);
+        if (i === 0 && block.head) { td.setAttribute('scope', 'row'); }
+        tr.appendChild(td);
+      });
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+
+    frame.appendChild(table);
+    if (block.note) { frame.appendChild(el('p', 'table-note', block.note)); }
+    return frame;
+  }
+
+  /* A video or page the note sends the candidate to. The label is the
+     note's own words; the address is shown beneath it, because a
+     printed note is read on paper as often as on a screen. */
+  function buildMedia(block) {
+    var wrap = el('div', 'media');
+    var items = block.items || [{ label: block.label, href: block.href, note: block.note }];
+
+    if (block.label && block.items) { wrap.appendChild(el('p', 'media-lead', block.label)); }
+
+    items.forEach(function (item) {
+      var row = el('p', 'media-item');
+      var a = el('a', null, item.label || item.href);
+      a.href = item.href;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      row.appendChild(a);
+      if (item.note) { row.appendChild(el('span', 'media-note', item.note)); }
+      row.appendChild(el('span', 'media-host', hostOf(item.href)));
+      wrap.appendChild(row);
+    });
+    return wrap;
   }
 
   function buildPoints(block) {
@@ -204,14 +275,36 @@
           li.appendChild(document.createTextNode(item.joiner || ' '));
         }
       }
-      li.appendChild(document.createTextNode(item.body));
+      /* Some printed points answer their own question with nothing but
+         a list or a table, and no sentence at all. */
+      if (item.body) { li.appendChild(document.createTextNode(item.body)); }
 
+      /* Everything a printed point can carry after its opening
+         sentence, in the order the note prints it: a table, a further
+         paragraph, a list, and — where the note breaks one list with a
+         heading and resumes it — a second paragraph and a second list. */
+      if (item.table) { li.appendChild(buildTable(item.table)); }
       if (item.afterBody) {
         li.appendChild(el('p', null, item.afterBody));
       }
       if (item.list) {
-        li.appendChild(buildList({ items: item.list, style: item.listStyle === 'lettered' ? 'lettered' : null }));
+        li.appendChild(buildList({
+          items: item.list,
+          style: item.listStyle || null,
+          start: item.listStart || null
+        }));
       }
+      if (item.afterList) {
+        li.appendChild(el('p', null, item.afterList));
+      }
+      if (item.list2) {
+        li.appendChild(buildList({
+          items: item.list2,
+          style: item.list2Style || item.listStyle || null,
+          start: item.list2Start || null
+        }));
+      }
+      if (item.media) { li.appendChild(buildMedia(item.media)); }
       if (item.marginal) {
         var note = el('span', 'marginal');
         note.appendChild(el('span', 'mrk', item.marginal.mark + ' '));

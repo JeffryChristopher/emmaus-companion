@@ -78,6 +78,15 @@
       row = el('div', 'stop-blank');
     }
 
+    /* The Topic number, which is the note's own name for itself and
+       the only number a candidate can rely on: parishes reshuffle the
+       running order to sit with the feasts, so the session number goes
+       stale, but Topic 14 is Topic 14 in every parish and every year.
+       The briefings and the Day of Recollection carry no note and so
+       no number; they get an empty cell, to keep the titles aligned. */
+    row.appendChild(el('span', 'topicno',
+      hasNote ? Lang.t('topicNo', { n: session.topic }) : ''));
+
     /* The note's own title where it exists in this language, so the
        words on the map are the words on the candidate's paper. */
     var found = isWritten ? Emmaus.topicIn(session.topic, lang) : null;
@@ -99,11 +108,11 @@
       /* Say plainly that this one is still only in English. */
       if (!isTranslated && lang !== Lang.DEFAULT) {
         row.appendChild(el('span', 'flag flag--soon',
-          Lang.t('englishOnly', { n: session.topic })));
+          Lang.t('englishOnly')));
       }
     } else if (hasNote) {
       row.appendChild(el('span', 'flag flag--soon',
-        Lang.t('comingLater', { n: session.topic })));
+        Lang.t('comingLater')));
     } else {
       row.appendChild(el('span', 'flag flag--soon', Lang.t('briefing')));
     }

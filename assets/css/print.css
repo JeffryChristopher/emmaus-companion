@@ -90,8 +90,25 @@ body {
 .plate, .prayer, .pericope { break-inside: avoid; page-break-inside: avoid; }
 .part-head { break-after: avoid; page-break-after: avoid; }
 
+/* A table prints whole: no scrolling frame, no forced minimum width. */
+.table-frame { overflow: visible !important; }
+table.plain-table { min-width: 0 !important; font-size: 10.5pt; }
+table.plain-table caption,
+table.plain-table thead th { color: #000000 !important; }
+table.plain-table thead th { border-bottom-color: #000000 !important; }
+table.plain-table tbody th,
+table.plain-table tbody td { border-bottom-color: #BBBBBB !important; }
+.table-note { color: #444444 !important; }
+.table-frame, table.plain-table tr { break-inside: avoid; page-break-inside: avoid; }
+
+.media-host { color: #444444 !important; }
+.media-item::before { color: #000000 !important; }
+
 a { color: #000000 !important; text-decoration: none; }
 .plate .sources a::after { content: " (" attr(href) ")"; font-size: 0.85em; }
+/* On paper a link is only useful if its address is printed with it. */
+.media-item a::after { content: " (" attr(href) ")"; font-size: 0.85em; color: #444444; }
+.media-item .media-host { display: none; }
 
 .export h2 { color: #000000 !important; }
 .export::before {

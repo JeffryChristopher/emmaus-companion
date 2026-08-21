@@ -65,7 +65,8 @@ var Scripture = (function () {
     { slug: 'wisdom',         names: ['wisdom', 'wis'] },
     { slug: 'sirach',         names: ['sirach', 'sir', 'ecclesiasticus'] },
     { slug: 'isaiah',         names: ['isaiah', 'isa', 'is'] },
-    { slug: 'jeremiah',       names: ['jeremiah', 'jer'] },
+    /* 'Je' is the abbreviation the session notes themselves use. */
+    { slug: 'jeremiah',       names: ['jeremiah', 'jer', 'je'] },
     { slug: 'lamentations',   names: ['lamentations', 'lam'] },
     { slug: 'baruch',         names: ['baruch', 'bar'] },
     { slug: 'ezekiel',        names: ['ezekiel', 'ezek', 'ez'] },
