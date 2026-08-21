@@ -144,7 +144,7 @@ html[data-lang="zh"] .langpick-label {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.15rem;
+  justify-content: center;
   min-height: 44px;
   padding: 0.5rem 1rem;
   background: transparent;
@@ -179,21 +179,9 @@ html[data-lang="zh"] .langpick-label {
   cursor: default;
 }
 
+/* Every language stands under its own name alone, in its own
+   script, so all four buttons carry one line and sit level. */
 .langpick-name { display: block; }
-
-.langpick-gloss {
-  display: block;
-  font-family: "EB Garamond", Georgia, serif;
-  font-size: 0.72rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-}
-.langpick-btn[aria-checked="true"] .langpick-gloss { color: var(--gilt-ink); }
-
-/* A language whose own name is its English name needs no gloss line;
-   keeping the others level looks tidier than letting one sit high. */
-.langpick-btn:not(:has(.langpick-gloss)) { justify-content: center; }
 
 /* --- compact: the same control in a session's top bar ---
    A convenience for a reader who wants to change language without

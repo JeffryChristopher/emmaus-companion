@@ -624,14 +624,6 @@ var Lang = (function () {
       name.textContent = lang.endonym;
       button.appendChild(name);
 
-      if (!options.compact && lang.endonym !== lang.english) {
-        var gloss = document.createElement('span');
-        gloss.className = 'langpick-gloss';
-        gloss.setAttribute('lang', 'en');
-        gloss.textContent = lang.english;
-        button.appendChild(gloss);
-      }
-
       button.addEventListener('click', function () {
         if (lang.code === current()) { return; }
         set(lang.code);
